@@ -30,7 +30,6 @@ function App() {
                             <Route path="/signin">
                                 <SignIn/>
                             </Route>
-
                         </DefaultLayout>
                     </Switch>
                 </Router>
