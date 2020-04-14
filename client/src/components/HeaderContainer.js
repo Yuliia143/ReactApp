@@ -23,10 +23,20 @@ class HeaderContainer extends Component {
                                to='/user'
                     />
                     <Menu.Item position='right'>
-                        <Button as='a' inverted>
+                        <Button as={NavLink}
+                                name='signin' 
+                                active={activeItem === 'signin'}
+                                onClick={this.handleItemClick}
+                                to='/signin'
+                                inverted>
                             Log in
                         </Button>
-                        <Button as='a' inverted style={{marginLeft: '0.5em'}}>
+                        <Button as={NavLink}
+                                name='signup' 
+                                active={activeItem === 'signup'}
+                                onClick={this.handleItemClick}
+                                to='/signup' 
+                                inverted style={{marginLeft: '0.5em'}}>
                             Sign Up
                         </Button>
                     </Menu.Item>

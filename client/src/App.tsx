@@ -6,6 +6,8 @@ import HeaderContainer from "./components/HeaderContainer";
 import DefaultLayout from "./components/layouts/default";
 import Home from "./pages/Home/Home";
 import User from "./pages/User/User";
+import SignUp from "./pages/SignUp/SignUp";
+import SignIn from "./pages/SignIn/SignIn";
 import store from "./store";
 
 function App() {
@@ -21,6 +23,12 @@ function App() {
                             </Route>
                             <Route path="/user">
                                 <User/>
+                            </Route>
+                            <Route path="/signup">
+                                <SignUp/>
+                            </Route>
+                            <Route path="/signin">
+                                <SignIn/>
                             </Route>
                         </DefaultLayout>
                     </Switch>
