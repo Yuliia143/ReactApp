@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {Formik,Form} from 'formik';
-import axios from 'axios';
 import {object,string} from 'yup';
-import { BASE_URL } from '../../config';
+import {OnSubmitSignUp} from '../../services/api';
 import {Input, Checkbox, Button} from "semantic-ui-react";
 import './SignUp.css'
 
@@ -14,15 +13,8 @@ const validationSchema = object({
 
 const initialValues = {email:"", name:"", password:""};
 
-const onSubmit = async (values) =>{
-    console.log(values);
-    const result = await axios.post(`${BASE_URL}/api/signup`, values);
-    console.log(result.data);
-};
-
 class SignUp extends Component{
 
-    
     render(){
         return(
             <div className="modalContentUp">
@@ -31,7 +23,7 @@ class SignUp extends Component{
                 </div>
                 <hr/>
                 <div>
-                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} >
+                    <Formik initialValues={initialValues} onSubmit={OnSubmitSignUp} validationSchema={validationSchema} >
                         {({values, handleSubmit,handleChange, isValid})=>
                         <Form className="fieldsUp">
                             <Input name ="name" placeholder="Full Name"
@@ -53,11 +45,11 @@ class SignUp extends Component{
                         }
                     </Formik>
                     <p className="termsPrivacy">
-                        By signing up, you agree to our <a href="#">Terms of Use</a> and
-                        <a href="#"> Privacy Policy</a>.
+                        By signing up, you agree to our <a href={"#"}>Terms of Use</a> and
+                        <a href={"#"}> Privacy Policy</a>.
                     </p>
                     <hr/>
-                    <p className="logExAc">Already have an account? <a href="#">Log In</a></p>
+                    <p className="logExAc">Already have an account? <a href={"#"}>Log In</a></p>
                 </div>
             </div>
 

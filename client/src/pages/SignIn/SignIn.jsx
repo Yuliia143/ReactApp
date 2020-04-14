@@ -1,15 +1,10 @@
 import React, {Component} from 'react'
-import axios from 'axios';
 import {Formik,Form} from 'formik';
-import { BASE_URL } from '../../config';
-import './SignIn.css'
+import {BASE_URL} from '../../config';
+import {OnSubmitSignIn} from '../../services/api';
+import './SignIn.css';
 import {Button, Input} from "semantic-ui-react";
 
-const onSubmit = async (values) =>{
-    console.log(values);
-    const result = await axios.post(`${BASE_URL}/api/signin`, values);
-    console.log(result);
-};
 
 export default class SignIn extends Component {
 
@@ -36,7 +31,7 @@ export default class SignIn extends Component {
                             Continue with Apple
                         </Button>
                     </a>
-                    <Formik initialValues={{email:"", password:""}} onSubmit={onSubmit}>
+                    <Formik initialValues={{email:"", password:""}} onSubmit={OnSubmitSignIn}>
                         {({values, handleSubmit,handleChange})=>
                             <Form>
                                 <div className="inpAreaIn">
