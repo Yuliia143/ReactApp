@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Logo from "../assets/images/logoblack.png";
 import {Segment, Menu, Image} from "semantic-ui-react";
+import {Link} from 'react-router-dom';
+
 
 class FooterContainer extends Component {
     render() {
@@ -18,8 +20,8 @@ class FooterContainer extends Component {
                       inverted
                       secondary
                       style={{height: "50px"}}>
-                    <Menu.Item as='a'
-                               href="/"
+                    <Menu.Item as={Link}
+                               to="/"
                     >
                         <Image
                             src={Logo}

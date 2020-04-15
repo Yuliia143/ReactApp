@@ -5,6 +5,8 @@ import {Provider} from 'react-redux'; //makes redux store available to any neste
 import HeaderContainer from "./components/HeaderContainer";
 import Home from "./pages/Home/Home";
 import User from "./pages/User/User";
+import SignUp from "./pages/SignUp/SignUp";
+import SignIn from "./pages/SignIn/SignIn";
 import store from "./store";
 import FooterContainer from "./components/FooterContainer";
 
@@ -13,18 +15,25 @@ function App() {
         <div className="App">
             <Provider store={store}>
                 <Router>
+                    <HeaderContainer/>
                     <Switch>
-                        <HeaderContainer/>
-                        <Route exact path="/">
-                            <Home/>
-                        </Route>
-                        <Route path="/user">
-                            <User/>
-                        </Route>
+                        <div className="mainContent">
+                            <Route exact path="/">
+                                <Home/>
+                            </Route>
+                            <Route path="/user">
+                                <User/>
+                            </Route>
+                            <Route path="/signin">
+                                <SignIn/>
+                            </Route>
+                            <Route path="/signup">
+                                <SignUp/>
+                            </Route>
+                        </div>
                     </Switch>
+                    <FooterContainer/>
                 </Router>
-                <Home/>
-                <FooterContainer/>
             </Provider>
         </div>
     );

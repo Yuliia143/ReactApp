@@ -11,10 +11,12 @@ class HeaderContainer extends Component {
         role: 'admin',
         isActiveDropdownMenu: false,
         isActiveDropdownCategories: false,
+
         categoriesList: ["Development", "Business", "IT and Software", "Design", "Marketing", "Personal Development", "Photography", "Music"],
         searchField: '',
-        searchLectField: '',
-        lecturesList: []
+
+        lecturesTitleList: [],
+        searchLect: ''
     };
     handleItemClick = (e, {name}) => this.setState({activeItem: name});
     handleDropdownMenu = (status = false) => {
@@ -35,14 +37,25 @@ class HeaderContainer extends Component {
         });
     };
 
+    handleResultSelect = (e, { result }) => this.setState({searchLect: result.title});
+    handleSearchSelect = (event) => {this.setState({searchLect: event.target.value});};
+    handleSearchChange = (list) => {
+        return list.filter(item => {
+            return item.title.toLowerCase().includes(this.state.searchLect.toLowerCase())
+        });
+    };
+
 
     loadLectures() {
         return axios
             .get('https://glacial-chamber-22605.herokuapp.com/api/lecture')
             .then(result => {
-                const lecturesList = result.data.map(item => (item));
-                console.log(lecturesList);
-                this.setState({lecturesList});
+                const lecturesTitleList = [];
+                result.data.map((item)=>{
+                    lecturesTitleList.push({"title": item.title});
+                });
+                console.log(lecturesTitleList);
+                this.setState({lecturesTitleList});
             })
             .catch(error => {
                 console.log(error);
@@ -56,6 +69,7 @@ class HeaderContainer extends Component {
     render() {
         const {activeItem, isSignedIn, role, isActiveDropdownMenu, isActiveDropdownCategories, categoriesList} = this.state;
         const searchedCategories = this.searchChange(categoriesList);
+        const res = this.handleSearchChange(this.state.lecturesTitleList);
         return (
             <Segment color="teal" inverted style={{borderRadius: '0', padding: '10px 30px', marginBottom: '0'}}>
                 <Menu attached='top' inverted secondary style={{height: "50px"}}>
@@ -99,7 +113,12 @@ class HeaderContainer extends Component {
                             <Search
                                 placeholder="Search..."
                                 input={{fluid: true}}
-                                style={{width: '300px'}}/>
+                                style={{width: '300px'}}
+                                value={this.state.searchLect}
+                                onSearchChange={this.handleSearchSelect}
+                                onResultSelect={this.handleResultSelect}
+                                results={res}
+                            />
                         </Menu.Item>
                     </Menu.Menu>
 
@@ -130,7 +149,9 @@ class HeaderContainer extends Component {
                         (
                             <Menu.Menu position='right'>
                                 <Menu.Item>
-                                    <Button as={Link}
+                                    <Button as={NavLink}
+                                            active={activeItem === 'signin'}
+                                            onClick={this.handleItemClick}
                                             inverted
                                             to="/signin"
                                             style={{padding: '13px 40px'}}>
@@ -138,7 +159,9 @@ class HeaderContainer extends Component {
                                     </Button>
                                 </Menu.Item>
                                 <Menu.Item style={{paddingRight: '0'}}>
-                                    <Button as={Link}
+                                    <Button as={NavLink}
+                                            active={activeItem === 'signup'}
+                                            onClick={this.handleItemClick}
                                             inverted
                                             to="/signup"
                                             style={{marginLeft: '0.5em', padding: '13px 40px'}}>
