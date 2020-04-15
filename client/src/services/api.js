@@ -4,6 +4,7 @@ import {USER_LOGIN_START, USER_LOGIN, REMOVE_USER} from "../store/actions";
 
 
 
+
 const onSubmitSignUp = async (values) =>{
     const result = await axios.post(`${BASE_URL}/api/signup`, values);
     if(result.data.message === 'user created'){
@@ -15,8 +16,8 @@ const onSubmitSignUp = async (values) =>{
 const onSubmitSignIn = values =>  async (dispatch, getState) =>{
     dispatch({type: USER_LOGIN_START});
     try {
-        const result = await axios.post(`${BASE_URL}/api/signin`, values);
-        window.localStorage.setItem("Access-Token", result.data.token);
+        const result = await axios.post(`${BASE_URL}/api/signin`, values); 
+        window.localStorage.setItem("Access-Token", result.headers["access-token"]);
         dispatch({type: USER_LOGIN, payload: result.data})
     } catch (e) {
         dispatch({type: REMOVE_USER})
