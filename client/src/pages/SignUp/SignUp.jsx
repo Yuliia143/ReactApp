@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Formik,Form} from 'formik';
 import {object,string} from 'yup';
-import {OnSubmitSignUp} from '../../services/api';
+import {onSubmitSignUp} from '../../services/api';
 import {Input, Checkbox, Button} from "semantic-ui-react";
 import './SignUp.css'
 
@@ -9,10 +9,9 @@ const validationSchema = object({
     name:string().required(),
     email:string().required(),
     password:string().required(),
-    role:string().required(),
 });
 
-const initialValues = {email:"", name:"", password:"", role:""};
+const initialValues = {email:"", name:"", password:""};
 
 class SignUp extends Component{
 
@@ -24,7 +23,7 @@ class SignUp extends Component{
                 </div>
                 <hr/>
                 <div>
-                    <Formik initialValues={initialValues} onSubmit={OnSubmitSignUp} validationSchema={validationSchema} >
+                    <Formik initialValues={initialValues} onSubmit={onSubmitSignUp} validationSchema={validationSchema} >
                         {({values, handleSubmit,handleChange, isValid})=>
                         <Form className="fieldsUp">
                             <Input name ="name" placeholder="Full Name"
@@ -33,8 +32,6 @@ class SignUp extends Component{
                                    value={values.email} onChange={handleChange}/>
                             <Input type="password" name="password" placeholder="Password"
                                    value={values.password} onChange={handleChange}/>
-                                   <Input type="role" name="role" placeholder="Role"
-                                   value={values.role} onChange={handleChange}/>
                                    <div className="emailRec">
                                        <Checkbox/>
                                        <p className="emailRecText">

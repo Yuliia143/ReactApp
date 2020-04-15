@@ -3,9 +3,10 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 import {initReducer} from './reducers/initReducer';
+import user from "./reducers/user";
 
 const store = createStore(combineReducers({
-        init: initReducer,
+       user
     }
 ), composeWithDevTools(applyMiddleware((thunk))));
 
