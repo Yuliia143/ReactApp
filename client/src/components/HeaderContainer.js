@@ -22,6 +22,12 @@ class HeaderContainer extends Component {
                                onClick={this.handleItemClick}
                                to='/user'
                     />
+                     <Menu.Item as={NavLink}
+                               name='lecture'
+                               active={activeItem === 'lecture'}
+                               onClick={this.handleItemClick}
+                               to='/lecture'
+                    />
                     <Menu.Item position='right'>
                         <Button as={NavLink}
                                 name='signin' 
