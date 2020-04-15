@@ -8,10 +8,11 @@ import './SignUp.css'
 const validationSchema = object({
     name:string().required(),
     email:string().required(),
-    password:string().required()
+    password:string().required(),
+    role:string().required(),
 });
 
-const initialValues = {email:"", name:"", password:""};
+const initialValues = {email:"", name:"", password:"", role:""};
 
 class SignUp extends Component{
 
@@ -32,6 +33,8 @@ class SignUp extends Component{
                                    value={values.email} onChange={handleChange}/>
                             <Input type="password" name="password" placeholder="Password"
                                    value={values.password} onChange={handleChange}/>
+                                   <Input type="role" name="role" placeholder="Role"
+                                   value={values.role} onChange={handleChange}/>
                                    <div className="emailRec">
                                        <Checkbox/>
                                        <p className="emailRecText">
