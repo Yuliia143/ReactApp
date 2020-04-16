@@ -17,6 +17,7 @@ const OnSubmitSignUp = async (values) =>{
 const OnSubmitSignIn = async (values) =>{
     const history = useHistory();
     const result = await axios.post(`${BASE_URL}/api/signin`, values);
+    window.localStorage.setItem("User", {name: result.data.name, email: result.data.email});
     window.localStorage.setItem("Access-Token", result.data.token);
     //history.push('/home');
 };

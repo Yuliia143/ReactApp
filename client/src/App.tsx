@@ -8,6 +8,11 @@ import Home from "./pages/Home/Home";
 import User from "./pages/User/User";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
+import EditProfile from './pages/User/EditProfile'
+import EditPhoto from './pages/User/EditPhoto'
+import EditEmail from './pages/User/EditEmail'
+import EditPassword from './pages/User/EditPassword'
+import UserEditPage from './pages/User/UserEditPage'
 import store from "./store";
 
 function App() {
@@ -21,8 +26,23 @@ function App() {
                             <Route exact path="/">
                                 <Home/>
                             </Route>
-                            <Route path="/user">
+                            {/* <Route path="/user">
                                 <User/>
+                            </Route> */}
+                            <Route path="/edit-profile">
+                                <EditProfile />
+                            </Route>
+                            <Route path="/edit-photo">
+                                <EditPhoto />
+                            </Route>
+                            <Route path="/edit-email">
+                                <EditEmail />
+                            </Route>
+                            <Route path="/edit-password">
+                                <EditPassword />
+                            </Route>
+                            <Route path="/edit-page">
+                                <UserEditPage />
                             </Route>
                             <Route path="/signup">
                                 <SignUp/>
