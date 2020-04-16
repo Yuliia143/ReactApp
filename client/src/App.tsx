@@ -11,10 +11,7 @@ import {store, persistor} from "./store";
 import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import {PersistGate} from 'redux-persist/integration/react';
 import FooterContainer from "./components/FooterContainer";
-import Banner from "./pages/Home/Banner/Banner"
-import AfterBanner from "./pages/Home/AfterBanner/AfterBanner";
-import { Button, Header, Image, Modal } from 'semantic-ui-react';
-import RecomendedLections from "./pages/Home/RecomendedLections/RecomendedLections";
+
 
 
 function App() {
@@ -32,10 +29,7 @@ function App() {
                                 <Route path="/signup" component={SignUp}/>
                                 <Route path="/signin" component={SignIn}/>
                                 <Route path="/lecture/new" component={CreateLecture}/>
-                                <Route path="/homepage">
-                                <Banner />
-                                <AfterBanner />  
-                                </Route>
+                               
                             </div>
                         </Switch>
                         <FooterContainer/>
