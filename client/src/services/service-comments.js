@@ -7,7 +7,7 @@ export const getLecture = async (lectureId) => {
   const result = await axios(`${BASE_URL}/api/lectures/${lectureId}`, {
     headers: {
       "Access-Token": token,
-      'Access-Control-Allow-Origin': '*'
+      
     },
     withCredentials: false,
   });
