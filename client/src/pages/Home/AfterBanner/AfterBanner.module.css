@@ -1,0 +1,17 @@
+.background{
+    height: 100px;
+    background: rgb(36,0,27);
+    background: linear-gradient(90deg, rgba(36,0,27,0.3169642857142857) 0%, rgba(86,9,121,0.6446953781512605) 39%, rgba(255,0,129,1) 100%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    margin-bottom: 0;
+}
