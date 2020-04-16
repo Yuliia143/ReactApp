@@ -1,14 +1,20 @@
 import React, {Component} from 'react'
 import {Formik,Form} from 'formik';
 import {BASE_URL} from '../../config';
-import {OnSubmitSignIn} from '../../services/api';
+import {onSubmitSignIn} from '../../services/api';
 import './SignIn.css';
 import {Button, Input} from "semantic-ui-react";
+import {connect} from "react-redux";
+import {object, string} from "yup";
 
-
-export default class SignIn extends Component {
+const validationSchema = object({
+    email:string().required(),
+    password:string().required(),
+});
+class SignIn extends Component {
 
     render() {
+        const {onLogIn, loading, user} = this.props;
         return (
             <div className="modalContentIn">
                 <div className="headerPopIn">
@@ -31,8 +37,8 @@ export default class SignIn extends Component {
                             Continue with Apple
                         </Button>
                     </a>
-                    <Formik initialValues={{email:"", password:""}} onSubmit={OnSubmitSignIn}>
-                        {({values, handleSubmit,handleChange})=>
+                    <Formik  validationSchema={validationSchema} initialValues={{email:"", password:""}} onSubmit={onLogIn}>
+                        {({values, handleSubmit,handleChange, isValid})=>
                             <Form>
                                 <div className="inpAreaIn">
                                     <Input type="email" name="email" value={values.email}
@@ -41,7 +47,8 @@ export default class SignIn extends Component {
                                            className="textInp" value={values.password} onChange={handleChange}/>
                                 </div>
                                 <div className="logBtnIn fieldsIn">
-                                    <Button type="submit" onClick={handleSubmit}>Log In</Button>
+                                    {loading && 'Loading'}
+                                    <Button type="submit" disabled={loading || !isValid} onClick={handleSubmit}>Log In</Button>
                                 </div>
                                 <div className="changeAccIn">
                                     <p className="forgotPassword">or <a href="#">Forgot Password</a></p>
@@ -56,3 +63,11 @@ export default class SignIn extends Component {
         );
     }
 }
+const mapDispatchToProps = (dispatch) =>({
+    onLogIn: (form) => dispatch(onSubmitSignIn(form))
+});
+const mapStateToProps = (state) => ({
+    user: state.user.data,
+    loading: state.user.loading
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

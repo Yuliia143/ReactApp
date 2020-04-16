@@ -25,9 +25,8 @@ function App() {
                             <Route path="/user">
                                 <User/>
                             </Route>
-                            <Route path="/lecture">
-                                <Lecture/>
-                            </Route>
+                            <Route path="/lecture/:id" component={Lecture}/>
+                             
                             <Route path="/signup">
                                 <SignUp/>
                             </Route>
