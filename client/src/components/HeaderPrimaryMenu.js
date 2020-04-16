@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Dropdown} from 'semantic-ui-react';
 
+import {REMOVE_USER} from "../store/actions";
+import {connect} from "react-redux";
+
 class HeaderPrimaryMenu extends Component {
     state = {
         activeItem: '',
-        role: 'admin',
+        role: 'user',
         isActiveDropdownMenu: false,
     };
     handleDropdownMenu = (status = false) => {
@@ -17,6 +20,7 @@ class HeaderPrimaryMenu extends Component {
 
     render() {
         const {role, isActiveDropdownMenu} = this.state;
+        const {onLogOut} = this.props;
         return (
             <Dropdown item icon='user large'
                       onMouseEnter={() => this.handleDropdownMenu(true)}
@@ -35,12 +39,15 @@ class HeaderPrimaryMenu extends Component {
                     ) : null}
                     <Dropdown.Item as={Link}
                                    name='signout'
+                                   onClick={onLogOut}
                                    to="/">Sign out</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-
         )
     }
 }
 
-export default HeaderPrimaryMenu;
+const mapDispatchToProps = (dispatch) =>({
+    onLogOut: () => dispatch({type: REMOVE_USER})
+});
+export default connect(null, mapDispatchToProps)(HeaderPrimaryMenu);

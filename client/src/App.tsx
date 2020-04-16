@@ -7,33 +7,30 @@ import Home from "./pages/Home/Home";
 import User from "./pages/User/User";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
-import store from "./store";
+import {store, persistor} from "./store";
+import CreateLecture from "./pages/Lectures/Create/CreatePage"
+import {PersistGate} from 'redux-persist/integration/react'
 import FooterContainer from "./components/FooterContainer";
 
 function App() {
     return (
         <div className="App">
             <Provider store={store}>
-                <Router>
-                    <HeaderContainer/>
-                    <Switch>
-                        <div className="mainContent">
-                            <Route exact path="/">
-                                <Home/>
-                            </Route>
-                            <Route path="/user">
-                                <User/>
-                            </Route>
-                            <Route path="/signin">
-                                <SignIn/>
-                            </Route>
-                            <Route path="/signup">
-                                <SignUp/>
-                            </Route>
-                        </div>
-                    </Switch>
-                    <FooterContainer/>
-                </Router>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Router>
+                        <HeaderContainer/>
+                        <Switch>
+                            <div className="mainContent">
+                                <Route exact path="/" component={Home}/>
+                                <Route path="/user" component={User}/>
+                                <Route path="/signup" component={SignUp}/>
+                                <Route path="/signin" component={SignIn}/>
+                                <Route path="/lecture/new" component={CreateLecture}/>
+                            </div>
+                        </Switch>
+                        <FooterContainer/>
+                    </Router>
+                </PersistGate>
             </Provider>
         </div>
     );

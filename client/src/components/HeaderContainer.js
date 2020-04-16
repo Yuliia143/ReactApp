@@ -6,11 +6,13 @@ import axios from 'axios';
 import HeaderCategories from "./HeaderCategories";
 import HeaderSearch from "./HeaderSearch";
 import HeaderPrimaryMenu from "./HeaderPrimaryMenu";
+import {BASE_URL} from "../config";
+
+import {connect} from "react-redux";
 
 class HeaderContainer extends Component {
     state = {
         activeItem: '',
-        isSignedIn: true,
         categoriesList: [],
         lecturesList :[]
     };
@@ -19,7 +21,7 @@ class HeaderContainer extends Component {
 
     loadCategories(){
         return axios
-            .get('https://glacial-chamber-22605.herokuapp.com/api/categories/all')
+            .get(`${BASE_URL}/api/categories/all`)
             .then(result => {
                 const categoriesList = [];
                 result.data.map((item) => {
@@ -35,7 +37,7 @@ class HeaderContainer extends Component {
 
     loadLectures() {
         return axios
-            .get('https://glacial-chamber-22605.herokuapp.com/api/lectures/all')
+            .get(`${BASE_URL}/api/lectures/all`)
             .then(result => {
                 const lecturesList = [];
                 result.data.map((item) => {
@@ -55,7 +57,8 @@ class HeaderContainer extends Component {
     }
 
     render() {
-        const {activeItem, isSignedIn, lecturesList, categoriesList} = this.state;
+        const {user, onLogOut} = this.props;
+        const {activeItem, lecturesList, categoriesList} = this.state;
         return (
             <Segment color="teal" inverted style={{borderRadius: '0', padding: '10px 30px', marginBottom: '0'}}>
                 <Menu attached='top' inverted secondary style={{height: "50px"}}>
@@ -81,9 +84,9 @@ class HeaderContainer extends Component {
                         </Menu.Item>
                     </Menu.Menu>
 
-                    {isSignedIn ? (
+                    {user ? (
                             <Menu.Menu position='right'>
-                                <HeaderPrimaryMenu/>
+                                <HeaderPrimaryMenu onLogOut={onLogOut}/>
                             </Menu.Menu>
                         ) :
                         (
@@ -117,4 +120,7 @@ class HeaderContainer extends Component {
     }
 }
 
-export default HeaderContainer;
+const mapStateToProps = (state) => ({
+    user: state.user.data
+});
+export default connect(mapStateToProps)(HeaderContainer);
