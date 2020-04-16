@@ -4,37 +4,36 @@ import { Form, Button, Image } from 'semantic-ui-react'
 import './User.css';
 import UserEditPage from './UserEditPage'
 
+
 export default class EditProfile extends React.Component {
-
-
     onChangeType = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
 
     saveFields = (event) => {
-        console.log(localStorage.getItem("User"))
+        const userData = JSON.parse(localStorage.getItem("User"));
+        console.log(this.props.user)
+        const token = localStorage.getItem("Access-Token");
+
         const data = {
             "oldData": {
                 "email": "tarasdida22@gmail.com"
             },
             "newData": {
-                "first_name": "Taras",
-                "surName": "Dyda",
+                "first_name": "sebek",
+                "surName": "sebek",
                 "password": "taras20012001",
                 "email": "tarasdida22@gmail.com"
             }
         }
 
-        axios.put("https://glacial-chamber-22605.herokuapp.com/api/editProfile", data, {
+        axios.put("https://glacial-chamber-22605.herokuapp.com/api/editName", data, {
             headers: {
-                'accept': 'application/json',
-                'Access-Token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTkzNzUzODdkMzkwZDQ0NzJiMDg1MzUiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwibmFtZSI6IkpvaG4iLCJleHAiOjE1ODczODE0MjEsImlhdCI6MTU4Njc3NjYyMX0.NkhA-yUC7Sqxck03Xc82rL9REJlOW9R8wiP2vzUtCxk',
-                "Access-Control-Allow-Headers": "accept, x-requested-with, origin, content-type, cookie, pragma, cache-control",
-                // 'Content-Type': 'application/x-www-form-urlencoded'
+                'Access-Token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTk4NjFmMTZmODRkYzAwMTdhOTkxY2IiLCJlbWFpbCI6ImFuZHJpeWR1YmFzMTk4NkB1a3IubmV0IiwibmFtZSI6InNlYmVrIiwiaXNBZG1pbiI6ZmFsc2UsImV4cCI6MTU4NzY0OTk3MiwiaWF0IjoxNTg3MDQ1MTcyfQ.fjwslmUGvKs1ALdQ2FJhXpI-cmTRIovn1LIK2A7ZkxU'
             }
         })
-            .then(response => console.log(response))
-            .catch(e => console.log(e))
+        .then(response => console.log(response))
+        .catch(e => console.log(e))
     };
 
     render() {
