@@ -1,13 +1,21 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 import {composeWithDevTools} from 'redux-devtools-extension';
+import { PersistGate } from 'redux-persist/integration/react'
 
-import {initReducer} from './reducers/initReducer';
-import user from "./reducers/user";
+import rootReducer from './reducers';
 
-const store = createStore(combineReducers({
-       user
-    }
-), composeWithDevTools(applyMiddleware((thunk))));
+const persistConfig = {
+    key: 'root',
+    storage,
+    whiteList: ['user']
+  }
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware((thunk))));
+export let persistor = persistStore(store)
+  
