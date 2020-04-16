@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {Formik,Form} from 'formik';
 import {object,string} from 'yup';
-import {OnSubmitSignUp} from '../../services/api';
+import {onSubmitSignUp} from '../../services/api';
 import {Input, Checkbox, Button} from "semantic-ui-react";
 import './SignUp.css'
 
 const validationSchema = object({
     name:string().required(),
     email:string().required(),
-    password:string().required()
+    password:string().required(),
 });
 
 const initialValues = {email:"", name:"", password:""};
@@ -23,7 +23,7 @@ class SignUp extends Component{
                 </div>
                 <hr/>
                 <div>
-                    <Formik initialValues={initialValues} onSubmit={OnSubmitSignUp} validationSchema={validationSchema} >
+                    <Formik initialValues={initialValues} onSubmit={onSubmitSignUp} validationSchema={validationSchema} >
                         {({values, handleSubmit,handleChange, isValid})=>
                         <Form className="fieldsUp">
                             <Input name ="name" placeholder="Full Name"
