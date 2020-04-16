@@ -14,16 +14,14 @@ const validationSchema = object({
 
 
 class SignIn extends Component {
-    
     handleLogin = async(values) =>{
         const {onLogIn, history} = this.props;
         await onLogIn(values);
         history.push("/");
         console.log(this.props);
-    }  
+    };
 
     render() {
-        const {onLogIn, loading, user} = this.props;
         return (
             <div className="modalContentIn">
                 <div className="headerPopIn">
@@ -46,7 +44,7 @@ class SignIn extends Component {
                             Continue with Apple
                         </Button>
                     </a>
-                    <Formik  validationSchema={validationSchema} 
+                    <Formik validationSchema={validationSchema}
                         initialValues={{email:"", password:""}} 
                         onSubmit={this.handleLogin}>
                         {({values, handleSubmit,handleChange, isSubmiting, isValid})=>
@@ -58,8 +56,10 @@ class SignIn extends Component {
                                            className="textInp" value={values.password} onChange={handleChange}/>
                                 </div>
                                 <div className="logBtnIn fieldsIn">
+
                                     {isSubmiting && 'Loading'}
                                     <Button type="submit" disabled={isSubmiting || !isValid} onClick={handleSubmit}>Log In</Button>
+
                                 </div>
                                 <div className="changeAccIn">
                                     <p className="forgotPassword">or <a href="#">Forgot Password</a></p>
@@ -74,6 +74,7 @@ class SignIn extends Component {
         );
     }
 }
+
 const mapDispatchToProps = (dispatch) =>({
     onLogIn: (form) => dispatch(onSubmitSignIn(form))
 });
