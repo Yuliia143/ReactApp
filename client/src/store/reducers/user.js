@@ -14,6 +14,10 @@ export default function (state = initialState, {type, payload}) {
             return{
                 ...state, data: payload, loading: false
             };
+        case 'UPDATE_PROFILE':
+            return{
+                ...state, data: payload, loading: false
+            };
         case 'REMOVE_USER':
             return initialState;
 
