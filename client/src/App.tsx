@@ -36,21 +36,7 @@ function App() {
                                 <Route path="/signin" component={SignIn}/>
                                 <Route path="/lecture/new" component={CreateLecture}/>
                                 <Route path="/lecture/:id" component={Lecture}/>
-                                <Route path="/edit-profile">
-                                    <EditProfile />
-                                </Route>
-                                <Route path="/edit-photo">
-                                    <EditPhoto />
-                                </Route>
-                                <Route path="/edit-email">
-                                    <EditEmail />
-                                </Route>
-                                <Route path="/edit-password">
-                                    <EditPassword />
-                                </Route>
-                                <Route path="/edit-page">
-                                    <UserEditPage />
-                                </Route>
+                                <Route path="/edit-page" component={UserEditPage}/>
                             </div>
                         </Switch>
                         <FooterContainer/>
