@@ -2,8 +2,9 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
 import axios from "axios";
-import { getLecture, postComment } from "../../services/service-comments";
+import { getLecture, postComment } from "../../api/comments-api";
 import CommentForm from "./CommentForm";
+import {renderComments} from './RenderComments';
 import "./Lecture.css";
 
 export default class Lecture extends React.Component {
@@ -27,39 +28,24 @@ export default class Lecture extends React.Component {
         });
       });
   };
-
   componentDidMount() {
     this.fetchLecture();
   }
 
-  renderComments(result) {
-    return result.map((item) => {
-      console.log(item);
-      const date = item.createdOn.slice(11, 16);
-      return (
-        <Comment key={item.id}>
-          <Comment.Avatar />
-          <Comment.Content>
-            <Comment.Author></Comment.Author>
-            <Comment.Metadata>
-              <div>{date}</div>
-            </Comment.Metadata>
-            <Comment.Text> {item.messageText}</Comment.Text>
-          </Comment.Content>
-        </Comment>
-      );
-    });
+  componentDidUpdate() {
+    this.fetchLecture();
   }
+
 
   render() {
     const lectureId = this.props.match.params.id;
     const { lecture, loading } = this.state;
-    if (loading) return <h1>Loading...</h1>;
+    if (loading) return <h1 className="loading">Loading...</h1>;
     if (!lecture) return <h1>404 Not Found</h1>;
-    const commentCard = this.renderComments(lecture.messages || []);
+    const commentCard = renderComments(lecture.messages || []);
     return (
       <div>
-        <h1>{lecture.title}</h1>
+        <h1 className="title">{lecture.title}</h1>
         <div className="video-container">
           <ReactPlayer
             className="video-item"
@@ -69,16 +55,17 @@ export default class Lecture extends React.Component {
             height="450px"
           />
         </div>
-        <div>{lecture.description}</div>
-        <hr />
-        <Comment.Group style={{ margin: "0 auto", padding: "10px 0 40px 0" }}>
+        <div className="description">
+          This video is about: {lecture.description}{" "}
+        </div>
+        <Comment.Group id="commentGroup">
           <Header as="h3" dividing>
             Comments
           </Header>
           <div style={{ fontWeight: "bold", fontSize: "17px" }}>
             {commentCard}
           </div>
-         <CommentForm lectureId={lectureId}/>
+          <CommentForm lectureId={lectureId} />
         </Comment.Group>
       </div>
     );
