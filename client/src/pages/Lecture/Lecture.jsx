@@ -45,7 +45,7 @@ export default class Lecture extends React.Component {
     const commentCard = renderComments(lecture.messages || []);
     return (
       <div>
-        <h1 className="title">{lecture.title}</h1>
+        <h1 className="comment-title">{lecture.title}</h1>
         <div className="video-container">
           <ReactPlayer
             className="video-item"
@@ -55,8 +55,8 @@ export default class Lecture extends React.Component {
             height="450px"
           />
         </div>
-        <div className="description">
-          This video is about: {lecture.description}{" "}
+        <div className="comment-description">
+          This video is about: {lecture.description}
         </div>
         <Comment.Group id="commentGroup">
           <Header as="h3" dividing>

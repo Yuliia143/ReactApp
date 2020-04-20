@@ -28,14 +28,14 @@
     border-bottom: 1px solid rgb(175, 167, 167);
 }
 
-.title {
+.comment-title {
     height: 60px;
     background-color: rgb(212, 211, 211);
     text-align: center;
     padding-top: 12px;
 }
 
-.description {
+.comment-description {
     height: 60px;
     font-size: 26px;
     font-weight: lighter;
