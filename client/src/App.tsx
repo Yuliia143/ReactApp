@@ -3,7 +3,6 @@ import "./App.css";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-
 import PrivateRoute from "./PrivateRoute";
 import HeaderContainer from "./components/header/HeaderContainer";
 import Home from "./pages/Home/Home";
@@ -53,4 +52,5 @@ function App() {
 }
 
 export default App;
+
 
