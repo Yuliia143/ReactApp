@@ -11,10 +11,17 @@ const validationSchema = object({
     email:string().required(),
     password:string().required(),
 });
+
+
 class SignIn extends Component {
+    handleLogin = async(values) =>{
+        const {onLogIn, history} = this.props;
+        await onLogIn(values);
+        history.push("/");
+        console.log(this.props);
+    };
 
     render() {
-        const {onLogIn, loading, user} = this.props;
         return (
             <div className="modalContentIn">
                 <div className="headerPopIn">
@@ -37,8 +44,10 @@ class SignIn extends Component {
                             Continue with Apple
                         </Button>
                     </a>
-                    <Formik  validationSchema={validationSchema} initialValues={{email:"", password:""}} onSubmit={onLogIn}>
-                        {({values, handleSubmit,handleChange, isValid})=>
+                    <Formik validationSchema={validationSchema}
+                        initialValues={{email:"", password:""}} 
+                        onSubmit={this.handleLogin}>
+                        {({values, handleSubmit,handleChange, isSubmiting, isValid})=>
                             <Form>
                                 <div className="inpAreaIn">
                                     <Input type="email" name="email" value={values.email}
@@ -47,8 +56,10 @@ class SignIn extends Component {
                                            className="textInp" value={values.password} onChange={handleChange}/>
                                 </div>
                                 <div className="logBtnIn fieldsIn">
-                                    {loading && 'Loading'}
-                                    <Button type="submit" disabled={loading || !isValid} onClick={handleSubmit}>Log In</Button>
+
+                                    {isSubmiting && 'Loading'}
+                                    <Button type="submit" disabled={isSubmiting || !isValid} onClick={handleSubmit}>Log In</Button>
+
                                 </div>
                                 <div className="changeAccIn">
                                     <p className="forgotPassword">or <a href="#">Forgot Password</a></p>
@@ -63,6 +74,7 @@ class SignIn extends Component {
         );
     }
 }
+
 const mapDispatchToProps = (dispatch) =>({
     onLogIn: (form) => dispatch(onSubmitSignIn(form))
 });
