@@ -1,7 +1,11 @@
-import user from "./user";
 import {combineReducers} from "redux";
+import categoriesReducer from "./categoriesReducer";
+import lecturesReducer from "./lecturesReducer";
+import authReducer from "./authReducer";
 
 export default combineReducers({
-    user
- }
+        auth: authReducer,
+        lectures: lecturesReducer,
+        categories: categoriesReducer,
+    }
 )

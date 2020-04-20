@@ -17,7 +17,7 @@ class HeaderCategories extends Component{
     handleChange = (event) => {
         this.setState({searchCategField: event.target.value})
     };
-    searchChange = (list) => {
+    searchChange = (list = []) => {
         return list.filter(category => {
             return category.title.toLowerCase().includes(this.state.searchCategField.toLowerCase())
         });

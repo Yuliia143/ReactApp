@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Dropdown} from 'semantic-ui-react';
 
-import {REMOVE_USER} from "../store/actions";
 import {connect} from "react-redux";
+import {signOut} from "../../store/actions/auth";
 
 class HeaderPrimaryMenu extends Component {
     state = {
@@ -20,7 +20,7 @@ class HeaderPrimaryMenu extends Component {
 
     render() {
         const {role, isActiveDropdownMenu} = this.state;
-        const {onLogOut} = this.props;
+        const {onSignOut} = this.props;
         return (
             <Dropdown item icon='user large'
                       onMouseEnter={() => this.handleDropdownMenu(true)}
@@ -31,15 +31,15 @@ class HeaderPrimaryMenu extends Component {
                 <Dropdown.Menu direction='left' style={{marginTop: 0, width: '200px',maxHeight: '200px'}}>
                     <Dropdown.Item as={Link}
                                    name='profile'
-                                   to="/profile">My profile</Dropdown.Item>
+                                   to="/edit-profile">My profile</Dropdown.Item>
                     {role === 'admin' ? (
                         <Dropdown.Item as={Link}
                                        name='admin'
-                                       to="/admin">Admin page</Dropdown.Item>
+                                       to="/lecture/new">Admin page</Dropdown.Item>
                     ) : null}
                     <Dropdown.Item as={Link}
                                    name='signout'
-                                   onClick={onLogOut}
+                                   onClick={onSignOut}
                                    to="/">Sign out</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
@@ -47,7 +47,11 @@ class HeaderPrimaryMenu extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) =>({
-    onLogOut: () => dispatch({type: REMOVE_USER})
-});
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        onSignOut: () => {
+            dispatch(signOut())
+        }
+    }
+};
 export default connect(null, mapDispatchToProps)(HeaderPrimaryMenu);
