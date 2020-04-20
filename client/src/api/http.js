@@ -5,8 +5,9 @@ const get = () => {
 
 }
 
-const post = () => {
-    
+const post = async (url, data, options = {}) => {
+    const token = localStorage.getItem("Access-Token");
+    return axios.post(BASE_URL+url, data, {...options, headers: {'Access-Token': token}})
 }
 
 const put = async (url, data, options = {}) => {

@@ -12,16 +12,12 @@
 }
   
 .edit-content {
-    width: 50%;
+    width: 60%;
     border: 1px solid lightgray;
     border-radius: 4px;
     padding: 20px;
 }
-  
-.inputs > .button {
-    margin-top: 30px;
-}
-  
+
 .inputs {
     width: 60%;
 }
@@ -33,6 +29,7 @@ form.form {
  .save-btn {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
  }
   
 .edit-menu-data {
@@ -51,8 +48,9 @@ form.form {
   
 [type="file"] {
     height: 0;
-    overflow: hidden;
     width: 0;
+    overflow: hidden;
+    visibility: hidden;
 }
   
 [type="file"] + label {
@@ -71,6 +69,7 @@ form.form {
 .edit-profile {
     display: flex;
     justify-content: center;
+    width: 100%;
     margin-top: 50px;
 }
   
@@ -84,12 +83,7 @@ form.form {
     font-size: 15px;
     margin: 15px 0 30px 0;
 }
-  
-.image-preview {
-    height: 400px;
-    background-color: yellow;
-}
-  
+ 
 .imgPreview {
     text-align: center;
     margin: 5px 15px;
@@ -113,4 +107,8 @@ form.form {
 
 .vertical.menu {
     margin: 0;
+}
+
+.ui.negative.message, .ui.success.message {
+    margin-top: 20px;
 }
