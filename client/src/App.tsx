@@ -28,8 +28,7 @@ function App() {
                                 <Route path="/user" component={User}/>
                                 <Route path="/signup" component={SignUp}/>
                                 <Route path="/signin" component={SignIn}/>
-                                <Route path="/lecture/new" component={CreateLecture}/>
-                               
+                                <Route path="/lecture/new" component={CreateLecture}/>    
                             </div>
                         </Switch>
                         <FooterContainer/>

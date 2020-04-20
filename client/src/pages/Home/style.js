@@ -11,13 +11,13 @@ export const LectionWrapper = styled.div`
     .slick-slide{
         width: 242px;
         height: 280px;
-        padding-left: 21px;
+
     }
     .slick-track{
         height: 295px;
     }
     .slick-list{
-        width: 1173px;
+        width: 100%;
     }
  
 `;

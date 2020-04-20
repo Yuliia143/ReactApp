@@ -1,11 +1,11 @@
 .wrapper{
     width: 85%;
     margin: 0 auto;
-    /* background-color: thistle; */
     margin-top: 43px;
     display: flex;
     justify-content: space-between;
 }
+
 .info{
     width: 40%;
     height: 350px;
@@ -14,17 +14,16 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .title{
     font-size: 20px;
     color: rgba(0, 0, 0, 0.836);
     margin: 3px 35px;
 }
+
 .text{
     font-size: 17px;
     color: rgba(0, 0, 0, 0.616);
     margin: 0 35px;
 }
 
-.activeLink{
-    border-bottom: 3px solid rgba(0, 97, 0, 0.774);
-}
