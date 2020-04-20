@@ -55,7 +55,7 @@ export default class Lecture extends React.Component {
             height="450px"
           />
         </div>
-        <div className="description">
+        <div className="comment-description">
           This video is about: {lecture.description}{" "}
         </div>
         <Comment.Group id="commentGroup">

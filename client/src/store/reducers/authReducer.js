@@ -34,6 +34,12 @@ export default function (state = initialState, action) {
                 loading: false,
                 token: null
             };
+        case 'UPDATE_PROFILE':
+            return {
+                ...state, 
+                user: action.payload, 
+                loading: false
+            }
         default:
             return state;
     }
