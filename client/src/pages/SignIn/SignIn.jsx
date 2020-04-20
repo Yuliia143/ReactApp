@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {Formik,Form} from 'formik';
 import {BASE_URL} from '../../config';
-import {onSubmitSignIn} from '../../services/api';
 import './SignIn.css';
 import {Button, Input} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {object, string} from "yup";
+import {signIn} from "../../store/actions/auth";
 
 const validationSchema = object({
     email:string().required(),
@@ -14,11 +14,10 @@ const validationSchema = object({
 
 
 class SignIn extends Component {
-    handleLogin = async(values) =>{
-        const {onLogIn, history} = this.props;
-        await onLogIn(values);
+    handleSignIn = async(values) =>{
+        const {onSignIn, history} = this.props;
+        await onSignIn(values);
         history.push("/");
-        console.log(this.props);
     };
 
     render() {
@@ -46,7 +45,7 @@ class SignIn extends Component {
                     </a>
                     <Formik validationSchema={validationSchema}
                         initialValues={{email:"", password:""}} 
-                        onSubmit={this.handleLogin}>
+                        onSubmit={this.handleSignIn}>
                         {({values, handleSubmit,handleChange, isSubmiting, isValid})=>
                             <Form>
                                 <div className="inpAreaIn">
@@ -75,11 +74,16 @@ class SignIn extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) =>({
-    onLogIn: (form) => dispatch(onSubmitSignIn(form))
-});
 const mapStateToProps = (state) => ({
-    user: state.user.data,
-    loading: state.user.loading
+    user: state.auth.user,
+    loading: state.auth.loading
 });
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        onSignIn: (credential) => {
+            dispatch(signIn(credential))
+        }
+    }
+};
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

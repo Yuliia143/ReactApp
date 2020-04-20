@@ -4,17 +4,18 @@ import {withRouter} from 'react-router-dom';
 
 class HeaderSearch extends Component{
     state = {
-        searchLectField: ''
+        searchLectField: '',
+        count: 0
     };
 
     handleResultSelect = (e, {result}) => {
         this.setState({searchLectField: result.title});
-        this.props.history.push(`/lectures/${result.id}`);
+        this.props.history.push(`/lecture/${result.id}`);
     };
     handleSearchSelect = (event) => {
         this.setState({searchLectField: event.target.value})
     };
-    handleSearchChange = (list) => {
+    handleSearchChange = (list = []) => {
         return list.filter(item => {
             return item.title.toLowerCase().includes(this.state.searchLectField.toLowerCase())
         });

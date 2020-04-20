@@ -7,11 +7,13 @@
     align-items: center;
     color: white;
 }
+
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .title{
     margin-bottom: 0;
 }

@@ -3,12 +3,14 @@
     margin: 0 auto;
     margin-top: 18px;
 }
+
 .title{
     font-size: 24px;
     font-weight: 600;
     line-height: 1.33em;
     color: #29303b;
 }
+
 .flexCategories{
     width: 100%;
     
@@ -19,6 +21,7 @@
     align-items: center;
     margin-bottom: 15px;
 }
+
 .text:nth-child(1),
 .text:nth-child(2),
 .text:nth-child(3){
@@ -31,9 +34,9 @@
     width: 25%;
     font-size: 17px;
     box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
-    /* border: 1px solid #29303b31; */
     line-height: 52px;
 }
+
 .text:hover{
     cursor: pointer;
     box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);

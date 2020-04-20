@@ -7,7 +7,6 @@ import Recommendations from "./Recommendations/Recommendations";
 import Categories from "./Categories/Categories";
 import Reviews from "./Reviews/Reviews";
 import {LectionWrapper} from './style'
-import ModalExampleDimmer from "./Modal/Modal";
 
 export default function Home() {
 
