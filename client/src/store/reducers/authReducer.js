@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
         case 'UPDATE_PROFILE':
             return {
                 ...state, 
-                user: payload, 
+                user: action.payload, 
                 loading: false
             }
         default:
