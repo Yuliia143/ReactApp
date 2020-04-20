@@ -1,6 +1,5 @@
 import React from "react";
 import classes from './TrustedCompanies.module.css';
-import { Icon, Button } from 'semantic-ui-react';
 
 const TrustedCompanies = () => {
 

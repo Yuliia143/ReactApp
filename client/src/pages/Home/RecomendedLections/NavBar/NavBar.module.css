@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 15px;
+    margin-left: 51px;
     border-bottom: 1px solid #dedfe0;
 
 }
@@ -18,7 +18,4 @@ button{
     background-color: white;
     margin-bottom: 15px;
     outline: none;  
-}
-button:hover {
-    border-bottom: 3px solid rgba(0, 61, 0, 0.795);
 }

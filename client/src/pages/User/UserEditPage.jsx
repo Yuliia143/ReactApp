@@ -77,11 +77,11 @@ class UserEditPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) =>({
-    updateProfile: (data) => dispatch({ type: 'UPDATE_PROFILE', payload: data })
+    updateProfile: (user) => dispatch({ type: 'UPDATE_PROFILE', payload: user })
 });
 
 const mapStateToProps = (state) => ({
-    user: state.user.data
+    user: state.auth.user
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserEditPage);
