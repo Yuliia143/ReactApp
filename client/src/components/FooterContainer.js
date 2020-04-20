@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Logo from "../assets/images/logoblack.png";
-import {Segment, Menu, Image} from "semantic-ui-react";
+import LogoImg from "../assets/images/logoblack.png";
+import {Segment, Menu} from "semantic-ui-react";
 import {Link} from 'react-router-dom';
+import Logo from "./Logo";
 
 
 class FooterContainer extends Component {
@@ -23,12 +24,7 @@ class FooterContainer extends Component {
                     <Menu.Item as={Link}
                                to="/"
                     >
-                        <Image
-                            src={Logo}
-                            size="tiny"
-                            alt="Logo"
-                            style={{width: '100px'}}
-                        />
+                        <Logo image={LogoImg}/>
                     </Menu.Item>
                     <Menu.Menu position='right'>
                         <Menu.Item as="a" id="footer__link">

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Formik,Form} from 'formik';
+import {Formik, Form} from 'formik';
 import {object,string} from 'yup';
-import {onSubmitSignUp} from '../../services/api';
 import {Input, Checkbox, Button} from "semantic-ui-react";
 import './SignUp.css'
+import {connect} from "react-redux";
+import {signUp} from "../../store/actions/auth";
 
 const validationSchema = object({
     name:string().required(),
@@ -14,7 +15,11 @@ const validationSchema = object({
 const initialValues = {email:"", name:"", password:""};
 
 class SignUp extends Component{
-
+    handleSignUp = async(credential) =>{
+        const {onSignUp, history} = this.props;
+        await onSignUp(credential);
+        history.push("/signin");
+    };
     render(){
         return(
             <div className="modalContentUp">
@@ -23,7 +28,7 @@ class SignUp extends Component{
                 </div>
                 <hr/>
                 <div>
-                    <Formik initialValues={initialValues} onSubmit={onSubmitSignUp} validationSchema={validationSchema} >
+                    <Formik initialValues={initialValues} onSubmit={this.handleSignUp} validationSchema={validationSchema} >
                         {({values, handleSubmit,handleChange, isValid})=>
                         <Form className="fieldsUp">
                             <Input name ="name" placeholder="Full Name"
@@ -57,6 +62,17 @@ class SignUp extends Component{
     }
 }
 
+const mapStateToProps = (state) => ({
+    categoriesList: state.categories.categories,
+    lecturesList: state.lectures.lectures
+});
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSignUp: (credential) => {
+            dispatch(signUp(credential))
+        }
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
