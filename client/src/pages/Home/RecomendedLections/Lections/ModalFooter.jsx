@@ -27,5 +27,5 @@ const ModalFooter = ({id, onClose , userData}) =>{
         </Modal.Actions>
     )
 }
-const mapStateToProps = (state) =>({userData: state.user.data})
+const mapStateToProps = (state) =>({userData: state.auth.user})
 export default connect(mapStateToProps)(ModalFooter);
