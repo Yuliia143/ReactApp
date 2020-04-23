@@ -1,53 +1,43 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Dropdown} from 'semantic-ui-react';
 
 import {connect} from "react-redux";
 import {signOut} from "../../store/actions/auth";
 
-class HeaderPrimaryMenu extends Component {
-    state = {
-        activeItem: '',
-        role: 'user',
-        isActiveDropdownMenu: false,
-    };
-    handleDropdownMenu = (status = false) => {
-        this.handleDropDown('isActiveDropdownMenu', status)
-    };
-    handleDropDown = (typeDropdown, status) => {
-        this.setState({[typeDropdown]: status})
-    };
+const HeaderPrimaryMenu = ({onSignOut}) => {
+    const [isActiveDropdownMenu, setIsActiveDropdownMenu] = useState(false);
+    const role = 'user';
 
-    render() {
-        const {role, isActiveDropdownMenu} = this.state;
-        const {onSignOut} = this.props;
-        return (
-            <Dropdown item icon='user large'
-                      onMouseEnter={() => this.handleDropdownMenu(true)}
-                      onMouseLeave={() => this.handleDropdownMenu()}
-                      onClick={() => this.handleDropdownMenu()}
-                      open={isActiveDropdownMenu}
-            >
-                <Dropdown.Menu direction='left' style={{marginTop: 0, width: '200px',maxHeight: '200px'}}>
+    const handleDropdownMenu = (status = false) => {
+        setIsActiveDropdownMenu(status);
+    };
+    return (
+        <Dropdown item icon='user large'
+                  onMouseEnter={() => handleDropdownMenu(true)}
+                  onMouseLeave={() => handleDropdownMenu()}
+                  onClick={() => handleDropdownMenu()}
+                  open={isActiveDropdownMenu}
+        >
+            <Dropdown.Menu direction='left' style={{marginTop: 0, width: '200px', maxHeight: '200px'}}>
+                <Dropdown.Item as={Link}
+                               name='profile'
+                               to="/edit-page">My profile</Dropdown.Item>
+                {role === 'admin' ? (
                     <Dropdown.Item as={Link}
-                                   name='profile'
-                                   to="/edit-page">My profile</Dropdown.Item>
-                    {role === 'admin' ? (
-                        <Dropdown.Item as={Link}
-                                       name='admin'
-                                       to="/lecture/new">Admin page</Dropdown.Item>
-                    ) : null}
-                    <Dropdown.Item as={Link}
-                                   name='signout'
-                                   onClick={onSignOut}
-                                   to="/">Sign out</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        )
-    }
-}
+                                   name='admin'
+                                   to="/lecture/new">Admin page</Dropdown.Item>
+                ) : null}
+                <Dropdown.Item as={Link}
+                               name='signout'
+                               onClick={onSignOut}
+                               to="/">Sign out</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
+    )
+};
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
     return {
         onSignOut: () => {
             dispatch(signOut())

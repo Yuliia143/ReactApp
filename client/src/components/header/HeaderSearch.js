@@ -1,39 +1,34 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {Search} from "semantic-ui-react";
 import {withRouter} from 'react-router-dom';
 
-class HeaderSearch extends Component{
-    state = {
-        searchLectField: '',
-        count: 0
-    };
+const HeaderSearch=({lecturesList, history})=>{
+    const [searchLectField, setSearchLectField] = useState('');
 
-    handleResultSelect = (e, {result}) => {
-        this.setState({searchLectField: result.title});
-        this.props.history.push(`/lecture/${result.id}`);
+    const handleResultSelect = (e, {result}) => {
+        setSearchLectField(result.title);
+        history.push(`/lecture/${result.id}`);
     };
-    handleSearchSelect = (event) => {
-        this.setState({searchLectField: event.target.value})
+    const handleSearchSelect = (event) => {
+        setSearchLectField(event.target.value);
     };
-    handleSearchChange = (list = []) => {
+    const handleSearchChange = (list = []) => {
         return list.filter(item => {
-            return item.title.toLowerCase().includes(this.state.searchLectField.toLowerCase())
+            return item.title.toLowerCase().includes(searchLectField.toLowerCase())
         });
     };
 
-    render() {
-        const res = this.handleSearchChange(this.props.lecturesList);
+        const res = handleSearchChange(lecturesList);
         return (
             <Search
                 placeholder="Search..."
                 input={{fluid: true}}
                 style={{width: '300px'}}
-                value={this.state.searchLectField}
-                onSearchChange={this.handleSearchSelect}
-                onResultSelect={this.handleResultSelect}
+                value={searchLectField}
+                onSearchChange={handleSearchSelect}
+                onResultSelect={handleResultSelect}
                 results={res}/>
         )
-    }
 }
 
 export default withRouter(HeaderSearch);
