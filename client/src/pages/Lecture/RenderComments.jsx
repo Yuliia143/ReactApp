@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
 
- export const renderComments = (result) => {
-    return result.map((item) => {
+ export const RenderComments = ({comments}) => {
+    return comments.map((item) => {
       const time = item.createdOn.slice(11, 16);
       const date = item.createdOn.slice(0, 10);
       return (
@@ -21,3 +21,4 @@ import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
       );
     });
   };
+  
