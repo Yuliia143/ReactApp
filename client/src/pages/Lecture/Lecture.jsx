@@ -4,16 +4,15 @@ import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
 import axios from "axios";
 import { getLecture, postComment } from "../../api/comments-api";
 import CommentForm from "./CommentForm";
-import {renderComments} from './RenderComments';
+import { RenderComments } from "./RenderComments";
 import "./Lecture.css";
 
 export default class Lecture extends React.Component {
   state = {
     lecture: null,
-    loading: true
+    loading: true,
   };
 
-  
   fetchLecture = async () => {
     const { match } = this.props;
     getLecture(match.params.id)
@@ -29,23 +28,26 @@ export default class Lecture extends React.Component {
         });
       });
   };
+
   componentDidMount() {
     this.fetchLecture();
   }
-  componentDidUpdate() {
-    this.fetchLecture();
-  }
-
+  onPostComment = (comment) =>
+    this.setState((prevState) => ({
+      lecture: {
+        ...prevState.lecture,
+        messages: [...prevState.lecture.messages, comment],
+      },
+    }));
 
   render() {
     const lectureId = this.props.match.params.id;
     const { lecture, loading } = this.state;
     if (loading) return <h1 className="loading">Loading...</h1>;
     if (!lecture) return <h1>404 Not Found</h1>;
-    const commentCard = renderComments(lecture.messages || []);
     return (
       <div>
-        <h1 className="title">{lecture.title}</h1>
+        <h1 className="comment-title">{lecture.title}</h1>
         <div className="video-container">
           <ReactPlayer
             className="video-item"
@@ -62,10 +64,13 @@ export default class Lecture extends React.Component {
           <Header as="h3" dividing>
             Comments
           </Header>
-          <div style={{ fontWeight: "bold", fontSize: "17px" }}>
-            {commentCard}
+          <div className="commentCard">
+            <RenderComments comments={lecture.messages || []}/>
           </div>
-          <CommentForm lectureId={lectureId} />
+          <CommentForm
+            lectureId={lectureId}
+            onPostComment={this.onPostComment}
+          />
         </Comment.Group>
       </div>
     );

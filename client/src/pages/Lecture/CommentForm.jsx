@@ -10,29 +10,30 @@ export default class CommentForm extends Component {
   };
 
   postComment = async () => {
-    const { lectureId} = this.props;
-    await postComment(lectureId, {
+    const { lectureId, onPostComment} = this.props;
+    this.setState({loading: true, comment: ""});
+    const comment = await postComment(lectureId, {
       rating: 3,
       messageText: this.state.comment,
     });
     this.setState({loading: false});
+    onPostComment(comment);
   };
 
-  handleSubmit = () => this.setState({comment: "", loading: true});
+
+
 
   render() {
     const { comment, loading } = this.state;
     return (
-      <Form reply onSubmit={this.handleSubmit}>
+      <Form reply>
          <h3> {loading && "Sending..."}</h3>
         <Form.TextArea
           value={comment}
           onChange={(event) => {
-            console.log(event);
             this.setState({ comment: event.target.value});
           }}
         />
-     
         <Button
           content="Add Reply"
           onClick={this.postComment}

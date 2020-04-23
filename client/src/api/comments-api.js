@@ -1,23 +1,13 @@
-import { BASE_URL } from '../config';
-import axios from 'axios';
+import http from './http';
 
  const getLecture = async (lectureId) => {
-    const token = window.localStorage.getItem("Access-Token");
-    const result = await axios.get(`${BASE_URL}/api/lectures/${lectureId}`, {
-      headers: {
-        "Access-Token": token,
-      },
-      
-    });
+    const result = await http.get(`/api/lectures/${lectureId}`);
     return result.data;
   };
   
    const postComment = async(lectureId, comment) => {
-    const token = window.localStorage.getItem("Access-Token");
-    const myUrl = `${BASE_URL}/api/lectures/${lectureId}/messages`;
-      const response = await axios.post(myUrl, comment, {
-        headers: {"Access-Token": token},
-      });
+    const url = `/api/lectures/${lectureId}/messages`;
+      const response = await http.post(url, comment);
       return response.data; 
     };
 
