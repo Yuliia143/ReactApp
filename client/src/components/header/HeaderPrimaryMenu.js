@@ -31,7 +31,7 @@ class HeaderPrimaryMenu extends Component {
                 <Dropdown.Menu direction='left' style={{marginTop: 0, width: '200px',maxHeight: '200px'}}>
                     <Dropdown.Item as={Link}
                                    name='profile'
-                                   to="/edit-profile">My profile</Dropdown.Item>
+                                   to="/edit-page">My profile</Dropdown.Item>
                     {role === 'admin' ? (
                         <Dropdown.Item as={Link}
                                        name='admin'
