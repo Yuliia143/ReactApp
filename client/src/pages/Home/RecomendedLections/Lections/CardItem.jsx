@@ -1,23 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Rating, Header, Image, Modal } from 'semantic-ui-react';
 import classes from './Lections.module.css';
 import ModalFooter from './ModalFooter';
 
-export default class CardItem extends React.Component{
-    state ={
-        open: false
-    }
+ const CardItem = (props) => {
+  const [open, setOpen] = useState(false);
+  const [dimmer, setDimmer] = useState(false);
+   
     
-    show = (dimmer) => () => this.setState({ dimmer, open: true });
-    close = () => this.setState({ open: false });
+    const show = (dimmer) => () => {setOpen(true),setDimmer(true)};
+    const close = () => setOpen(false);
 
-    render(){
-    const {imgUrl, title, author, defaultRating, oldPrice, newPrice, description, id} = this.props.item;
-    const { open, dimmer } = this.state;
+    
+    const {imgUrl, title, author, defaultRating, oldPrice, newPrice, description, id} = props.item;
+    const { open, dimmer } = setOpen();
 
-        return <div >
-        
-        <Card className={classes.wrapperCards} onClick={this.show('blurring')}>
+        return <div > 
+        <Card className={classes.wrapperCards} onClick={show('blurring')}>
           <div className="ui link three cards">
             <div className="card" id={classes.cards}>
               <div className="image">
@@ -46,7 +45,7 @@ export default class CardItem extends React.Component{
         </Card>
 
 
-        <Modal dimmer={dimmer} open={open} onClose={this.close}>
+        <Modal dimmer={dimmer} open={open} onClose={close()}>
         <Modal.Header>Do you want to buy this lecture?</Modal.Header>
         <Modal.Content image>
           <Image
@@ -61,8 +60,8 @@ export default class CardItem extends React.Component{
             </p>
           </Modal.Description>
         </Modal.Content>
-        <ModalFooter onClose={this.close} id={id}/>
+        <ModalFooter onClose={close()} id={id}/>
       </Modal>
         </div>
     }
-}
+    export default CardItem;
