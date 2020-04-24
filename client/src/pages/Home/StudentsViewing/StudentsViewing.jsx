@@ -14,7 +14,7 @@ const StudentsViewing = (props) => {
 
     readLectures()
       .then((lection) => {
-        setLection(lection)
+        setLection({lection})
       })
   }
 

@@ -14,7 +14,7 @@ const Lections = (props) => {
   const updateLecture = () => {
     readLectures()
     .then((lection) => {
-      setLection(lection)
+      setLection({lection})
     })
   }
 
@@ -23,6 +23,7 @@ const Lections = (props) => {
   }, [])
 
   const renderLectures = (arr) => {
+    console.log(arr)
     return arr.map((item, index) => {
       return (
         <CardItem item={item} />
