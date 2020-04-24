@@ -1,22 +1,21 @@
 import React from "react";
 import classes from './Lections.module.css';
-import LectureService from '../../../../api/lection';
 import CardItem from "./CardItem";
-
+import {readLectures} from '../../../../api/lectures';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
   
-export default class Lections extends React.Component{
-  lectureService = new LectureService();
-    state = {
-      lection: [] 
-    };
+const Lections = (props) =>{
 
-  updateLecture = () => {
-    this.lectureService.getLectures()
+    // state = {
+    //   lection: [] 
+    // };
+    
+  const updateLecture = () => {
+    readLectures()
       .then((lection) => {
         this.setState({
           lection
@@ -28,7 +27,7 @@ export default class Lections extends React.Component{
     this.updateLecture();
   }
 
-  renderLectures(arr) {
+  const renderLectures(arr) {
     return arr.map((item, index) => {
 
       return (
@@ -38,10 +37,8 @@ export default class Lections extends React.Component{
 
   }
 
-
-  render() {
     const { lection } = this.state;
-    const lectionCard = this.renderLectures(lection);
+    const lectionCard = renderLectures(lection);
 
     const settings = {
       dots: false,
@@ -60,7 +57,7 @@ export default class Lections extends React.Component{
       </div>
   
     )
-  }
+
 
 
 }

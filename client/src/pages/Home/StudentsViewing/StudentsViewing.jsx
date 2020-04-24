@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import classes from './StudentsViewing.module.css';
-import LectureService from '../../../api/lection';
 import CardItem from '../RecomendedLections/Lections/CardItem'
+import {readLectures} from '../../../api/lectures';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,13 +9,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default class StudentsViewing extends React.Component {
 
-  lectureService = new LectureService();
   state = {
     lection: []
   };
 
   updateLecture = () => {
-    this.lectureService.getLectures()
+    readLectures()
       .then((lection) => {
         this.setState({
           lection
