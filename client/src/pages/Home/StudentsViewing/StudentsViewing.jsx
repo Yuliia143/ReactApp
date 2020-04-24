@@ -10,15 +10,21 @@ import "slick-carousel/slick/slick-theme.css";
 const StudentsViewing = (props) => {
   const [lection, setLection] = useState([]);
 
-  useEffect(() => {
+  const updateLecture = () => {
+
     readLectures()
       .then((lection) => {
         setLection(lection)
       })
+  }
+
+  useEffect(() => {
+    updateLecture()
   }, [])
 
 
   const renderLectures = (arr) => {
+    console.log(arr)
     return arr.map((item, index) => {
 
       return (

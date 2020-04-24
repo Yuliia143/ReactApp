@@ -11,16 +11,19 @@ import "slick-carousel/slick/slick-theme.css";
 const Lections = (props) => {
   const [lection, setLection] = useState([]);
 
-  useEffect(() => {
+  const updateLecture = () => {
     readLectures()
-      .then((lection) => {
-        setLection(lection)
-      })
+    .then((lection) => {
+      setLection(lection)
+    })
+  }
+
+  useEffect(() => {
+    updateLecture()
   }, [])
 
   const renderLectures = (arr) => {
     return arr.map((item, index) => {
-
       return (
         <CardItem item={item} />
       )
@@ -40,15 +43,12 @@ const Lections = (props) => {
   };
 
   return (
-
     <div className={classes.cardsFlex}>
       <Slider {...settings} >
         {lectionCard}
       </Slider>
     </div>
-
   )
-
 }
 
 export default Lections;
