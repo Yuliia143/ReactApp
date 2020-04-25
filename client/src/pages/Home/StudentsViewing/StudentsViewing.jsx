@@ -11,10 +11,7 @@ const StudentsViewing = (props) => {
   const [lection, setLection] = useState([]);
 
   const updateLecture = () => {
-    readLectures()
-      .then((lection) => {
-        setLection(lection)
-      })
+    readLectures(setLection(lection))    
   }
 
   useEffect(() => {
