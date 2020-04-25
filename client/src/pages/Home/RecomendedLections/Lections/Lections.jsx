@@ -14,7 +14,7 @@ const Lections = (props) => {
   const updateLecture = () => {
     readLectures()
     .then((lection) => {
-      setLection({lection})
+      setLection(lection)
     })
   }
 
