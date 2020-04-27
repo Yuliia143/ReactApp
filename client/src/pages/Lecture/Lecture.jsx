@@ -6,6 +6,11 @@ import { getLecture, postComment } from "../../api/comments-api";
 import CommentForm from "./CommentForm";
 import { RenderComments } from "./RenderComments";
 import "./Lecture.css";
+import socketIoClient from "socket.io-client";
+import {BASE_URL} from "../../config";
+
+const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
+
 
 export default class Lecture extends React.Component {
   state = {
@@ -13,10 +18,12 @@ export default class Lecture extends React.Component {
     loading: true,
   };
 
-  fetchLecture = async () => {
+
+fetchLecture = async () => {
     const { match } = this.props;
     getLecture(match.params.id)
       .then((lecture) => {
+          socket.emit('join_room', match.params.id);
         this.setState({
           lecture,
           loading: false,
@@ -31,14 +38,23 @@ export default class Lecture extends React.Component {
 
   componentDidMount() {
     this.fetchLecture();
+      socket.on('New message received', message => {
+          this.addNewComment(message);
+      });
   }
-  onPostComment = (comment) =>
-    this.setState((prevState) => ({
-      lecture: {
-        ...prevState.lecture,
-        messages: [...prevState.lecture.messages, comment],
-      },
-    }));
+  onPostComment = (comment) => {
+      this.addNewComment(comment);
+      socket.emit('message', {room:this.props.match.params.id, message:comment});
+  }
+
+  addNewComment = (comment) => {
+      this.setState((prevState) => ({
+          lecture: {
+              ...prevState.lecture,
+              messages: [...prevState.lecture.messages, comment],
+          },
+      }));
+  }
 
   render() {
     const lectureId = this.props.match.params.id;
