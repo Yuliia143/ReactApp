@@ -7,9 +7,10 @@ const CardItem = (props) => {
   const [open, setOpen] = useState(false);
   const [dimmer, setDimmer] = useState(false);
 
+// show = (dimmer) => () => this.setState({ dimmer, open: true });
+// close = () => this.setState({ open: false });
 
-  // const show = () => { setOpen(true), setDimmer(true) };
-  const show = () => {setDimmer(true) };
+  const show = () => {setDimmer(true); setOpen(true) };
   const close = () => setOpen(false);
 
 

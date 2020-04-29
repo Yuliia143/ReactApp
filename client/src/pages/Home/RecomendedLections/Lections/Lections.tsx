@@ -6,9 +6,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import {connect, ConnectedProps} from "react-redux";
-import {getLectures} from "../../../../store/actions/getLectures";
-import {RootState} from "../../../../store";
+import { connect, ConnectedProps } from "react-redux";
+import { getLectures } from "../../../../store/actions/getLectures";
+import { RootState } from "../../../../store";
 
 const mapStateToProps = (state: RootState) => ({
   lecturesList: state.lectures.lectures
@@ -21,24 +21,18 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
+// let [names, setNames] = useState([]);
 
-const Lections = ({lecturesList, getLectures}: PropsFromRedux) => {
-  // const [lection, setLection] = useState([]);
+
+const Lections = ({ lecturesList, getLectures }: PropsFromRedux) => {
+
+  useEffect(() => {
+    getLectures()
+  }, []);
   
-  // const updateLecture = () => {
-  //   setLection({ lecturesList});
-  // }
-
-  // const updateLecture = () => setLection(getLectures());
-
-  // useEffect(() => {
-  //   getLectures();
-  //   // updateLecture()
-  // }, [])
-
-  const renderLectures = (arr:any) => {
-    console.log(arr)
-    return arr.map((item:any, index:any) => {
+  const renderLectures = (arr: any) => {
+    // console.log(arr)
+    return arr.map((item: any, index: any) => {
       return (
         <CardItem item={item} />
       )
@@ -58,7 +52,7 @@ const Lections = ({lecturesList, getLectures}: PropsFromRedux) => {
   return (
     <div className={classes.cardsFlex}>
       <Slider {...settings} >
-      {lectionCard}
+        {lectionCard}
       </Slider>
     </div>
   )
