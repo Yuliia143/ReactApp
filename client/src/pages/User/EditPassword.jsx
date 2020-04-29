@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Form, Button, Message } from 'semantic-ui-react';
 
@@ -7,47 +7,44 @@ import http from "../../api/http";
 import './User.css';
 
 
-export default class EditPassword extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            oldPassword: '',
-            newPassword: '',
-            repeatNewPassword: '',
-            error: false,
-            success: false,
-            isDisabled: true
-        }
-        this.matchPasswords = this.matchPasswords.bind(this);
-    }
+const EditPassword = (props) => {
+    const [passwords, setPasswords] = useState({
+        oldPassword: '',
+        newPassword: '',
+        repeatNewPassword: ''
+    })
+    const [ error, setError ] = useState(false)
+    const [ success, setSuccess ] = useState(false)
+    const [ isDisabled, setIsDisabled ] = useState(true)
 
-    matchPasswords() {
-        if (this.state.newPassword !== this.state.repeatNewPassword) {
-            this.setState({error: true});
+    const matchPasswords = () => {
+        if (passwords.newPassword !== passwords.repeatNewPassword) {
+            setError(true)
         } 
     }
 
-    textInputOnChange = (e) => {
-        const isDisabled = this.isDisabled()
-        this.setState({
-            [e.target.name]: e.target.value,
-            error: false,
-            success: false,
-            isDisabled
-        })
+    // const checkIsDisabled = () => {
+    //     return passwords.oldPassword.length < 5 || passwords.newPassword.length < 5 || passwords.repeatNewPassword.length < 5
+    // }
+
+    const textInputOnChange = (e) => {
+        // const isDisabled = checkIsDisabled()
+        const { name, value } = e.target
+        setPasswords( prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+
+        setIsDisabled(isDisabled)
+        setError(false)
+        setSuccess(false)
     }
 
-    isDisabled = () => {
-        const { oldPassword, newPassword, repeatNewPassword } = this.state
-        return oldPassword.length < 5 || newPassword.length < 5 || repeatNewPassword.length < 5
-    }
-
-    getMessage = () => {
-        const { error, success, oldPassword, newPassword, repeatNewPassword } = this.state
+    const getMessage = () => {
         if (error) {
-            if (newPassword !== repeatNewPassword) {
+            if (passwords.newPassword !== passwords.repeatNewPassword) {
                 return <Message negative header="Your new password does not match confirmation." />
-            } else if (oldPassword == newPassword) {
+            } else if (passwords.oldPassword == passwords.newPassword) {
                 return <Message negative header={"New password can not be the same as old password" }/>
             }
             else { 
@@ -59,52 +56,70 @@ export default class EditPassword extends React.Component {
         }
     }
 
-    saveFields = () => {
+    const saveFields = () => {
         const data = {
             "oldData": {
-                "email": this.props.email,
-                "password": this.state.oldPassword
+                "email": props.email,
+                "password": passwords.oldPassword
             },
             "newData": {
-                "password": this.state.newPassword
+                "password": passwords.newPassword
             }
         }
 
         http.put("/api/edit/editPassword", data )
             .then(response => {
-                this.setState({ success: true })
+                setSuccess(true)
             })
-            .catch(e => this.setState({ error: true }))
+            .catch(e => 
+                setError(true)
+            )
     };
 
-    render() {
-        return (
-            <div className="edit-profile">
-                <div className="edit-content">
-                    <div className="title-edit">Password</div>
-                    <div className="description-edit">Change your password here</div>
-                    <div className="inputs">
-                        <Form onSubmit={this.matchPasswords}> 
-                            <Form.Field required>
-                                <label>Password:</label>
-                                <input onChange={this.textInputOnChange} type="password" name="oldPassword" placeholder='Enter current password' />
-                            </Form.Field>
-                            <Form.Field required>
-                                <input onChange={this.textInputOnChange} type="password" name="newPassword" placeholder='Enter new password' />
-                            </Form.Field>
-                            <Form.Field required>
-                                <input onChange={this.textInputOnChange} type="password" name="repeatNewPassword" placeholder='Re-type new password' />
-                            </Form.Field>
-                            <div className="save-btn">
-                                <Button onClick={this.saveFields} disabled={this.state.isDisabled} color="red">Save</Button>
-                            </div>
-                        </Form>
-                    </div>
-                    <div>
-                        {this.getMessage()}
-                    </div>
+    return (
+        <div className="edit-profile">
+            <div className="edit-content">
+                <div className="title-edit">Password</div>
+                <div className="description-edit">Change your password here</div>
+                <div className="inputs">
+                    <Form onSubmit={matchPasswords}> 
+                        <Form.Field required>
+                            <label>Password:</label>
+                            <input 
+                                onChange={textInputOnChange} 
+                                type="password" 
+                                name="oldPassword" 
+                                placeholder='Enter current password'
+                            />
+                        </Form.Field>
+                        <Form.Field required>
+                            <input 
+                                onChange={textInputOnChange} 
+                                type="password" 
+                                name="newPassword" 
+                                placeholder='Enter new password' 
+                            />
+                        </Form.Field>
+                        <Form.Field required>
+                            <input 
+                                onChange={textInputOnChange} 
+                                type="password" 
+                                name="repeatNewPassword" 
+                                placeholder='Re-type new password' 
+                            />
+                        </Form.Field>
+                        <div className="save-btn">
+                            <Button onClick={saveFields} color="red">Save</Button>
+                            {/* disabled={checkIsDisabled}  */}
+                        </div>
+                    </Form>
+                </div>
+                <div>
+                    {getMessage()}
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default EditPassword 

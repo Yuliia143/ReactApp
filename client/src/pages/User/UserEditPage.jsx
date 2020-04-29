@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import { Menu, Image } from 'semantic-ui-react';
 
@@ -12,68 +12,75 @@ import EditEmail from './EditEmail';
 import './User.css';
 
 
-class UserEditPage extends Component {
-    state = { 
-        activeItem: 'profile',
-        imageUrl: 'https://react.semantic-ui.com/images/wireframe/square-image.png'
+const UserEditPage = (props) => { 
+    const [ activeItem, setActiveItem ] = useState('profile')
+    const [ imageUrl, setImageUrl ] = useState('https://react.semantic-ui.com/images/wireframe/square-image.png')
+    
+    const handleItemClick = (e, { name }) => {
+        setActiveItem(name)
     }
 
-
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name })
+    const setPhoto = (url) => {
+        setImageUrl(url)
     }
 
-    setPhoto = (url) => {
-        this.setState({ imageUrl: url })
+    const updateProfile = (data) => {
+        props.updateProfile(Object.assign({}, props.user, data))
     }
 
-    updateProfile = (data) => {
-        this.props.updateProfile(Object.assign({}, this.props.user, data))
-    }
+    const { name, surName, email } = props.user
 
-    render() {
-        const { activeItem, imageUrl } = this.state
-        const { name, surName, email } = this.props.user
-
-        return (
-            <div className="edit-profile">
-                <Menu pointing vertical>
-                    <Menu.Item>
-                        <div className="edit-menu-data">
-                            <Image className="edit-menu-item" src={imageUrl} size='small' circular />
-                            <div className="edit-menu-item">{name + ' ' + surName}</div>
-                        </div>
-                    </Menu.Item>
-                    <Menu.Item
-                        name='profile'
-                        active={activeItem === 'profile'}
-                        onClick={this.handleItemClick}
-                    ></Menu.Item>
-                    <Menu.Item 
-                        name='photo'
-                        active={activeItem === 'photo'}
-                        onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                        name='email'
-                        active={activeItem === 'email'}
-                        onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                        name='password'
-                        active={activeItem === 'password'}
-                        onClick={this.handleItemClick}
-                    />
-                </Menu>
-                <div className="edit-content">
-                    {activeItem == 'profile' && <EditProfile name={name} email={email} surName={surName}  updateProfile={this.updateProfile} />}
-                    {activeItem == 'photo' && <EditPhoto imageUrl={imageUrl} setPhoto={this.setPhoto} />} 
-                    {activeItem == 'email' && <EditEmail email={email} updateProfile={this.updateProfile} />}
-                    {activeItem == 'password' && <EditPassword email={email}/>}
-                </div>
+    return (
+        <div className="edit-profile">
+            <Menu pointing vertical>
+                <Menu.Item>
+                    <div className="edit-menu-data">
+                        <Image className="edit-menu-item" src={imageUrl} size='small' circular />
+                        <div className="edit-menu-item">{name + ' ' + surName}</div>
+                    </div>
+                </Menu.Item>
+                <Menu.Item
+                    name='profile'
+                    active={activeItem === 'profile'}
+                    onClick={handleItemClick}
+                ></Menu.Item>
+                <Menu.Item 
+                    name='photo'
+                    active={activeItem === 'photo'}
+                    onClick={handleItemClick}
+                />
+                <Menu.Item
+                    name='email'
+                    active={activeItem === 'email'}
+                    onClick={handleItemClick}
+                />
+                <Menu.Item
+                    name='password'
+                    active={activeItem === 'password'}
+                    onClick={handleItemClick}
+                />
+            </Menu>
+            <div className="edit-content">
+                {activeItem == 'profile' && <EditProfile 
+                    name={name} 
+                    email={email} 
+                    surName={surName}  
+                    updateProfile={updateProfile} 
+                />}
+                {activeItem == 'photo' && <EditPhoto 
+                    imageUrl={imageUrl} 
+                    setPhoto={setPhoto} 
+                />} 
+                {activeItem == 'email' && <EditEmail 
+                    email={email} 
+                    updateProfile={updateProfile} 
+                />}
+                {activeItem == 'password' && <EditPassword 
+                    email={email}
+                />}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const mapDispatchToProps = (dispatch) =>({
