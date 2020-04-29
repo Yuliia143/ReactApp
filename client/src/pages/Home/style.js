@@ -17,7 +17,7 @@ export const LectionWrapper = styled.div`
         height: 295px;
     }
     .slick-list{
-        width: 100%;
+        width: 102%;
     }
  
 `;
