@@ -1,15 +1,9 @@
 import React from "react";
 import ReactPlayer from "react-player";
-import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
-import axios from "axios";
-import { getLecture, postComment } from "../../api/comments-api";
-import CommentForm from "./CommentForm";
-import { RenderComments } from "./RenderComments";
+import { getLecture} from "../../api/comments-api";
 import "./Lecture.css";
-import socketIoClient from "socket.io-client";
-import {BASE_URL} from "../../config";
+import Comments from "./Comments";
 
-const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
 
 
 export default class Lecture extends React.Component {
@@ -23,7 +17,6 @@ fetchLecture = async () => {
     const { match } = this.props;
     getLecture(match.params.id)
       .then((lecture) => {
-          socket.emit('join_room', match.params.id);
         this.setState({
           lecture,
           loading: false,
@@ -36,25 +29,12 @@ fetchLecture = async () => {
       });
   };
 
+
   componentDidMount() {
     this.fetchLecture();
-      socket.on('New message received', message => {
-          this.addNewComment(message);
-      });
-  }
-  onPostComment = (comment) => {
-      this.addNewComment(comment);
-      socket.emit('message', {room:this.props.match.params.id, message:comment});
+
   }
 
-  addNewComment = (comment) => {
-      this.setState((prevState) => ({
-          lecture: {
-              ...prevState.lecture,
-              messages: [...prevState.lecture.messages, comment],
-          },
-      }));
-  }
 
   render() {
     const lectureId = this.props.match.params.id;
@@ -77,18 +57,7 @@ fetchLecture = async () => {
           This video is about: {lecture.description}
 
         </div>
-        <Comment.Group id="commentGroup">
-          <Header as="h3" dividing>
-            Comments
-          </Header>
-          <div className="commentCard">
-            <RenderComments comments={lecture.messages || []}/>
-          </div>
-          <CommentForm
-            lectureId={lectureId}
-            onPostComment={this.onPostComment}
-          />
-        </Comment.Group>
+        <Comments messages={lecture.messages} lectureId={lectureId}/>
       </div>
     );
   }
