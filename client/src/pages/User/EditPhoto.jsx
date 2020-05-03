@@ -7,6 +7,16 @@ import http from "../../api/http";
 import './User.css';
 
 
+// interface Props {
+//     imageUrlProps: string
+//     setPhoto: (url: string) => void
+// }
+
+// : React.FC<Props> = ({
+//     imageUrlProps,
+//     setPhoto
+// })
+
 const EditPhoto = (props) => {
     const [ selectedFile, setSelectedFile ] = useState(null)
     const [ imagePreviewUrl, setImagePreviewUrl ] = useState('')
@@ -14,22 +24,20 @@ const EditPhoto = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ isDisabled, setIsDisabled ] = useState(true)
     
-    // const checkIsDisabled = () => {
-        
-    //     return imagePreviewUrl !== '' 
-    // }
-
+    const isValid = () => {
+        return imagePreviewUrl == '' 
+    }
+    
+    // event: React.ChangeEvent<HTMLInputElement>
     const singleFileChangedHandler = (event) => {
-        // const isDisabled = checkIsDisabled()
+        const valid = isValid()
         let reader = new FileReader();
-        let selectedFile = event.target.files[0];
+        const selectedFile = event.target.files[0];
 
         reader.onloadend = () => {
             setSelectedFile(selectedFile)
-            console.log(imagePreviewUrl)
             setImagePreviewUrl(reader.result)
-            setIsDisabled(isDisabled)
-            // // // // // // setIsDisabled(isDisabled)
+            setIsDisabled(!valid)
         }
         reader.readAsDataURL(selectedFile)
     };
@@ -83,7 +91,7 @@ const EditPhoto = (props) => {
                         <div className="text-edit-photo">Add / edit image:</div>
                         <input type="file" id="file" onChange={singleFileChangedHandler} />
                         <label for="file">Upload image</label>
-                        <Button className="save-btn" onClick={singleFileUploadHandler} color="red">Save</Button>
+                        <Button className="save-btn" onClick={singleFileUploadHandler} disabled={isDisabled} color="red">Save</Button>
                         {/* disabled={isDisabled} */}
                     </div>
                 </div>

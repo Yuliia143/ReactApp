@@ -13,6 +13,7 @@ const EditPassword = (props) => {
         newPassword: '',
         repeatNewPassword: ''
     })
+
     const [ error, setError ] = useState(false)
     const [ success, setSuccess ] = useState(false)
     const [ isDisabled, setIsDisabled ] = useState(true)
@@ -23,19 +24,19 @@ const EditPassword = (props) => {
         } 
     }
 
-    // const checkIsDisabled = () => {
-    //     return passwords.oldPassword.length < 5 || passwords.newPassword.length < 5 || passwords.repeatNewPassword.length < 5
-    // }
+    const isValidForm = () => {
+        return passwords.oldPassword.length >= 5 && passwords.newPassword.length >= 5 && passwords.repeatNewPassword.length >= 5
+    }
 
     const textInputOnChange = (e) => {
-        // const isDisabled = checkIsDisabled()
+        const valid = isValidForm()
         const { name, value } = e.target
         setPasswords( prevState => ({
             ...prevState,
             [name]: value
         }))
 
-        setIsDisabled(isDisabled)
+        setIsDisabled(!valid)
         setError(false)
         setSuccess(false)
     }
@@ -109,7 +110,7 @@ const EditPassword = (props) => {
                             />
                         </Form.Field>
                         <div className="save-btn">
-                            <Button onClick={saveFields} color="red">Save</Button>
+                            <Button onClick={saveFields} disabled={isDisabled} color="red">Save</Button>
                             {/* disabled={checkIsDisabled}  */}
                         </div>
                     </Form>

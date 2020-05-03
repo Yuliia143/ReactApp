@@ -3,19 +3,28 @@ import React, { useState } from 'react';
 import { Form, Button, Message } from 'semantic-ui-react';
 
 import http from "../../api/http";
+import User from "../../models/user";
 
 import './User.css';
 
 
-const EditProfile = (props) => {
+interface Props {
+    user: User,
+    updateProfile: (data: object) => void
+}
+
+const EditProfile: React.FC<Props> =  ({
+        user,
+        updateProfile
+    }) => {
     const [userFullName, setUserFullName] = useState({
-        name: props.name,
-        surName: props.surName
+        name: user.name,
+        surName: user.surName
     })
     const [ loading, setLoading ] = useState(false)
     const [ error, setError ] = useState(false)
 
-    const textInputOnChange = (e) => {
+    const textInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setUserFullName( prevState => ({
             ...prevState,
@@ -26,7 +35,7 @@ const EditProfile = (props) => {
     }
 
     const isFieldsEmpty = () => {
-        if (userFullName.name.length === 0 ||  userFullName.surName.lengt === 0) {
+        if (userFullName.name.length === 0 ||  userFullName.surName.length === 0) {
             setError(true)
         }
     }
@@ -42,7 +51,7 @@ const EditProfile = (props) => {
 
         const data = {
             "oldData": {
-                "email": props.email
+                "email": user.email
             },
             "newData": {
                 "first_name": userFullName.name,
@@ -53,17 +62,19 @@ const EditProfile = (props) => {
         http.put('/api/edit/editName', data )
             .then(response => {
                 setLoading(false)
-                props.updateProfile({
-                        name: userFullName.name,
-                        surName: userFullName.surName
-                    })
-                    console.log(response.data)
+                
+                updateProfile.bind({
+                    name: userFullName.name,
+                    surName: userFullName.surName
+                })
+                console.log(response.data)
             })
             .catch(e => { 
                 setError(true)
                 setLoading(false) 
             })
     };
+
 
     return (
         <div className="edit-profile">

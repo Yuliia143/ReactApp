@@ -3,17 +3,26 @@ import React, { useState }  from 'react';
 import { Form, Button, Message } from 'semantic-ui-react';
 
 import http from "../../api/http";
+import User from "../../models/user";
 
 import './User.css';
 
 
-const EditEmail = (props) => {
-    const [ email, setEmail ] = useState(props.email)
+interface Props {
+    user: User,
+    updateProfile: (data: object) => void
+}
+
+const EditEmail: React.FC<Props> =  ({
+    user,
+    updateProfile
+})  => {
+    const [ email, setEmail ] = useState(user.email)
     const [ error, setError ] = useState(false)
     const [ success, setSuccess ] = useState(false)
     const [ loading, setLoading ] = useState(false) 
     
-    const textInputOnChange = (e) => {
+    const textInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
         setError(false)
         setSuccess(false)
@@ -21,7 +30,7 @@ const EditEmail = (props) => {
 
     const getMessage = () => {
         if (error) {
-            if (props.email == email) {
+            if (user.email == email) {
                 return <Message negative header="This email is already used." />
             }
         }
@@ -33,10 +42,9 @@ const EditEmail = (props) => {
     const saveFields = () => {
         setLoading(true)
 
-
         const data = {
             "oldData": {
-                "email": props.email
+                "email": user.email
             },
             "newData": {
                 "email": email
@@ -47,7 +55,10 @@ const EditEmail = (props) => {
             .then(response => {
                 setLoading(false)
                 setSuccess(true)
-                props.updateProfile( { email: email })
+
+                updateProfile.bind({
+                    email: email
+                })
 
                 if (response.data.message == 'Email is already used') {
                     setError(true)
