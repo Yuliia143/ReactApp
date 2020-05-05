@@ -26,4 +26,8 @@
     color: rgba(0, 0, 0, 0.616);
     margin: 0 35px;
 }
-
+@media screen and (max-width:768px){
+    .info{
+        display: none;
+    }
+}

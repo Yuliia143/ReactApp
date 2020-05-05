@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from './StudentsViewing.module.css';
 import CardItem from '../RecomendedLections/Lections/CardItem'
 
@@ -22,16 +22,13 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const StudentsViewing = ({ lecturesList, getLectures }: PropsFromRedux) => {
-  // useEffect(() => {
-  //   getLectures()
-  // }, [])
+const StudentsViewing = ({lecturesList}: PropsFromRedux) => {
 
   const renderLectures = (arr: any) => {
     console.log(arr)
     return arr.map((item: any, index: any) => {
       return (
-        <CardItem item={item} />
+        <CardItem item={item} key={index}/>
       )
     })
   }
@@ -49,7 +46,9 @@ const StudentsViewing = ({ lecturesList, getLectures }: PropsFromRedux) => {
   return (
     <div className={classes.wrapper}>
       <p className={classes.textStudent}>Students are viewing</p>
-      <Slider {...settings}>{lectionCard}</Slider>
+      <Slider {...settings}>
+        {lectionCard}
+      </Slider>
     </div>
   )
 }

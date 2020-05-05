@@ -38,7 +38,6 @@ export const LectionWrapperNav = styled.div`
         height: 283px;
         width: 813px;
         outline: none;
-
     }
    
     .slick-prev{

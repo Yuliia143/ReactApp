@@ -14,6 +14,7 @@ import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import FooterContainer from "./components/FooterContainer";
 import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
+import FavoriteLections from "./pages/Home/FavoriteLections/FavoriteLections";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
+                                <PrivateRoute path="/favorite-lections" component={FavoriteLections}/>
                                 <Route component={NoMatch}/>
                             </Switch>
                         </div>

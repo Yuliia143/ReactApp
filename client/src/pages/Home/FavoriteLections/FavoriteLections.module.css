@@ -1,0 +1,13 @@
+.wrapper{
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 18px;
+}
+
+.title{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.33em;
+    color: #29303b;
+}
+

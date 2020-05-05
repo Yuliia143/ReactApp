@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from './Lections.module.css';
 import CardItem from "./CardItem";
 
@@ -13,7 +13,6 @@ import { RootState } from "../../../../store";
 const mapStateToProps = (state: RootState) => ({
   lecturesList: state.lectures.lectures
 });
-
 const mapDispatchToProps = (dispatch: Function) => ({
   getLectures: () => dispatch(getLectures())
 });
@@ -21,20 +20,14 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-// let [names, setNames] = useState([]);
 
+const Lections = ({lecturesList}: PropsFromRedux) => {
 
-const Lections = ({ lecturesList, getLectures }: PropsFromRedux) => {
-
-  useEffect(() => {
-    getLectures()
-  }, []);
-  
   const renderLectures = (arr: any) => {
-    // console.log(arr)
+    console.log(arr)
     return arr.map((item: any, index: any) => {
       return (
-        <CardItem item={item} />
+        <CardItem item={item} key={index}/>
       )
     })
 
@@ -50,10 +43,12 @@ const Lections = ({ lecturesList, getLectures }: PropsFromRedux) => {
   };
 
   return (
+    <div className={classes.wrapper}>
     <div className={classes.cardsFlex}>
       <Slider {...settings} >
         {lectionCard}
       </Slider>
+    </div>
     </div>
   )
 }

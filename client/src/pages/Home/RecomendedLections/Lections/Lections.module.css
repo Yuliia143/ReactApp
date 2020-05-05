@@ -1,8 +1,12 @@
+/* .wrapper{
+    width: 40%;
+    margin: 0 auto;
+} */
+
 .cardsFlex{
     display: flex !important;
     padding-left: 23px ;
     width: 770px;
-    /* flex-wrap: nowrap; */
 }
 
 #cards{
@@ -55,4 +59,8 @@
     width: 900px;
     display: flex;
     margin: 0;
+}
+#content{
+    margin: 15px auto;
+    border-top: 0;
 }
