@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import UserEditPage from './pages/User/UserEditPage';
+import AdminEditPage from './pages/Admin/AdminEditPage'
 import {store, persistor} from "./store";
 import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import FooterContainer from "./components/FooterContainer";
@@ -28,6 +29,7 @@ function App() {
                                 <Route exact path="/" component={Home}/>
                                 <Route path="/signup" component={SignUp}/>
                                 <Route path="/signin" component={SignIn}/>
+                                <PrivateRoute path="/admin" component={AdminEditPage}/>
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>

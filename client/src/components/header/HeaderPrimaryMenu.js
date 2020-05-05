@@ -7,7 +7,7 @@ import {signOut} from "../../store/actions/auth";
 
 const HeaderPrimaryMenu = ({onSignOut}) => {
     const [isActiveDropdownMenu, setIsActiveDropdownMenu] = useState(false);
-    const role = 'user';
+    const role = 'admin';
 
     const handleDropdownMenu = (status = false) => {
         setIsActiveDropdownMenu(status);
@@ -26,7 +26,7 @@ const HeaderPrimaryMenu = ({onSignOut}) => {
                 {role === 'admin' ? (
                     <Dropdown.Item as={Link}
                                    name='admin'
-                                   to="/lecture/new">Admin page</Dropdown.Item>
+                                   to="/admin">Admin page</Dropdown.Item>
                 ) : null}
                 <Dropdown.Item as={Link}
                                name='signout'
