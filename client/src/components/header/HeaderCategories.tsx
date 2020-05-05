@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Dropdown, Input} from "semantic-ui-react";
 import Category from "../../models/category";
 
-interface Props{
+interface Props {
     categoriesList: Category[]
 }
 
@@ -13,10 +13,10 @@ const HeaderCategories = ({categoriesList}: Props) => {
         setActiveDropdown(status);
     };
 
-    const handleChange = (event: React.ChangeEvent <HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchCategField(event.target.value);
     };
-    const searchChange = (list:Category[]=[]) => {
+    const searchChange = (list: Category[] = []) => {
         return list.filter(category => {
             return category.title.toLowerCase().includes(searchCategField.toLowerCase())
         })
