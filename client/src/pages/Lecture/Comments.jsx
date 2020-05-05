@@ -1,17 +1,14 @@
 import React from "react";
-import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
+import {Button, Comment, Form, Header, Statistic} from "semantic-ui-react";
 import CommentForm from "./CommentForm";
-import { RenderComments } from "./RenderComments";
+import {RenderComments} from "./RenderComments";
 import "./Lecture.css";
-import socketIoClient from "socket.io-client";
 import {BASE_URL} from "../../config";
-
-const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
-
+import {socket} from '../../App';
 
 export default class Comments extends React.Component {
     state = {
-      messages: []
+        messages: []
     };
 
     leave_room = () => {
@@ -32,8 +29,7 @@ export default class Comments extends React.Component {
     addNewComment = comment => {
         this.setState((prevState) => {
             const prevMessages = prevState.messages;
-            if(!prevMessages.find(item => item._id === comment._id)){
-                console.log('add comment', comment);
+            if (!prevMessages.find(item => item._id === comment._id)) {
                 return {messages: [...prevState.messages, comment]};
             }
             return {};
@@ -45,20 +41,18 @@ export default class Comments extends React.Component {
         const {lectureId} = this.props;
 
         return (
-
-
-                <Comment.Group id="commentGroup">
-                    <Header as="h3" dividing>
-                        Comments
-                    </Header>
-                    <div className="commentCard">
-                        <RenderComments comments={messages || []}/>
-                    </div>
-                    <CommentForm
-                        lectureId={lectureId}
-                        onPostComment={this.addNewComment}
-                    />
-                </Comment.Group>
+            <Comment.Group id="commentGroup">
+                <Header as="h3" dividing>
+                    Comments
+                </Header>
+                <div className="commentCard">
+                    <RenderComments comments={messages || []}/>
+                </div>
+                <CommentForm
+                    lectureId={lectureId}
+                    onPostComment={this.addNewComment}
+                />
+            </Comment.Group>
         );
     }
 }

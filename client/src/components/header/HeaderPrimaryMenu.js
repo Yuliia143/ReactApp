@@ -29,6 +29,12 @@ const HeaderPrimaryMenu = ({onSignOut}) => {
                                    to="/lecture/new">Admin page</Dropdown.Item>
                 ) : null}
                 <Dropdown.Item as={Link}
+                               name='webinar'
+                               to="/webinar/new">Webinar</Dropdown.Item>
+                <Dropdown.Item as={Link}
+                               name='webinars'
+                               to="/webinar/all">Webinars</Dropdown.Item>
+                <Dropdown.Item as={Link}
                                name='signout'
                                onClick={onSignOut}
                                to="/">Sign out</Dropdown.Item>
