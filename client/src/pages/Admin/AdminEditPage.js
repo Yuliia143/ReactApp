@@ -4,12 +4,6 @@ import { connect } from "react-redux";
 import LecturesTable from "./LecturesTable"
 import CreatePage from "../Lectures/Create/CreatePage";
 import UploadVideo from "../Lectures/Create/UploadVideo";
-
-// import LectureHandling from './LectureHandling';
-// import EditPhoto from './EditPhoto';
-// import EditPassword from './EditPassword';
-// import EditEmail from './EditEmail';
-
 import './Admin.css';
 
 const LectureForm = (

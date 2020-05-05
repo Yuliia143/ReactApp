@@ -17,7 +17,6 @@ const HeaderCategories = ({categoriesList}: Props) => {
         setSearchCategField(event.target.value);
     };
     const searchChange = (list:Category[]=[]) => {
-        console.log(list)
         return list.filter(category => {
             return category.title.toLowerCase().includes(searchCategField.toLowerCase())
         })
