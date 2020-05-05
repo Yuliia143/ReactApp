@@ -13,6 +13,7 @@ import { RootState } from "../../../../store";
 const mapStateToProps = (state: RootState) => ({
   lecturesList: state.lectures.lectures
 });
+
 const mapDispatchToProps = (dispatch: Function) => ({
   getLectures: () => dispatch(getLectures())
 });
@@ -20,18 +21,17 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-
-const Lections = ({lecturesList}: PropsFromRedux) => {
+const Lections = ({ lecturesList }: PropsFromRedux) => {
 
   const renderLectures = (arr: any) => {
     console.log(arr)
     return arr.map((item: any, index: any) => {
       return (
-        <CardItem item={item} key={index}/>
+        <CardItem item={item} key={index} />
       )
     })
-
   }
+
   const lectionCard = renderLectures(lecturesList);
 
   const settings = {
@@ -44,11 +44,11 @@ const Lections = ({lecturesList}: PropsFromRedux) => {
 
   return (
     <div className={classes.wrapper}>
-    <div className={classes.cardsFlex}>
-      <Slider {...settings} >
-        {lectionCard}
-      </Slider>
-    </div>
+      <div className={classes.cardsFlex}>
+        <Slider {...settings} >
+          {lectionCard}
+        </Slider>
+      </div>
     </div>
   )
 }
