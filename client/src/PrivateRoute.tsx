@@ -1,8 +1,20 @@
 import {Route, Redirect} from "react-router-dom";
 import React from "react";
-import {connect} from "react-redux";
+import {connect, ConnectedProps} from "react-redux";
+import {RootState} from "./store";
+import {RouteProps} from 'react-router-dom'
 
-function PrivateRoute({isAuth, children, ...rest}) {
+const mapStateToProps = (state: RootState) => ({
+    isAuth: state.auth.isAuth,
+});
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export interface ProtectedRouteProps extends PropsFromRedux, RouteProps {
+    children?: React.ReactNode,
+}
+
+const PrivateRoute = ({isAuth, children, ...rest}: ProtectedRouteProps) => {
     return (
         isAuth ? (
             <Route
@@ -12,7 +24,6 @@ function PrivateRoute({isAuth, children, ...rest}) {
         ) : (
             <Route
                 path={rest.path}
-                dispatc={rest.dispatch}
                 render={({location}) =>
                     <Redirect
                         to={{
@@ -25,11 +36,7 @@ function PrivateRoute({isAuth, children, ...rest}) {
         )
 
     );
-}
-
-const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-});
+};
 
 
-export default connect(mapStateToProps)(PrivateRoute)
+export default connector(PrivateRoute);

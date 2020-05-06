@@ -1,11 +1,12 @@
 import { BASE_URL } from "../config"
 import axios from "axios";
+import {store} from "../store";
 
 export const createLecture = async(values) => {
-    const token = localStorage.getItem("Access-Token");
+    // const token = localStorage.getItem("Access-Token");
     const response = await axios.post(`${BASE_URL}/api/lectures`, values, {
         headers: {
-            "Access-Token":token
+            "Access-token": store.getState().auth.token
         }
     })
     return response.data;

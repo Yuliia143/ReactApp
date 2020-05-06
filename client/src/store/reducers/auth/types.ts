@@ -8,13 +8,14 @@ import {
     SIGN_UP_SUCCESS, UPDATE_PROFILE
 } from "../../types/auth";
 
-export interface AuthState {
+export interface AuthState extends AuthConfig{
     loading: boolean,
-    user: User|null,
     isAuth: boolean,
-    token: string|null
 }
-
+export interface AuthConfig {
+    token: string|null
+    user: null|User
+}
 interface AuthLoadingAction {
     type: typeof AUTH_LOADING
 }
@@ -29,7 +30,7 @@ interface SignUpFailAction {
 
 interface SignInSuccessAction {
     type: typeof SIGN_IN_SUCCESS,
-    payload: User
+    payload: AuthConfig
 }
 
 interface SignInFailAction {

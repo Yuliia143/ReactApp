@@ -14,6 +14,7 @@ import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import FooterContainer from "./components/FooterContainer";
 import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
+import Admin from "./pages/Admin/Admin";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                                 <Route path="/signup" component={SignUp}/>
                                 <Route path="/signin" component={SignIn}/>
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
+                                <PrivateRoute path="/admin" component={Admin}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
                                 <Route component={NoMatch}/>

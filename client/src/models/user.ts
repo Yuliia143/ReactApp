@@ -1,8 +1,10 @@
 interface User {
-    _id: string
-    name:string
-    email:string
-    surName:string
-    role:string
+    id: string
+    name: string
+    email: string
+    surName: string
+    role: string
+    imageUrl: string
 }
+
 export default User;

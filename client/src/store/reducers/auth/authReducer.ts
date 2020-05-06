@@ -5,7 +5,7 @@ const initialState: AuthState = {
     loading: false,
     user: null,
     isAuth: false,
-    token: localStorage.getItem("Access-Token")
+    token: null,
 };
 
 export default function (state = initialState, action:AuthActions) {
@@ -23,7 +23,8 @@ export default function (state = initialState, action:AuthActions) {
         case SIGN_IN_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
+                user: action.payload.user,
+                token: action.payload.token,
                 isAuth: true,
                 loading: false
             };
