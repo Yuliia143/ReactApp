@@ -14,8 +14,7 @@ const mapStateToProps = (state) => ({
     lecturesList: state.lectures.lectures
 });
 
-
-const LecturesTable = ({lecturesList, getLectures}) => {
+const LecturesTable = ({ lecturesList, getLectures }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [lecturesPerPage] = useState(5)
 
@@ -41,14 +40,13 @@ const LecturesTable = ({lecturesList, getLectures}) => {
                 </Table.Row>
             </Table.Header>
             <BodyTable lecturesList={currentLecturesList} />
-            <Pagination 
-            lecturesPerPage={lecturesPerPage} 
-            totalLectures={lecturesList.length}
-            paginate={paginate} />
+            <Pagination
+                lecturesPerPage={lecturesPerPage}
+                totalLectures={lecturesList.length}
+                paginate={paginate} />
         </Table>
     )
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(LecturesTable);
 

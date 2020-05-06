@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Accordion, Form } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import LecturesTable from "./LecturesTable"
-import CreatePage from "../Lectures/Create/CreatePage";
+import CreatePage from "../Lectures/Create/CreatePage.jsx";
 import UploadVideo from "../Lectures/Create/UploadVideo";
 import './Admin.css';
 

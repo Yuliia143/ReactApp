@@ -19,7 +19,8 @@ const Pagination = ({ lecturesPerPage, totalLectures, paginate }) => {
                     <Menu floated='right' pagination>
                         {pageNumbers.map(number => (
                             <Menu.Item
-                                name={number}
+                                key = {number}
+                                name={`${number}`}
                                 active={activeItem === number}
                                 onClick={() => {
                                     handleItemClick(number)
