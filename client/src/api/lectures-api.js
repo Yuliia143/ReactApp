@@ -5,7 +5,7 @@ export const createLecture = async(values) => {
     const token = localStorage.getItem("Access-Token");
     const response = await axios.post(`${BASE_URL}/api/lectures`, values, {
         headers: {
-            "Access-Token":token
+            "Access-token": token
         }
     })
     return response.data;

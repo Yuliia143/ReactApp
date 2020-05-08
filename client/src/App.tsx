@@ -15,6 +15,7 @@ import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import FooterContainer from "./components/FooterContainer";
 import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
+import Admin from "./pages/Admin/Admin";
 
 
 function App() {
@@ -29,10 +30,11 @@ function App() {
                                 <Route exact path="/" component={Home}/>
                                 <Route path="/signup" component={SignUp}/>
                                 <Route path="/signin" component={SignIn}/>
-                                <PrivateRoute path="/admin" component={AdminEditPage}/>
+                                {/* <PrivateRoute path="/admin" component={AdminEditPage}/> */}
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
+                                <PrivateRoute path="/admin" component={Admin}/>
                                 <Route component={NoMatch}/>
                             </Switch>
                         </div>

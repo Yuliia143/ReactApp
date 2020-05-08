@@ -6,6 +6,7 @@ import FileLoaderProgress from './FileLoaderProgress';
 import classes from './CreatePage.module.css';
 import * as Yup from 'yup';
 import { withRouter } from "react-router-dom";
+import './Admin.css';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string()
@@ -38,6 +39,7 @@ const CreatePage = ({history}) => {
   }
 
   return (
+    <div className="edit-content">
     <Formik initialValues={{ title: "", description: "", videoUrl:'', file: null }} 
       validationSchema = {validationSchema}
       onSubmit={(values, {setSubmitting, resetForm}) => {
@@ -89,6 +91,7 @@ const CreatePage = ({history}) => {
         </Form>
       }
     </Formik>
+    </div>
   )
 }
 

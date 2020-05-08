@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, Button} from "semantic-ui-react";
-import http from '../../api/http';
-import { deleteLecture } from '../../api/lectures-api';
+import http from '../../../api/http';
+import { deleteLecture } from '../../../api/lectures-api';
 
 const ModalWindow = ({ modalState, dimmer, onClose, id }) => {
 

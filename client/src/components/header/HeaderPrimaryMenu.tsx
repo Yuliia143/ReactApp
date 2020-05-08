@@ -1,19 +1,32 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Dropdown} from 'semantic-ui-react';
 
-import {connect} from "react-redux";
+import {connect, ConnectedProps} from "react-redux";
 import {signOut} from "../../store/actions/auth";
+import {RootState} from "../../store";
 
-const HeaderPrimaryMenu = ({onSignOut}) => {
+const mapStateToProps = (state: RootState) => ({
+    user: state.auth.user
+});
+const mapDispatchToProps = (dispatch: Function) => {
+    return {
+        onSignOut: () => {
+            dispatch(signOut())
+        }
+    }
+};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
     const [isActiveDropdownMenu, setIsActiveDropdownMenu] = useState(false);
-    const role = 'admin';
 
     const handleDropdownMenu = (status = false) => {
         setIsActiveDropdownMenu(status);
     };
     return (
-        <Dropdown item icon='user large'
+        <Dropdown item icon='large user'
                   onMouseEnter={() => handleDropdownMenu(true)}
                   onMouseLeave={() => handleDropdownMenu()}
                   onClick={() => handleDropdownMenu()}
@@ -23,7 +36,12 @@ const HeaderPrimaryMenu = ({onSignOut}) => {
                 <Dropdown.Item as={Link}
                                name='profile'
                                to="/edit-page">My profile</Dropdown.Item>
-                {role === 'admin' ? (
+                {user && user.role === 'student' ? (
+                    <Dropdown.Item as={Link}
+                                   name='favorite'
+                                   to="/favorite-lections">Favorites</Dropdown.Item>
+                ):null}
+                {user && user.role === 'admin' ? (
                     <Dropdown.Item as={Link}
                                    name='admin'
                                    to="/admin">Admin page</Dropdown.Item>
@@ -37,11 +55,4 @@ const HeaderPrimaryMenu = ({onSignOut}) => {
     )
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onSignOut: () => {
-            dispatch(signOut())
-        }
-    }
-};
-export default connect(null, mapDispatchToProps)(HeaderPrimaryMenu);
+export default connector(HeaderPrimaryMenu);

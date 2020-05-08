@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Checkbox } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getLectures } from "../../store/actions/getLectures";
+import { getLectures } from "../../../store/actions/getLectures";
 import BodyTable from './BodyTable';
 import Pagination from './Pagination';
 
