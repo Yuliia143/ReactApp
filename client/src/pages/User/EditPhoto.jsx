@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Button, Image, Form } from 'semantic-ui-react'
 
 import http from "../../api/http";
+import AvatarCropper from './AvatarCropper'
 
 import './User.css';
 
@@ -18,81 +19,81 @@ import './User.css';
 // })
 
 const EditPhoto = (props) => {
-    const [ selectedFile, setSelectedFile ] = useState(null)
-    const [ imagePreviewUrl, setImagePreviewUrl ] = useState('')
-    const [ imageUrl, setImageUrl ] = useState(props.imageUrl)
+    const [ uploadedFile, setUploadedFile ] = useState(null)
     const [ loading, setLoading ] = useState(false)
     const [ isDisabled, setIsDisabled ] = useState(true)
+    const [ cropWindow,  showCropWindow] = useState(false)
+    const [ newAvatar, setNewAvatar ] = useState(null)
     
-    const isValid = () => {
-        return imagePreviewUrl == '' 
+    const isFileValid = (file) => {
+        const validExtentions = ['image/jpg', 'image/png', 'image/jpeg']
+        const maxSize = 15000000
+        return validExtentions.includes(file.type) && file.size <= maxSize
     }
     
     // event: React.ChangeEvent<HTMLInputElement>
     const singleFileChangedHandler = (event) => {
-        const valid = isValid()
-        let reader = new FileReader();
-        const selectedFile = event.target.files[0];
+        
+        const reader = new FileReader();
+        const file = event.target.files[0];
+        // todo test if non-file choosed
+        const valid = isFileValid(file)
 
         reader.onloadend = () => {
-            setSelectedFile(selectedFile)
-            setImagePreviewUrl(reader.result)
+            setUploadedFile(file)
+            setNewAvatar(reader.result)
             setIsDisabled(!valid)
+            showCropWindow(true)
         }
-        reader.readAsDataURL(selectedFile)
+        reader.readAsDataURL(file)
     };
 
-    
+    const cropImage = (file) => {
+        setUploadedFile(file)
+        showCropWindow(false)
+    }
 
     const singleFileUploadHandler = () => {
         setLoading(true) 
         const data = new FormData();
     
-        if (selectedFile) {
-            data.append('avatarImage', selectedFile, selectedFile.name);
-            http.post('/api/aws/upload-avatar', data, { headers: {
-                'Content-Type': `multipart/form-data; boundary=${data._boundary}`
-            }})
-                .then(response => {
+        if (uploadedFile) {
+            const requestOptions = {
+                headers: { 'Content-Type': `multipart/form-data; boundary=${data._boundary}` },
+                crossDomain: true
+            }
+            
+            data.append('avatarImage', uploadedFile, uploadedFile.name);
+            http.post('/api/aws/upload-avatar', data, requestOptions)
+                .then( response => {
                     setLoading(false)
-                    let fileName = response.data;
-                    props.setPhoto(imagePreviewUrl)
-                    if (200 === response.status) {
-                        console.log('fileName:', fileName);
-                    } else {
-                    console.log(response.data.error);
-                    }
+                    const avatar = response.data.updatedUser.imageUrl
+                    console.log('ok')
+                    props.setAvatar(avatar)
+                        // todo test non-200  
+                })
+                .catch( error => {
+                    setLoading(false)
+                    setIsDisabled(true)
+                    console.log('error')
                 })
         }
     }
 
-    let imagePreview = null;
-
-    if (imagePreviewUrl) {
-        imagePreview = (<img src={imagePreviewUrl} />);
-    } else {
-        imagePreview = (
-            <div className="img-template">
-                <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' />
-            </div>
-        );
-    }
-
     return (
         <>
-            <Form loading={loading} >
+            <Form loading={loading}>
                 <div className="edit-profile">
                     <div className="edit-content">
                         <div className="title-edit">Photo</div>
                         <div className="description-edit">Add a nice photo of yourself for your profile.</div>
                         <div className="imgPreview">
-                            {imagePreview}
+                            <Image src={newAvatar || props.avatar} />  
                         </div>
-                        <div className="text-edit-photo">Add / edit image:</div>
+                        {cropWindow && <AvatarCropper avatar={newAvatar} setNewAvatar={setNewAvatar} cropImage={cropImage}/>}
                         <input type="file" id="file" onChange={singleFileChangedHandler} />
-                        <label for="file">Upload image</label>
+                        <label htmlFor="file">Upload image</label>
                         <Button className="save-btn" onClick={singleFileUploadHandler} disabled={isDisabled} color="red">Save</Button>
-                        {/* disabled={isDisabled} */}
                     </div>
                 </div>
             </Form>
