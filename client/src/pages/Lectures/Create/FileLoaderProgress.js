@@ -4,6 +4,7 @@ import http from '../../../api/http';
 
 
 const FileLoaderProgress = (props) => {
+    const {onUploaded} = props; 
     const [loading, setLoading] = useState(false);
     const [localReader, setLocalReader] = useState(false);
     const [percentCompleted, setPercentCompleted] = useState(0);
@@ -24,8 +25,8 @@ const FileLoaderProgress = (props) => {
           }
         })
         setVideoUrl(response.data.videoUrl);
+        onUploaded(response.data.videoUrl);
         setLocalReader(false);
-        console.log(response);
       }
 
   
@@ -53,7 +54,7 @@ const FileLoaderProgress = (props) => {
         return (
         <div>
             <h5>Sending...</h5>
-            <Progress percent={percentCompleted} progress />
+            <Progress color='teal' percent={percentCompleted} progress />
         </div>
         ) 
     } else if (videoUrl.length > 0) {

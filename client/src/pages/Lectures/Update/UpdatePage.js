@@ -7,6 +7,7 @@ import classes from './CreatePage.module.css';
 import * as Yup from 'yup';
 import { withRouter } from "react-router-dom";
 
+
 const validationSchema = Yup.object().shape({
   title: Yup.string()
     .min(2, "Must have a character")

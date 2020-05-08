@@ -8,7 +8,6 @@ const ModalWindow = ({ modalState, dimmer, onClose, id }) => {
     const deleteLecture = async(id) =>{
         const response = await http.remove(`/api/lectures/${id}`);
         onClose();
-        console.log(response)
     }
 
     return (

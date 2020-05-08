@@ -3,7 +3,6 @@ import { Menu, Accordion, Form } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import LecturesTable from "./LecturesTable"
 import CreatePage from "../Lectures/Create/CreatePage.jsx";
-import UploadVideo from "../Lectures/Create/UploadVideo";
 import './Admin.css';
 
 const LectureForm = (
@@ -73,19 +72,13 @@ class AdminEditPage extends Component {
                                         active={activeItem === 'Add new'}
                                         onClick={this.handleItemClick}
                                     />
-                                    <Menu.Item
-                                        name='Upload Video'
-                                        active={activeItem === 'Upload Video'}
-                                        onClick={this.handleItemClick}
-                                    />
                                 </div>
                             } />
                     </Menu.Item>
                 </Accordion>
                 <div className="edit-content">
                     {activeItem == 'All lectures' && <LecturesTable />}
-                    {activeItem == 'Add new' && <CreatePage />}
-                    {activeItem == 'Upload Video' && < UploadVideo />} 
+                    {activeItem == 'Add new' && <CreatePage />} 
                 </div>
             </div>
         )

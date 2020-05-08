@@ -11,7 +11,7 @@ const BodyTable = ({lecturesList}) =>{
                             key ={i} 
                             id={lecturesList[i].id} 
                             title={lecturesList[i].title} 
-                            description={lecturesList[i].description} />
+                            videoUrl={lecturesList[i].videoUrl} />
                        );
                 })
             }

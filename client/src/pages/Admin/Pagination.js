@@ -15,7 +15,7 @@ const Pagination = ({ lecturesPerPage, totalLectures, paginate }) => {
     return (
         <Table.Footer>
             <Table.Row>
-                <Table.HeaderCell colSpan='3'>
+                <Table.HeaderCell colSpan='4'>
                     <Menu floated='right' pagination>
                         {pageNumbers.map(number => (
                             <Menu.Item

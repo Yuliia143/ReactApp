@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from 'semantic-ui-react';
+import { Table, Checkbox } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getLectures } from "../../store/actions/getLectures";
 import BodyTable from './BodyTable';
