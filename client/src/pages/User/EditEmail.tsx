@@ -18,21 +18,31 @@ const EditEmail: React.FC<Props> =  ({
     updateProfile
 })  => {
     const [ email, setEmail ] = useState(user.email)
-    const [ error, setError ] = useState(false)
-    const [ success, setSuccess ] = useState(false)
     const [ loading, setLoading ] = useState(false) 
+    const [ error, setError ] = useState('')
+    const [ success, setSuccess ] = useState('')
     
     const textInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
-        setError(false)
-        setSuccess(false)
+        setError('')
+        setSuccess('')
+    }
+
+    const isEmailValid = (email: string) => {
+        const emailPattern  = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}/g
+
+        if (!emailPattern.test(email)) {
+            setError('Your email is invalid')
+            setLoading(false)
+            return false
+        }
+        return true
+
     }
 
     const getMessage = () => {
         if (error) {
-            if (user.email == email) {
-                return <Message negative header="This email is already used." />
-            }
+            return <Message negative header={error} />
         }
         if (success) {
             return <Message success header="Your email has been changed." />
@@ -41,6 +51,9 @@ const EditEmail: React.FC<Props> =  ({
 
     const saveFields = () => {
         setLoading(true)
+        const valid = isEmailValid(email)
+        if (!valid) return
+        
 
         const data = {
             "oldData": {
@@ -54,14 +67,14 @@ const EditEmail: React.FC<Props> =  ({
         http.put("/api/edit/editEmail", data )
             .then(response => {
                 setLoading(false)
-                setSuccess(true)
+                setSuccess('Your email has been changed."')
 
-                updateProfile.bind({
+                updateProfile({
                     email: email
                 })
 
                 if (response.data.message == 'Email is already used') {
-                    setError(true)
+                    setError('Email is already used')
                 }
                 console.log(response.data)
             })
