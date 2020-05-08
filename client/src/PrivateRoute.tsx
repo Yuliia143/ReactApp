@@ -5,7 +5,7 @@ import {RootState} from "./store";
 import {RouteProps} from 'react-router-dom'
 
 const mapStateToProps = (state: RootState) => ({
-    isAuth: state.auth.isAuth,
+    user: state.auth.user,
 });
 const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
@@ -14,9 +14,9 @@ export interface ProtectedRouteProps extends PropsFromRedux, RouteProps {
     children?: React.ReactNode,
 }
 
-const PrivateRoute = ({isAuth, children, ...rest}: ProtectedRouteProps) => {
+const PrivateRoute = ({user, children, ...rest}: ProtectedRouteProps) => {
     return (
-        isAuth ? (
+        user ? (
             <Route
                 {...rest}
                 render={() => children}

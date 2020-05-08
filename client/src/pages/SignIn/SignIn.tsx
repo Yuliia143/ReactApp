@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Formik,Form} from 'formik';
 import {BASE_URL} from '../../config';
 import './SignIn.css';
@@ -6,7 +6,6 @@ import {Button, Input} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {object, string} from "yup";
 import {signIn} from "../../store/actions/auth";
-import {RootState} from "../../store";
 import {Credential} from "../../models/credential";
 import {History} from "history";
 
@@ -17,12 +16,6 @@ const validationSchema = object({
 
 const initialValues = {email: "", password: ""};
 
-
-const mapStateToProps = (state: RootState) => ({
-    user: state.auth.user,
-    loading: state.auth.loading
-});
-
 const mapDispatchToProps = (dispatch: Function) =>{
     return {
         onSignIn: (credential: Credential) => {
@@ -30,7 +23,7 @@ const mapDispatchToProps = (dispatch: Function) =>{
         }
     }
 };
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 
 type Props = {
     history: History,

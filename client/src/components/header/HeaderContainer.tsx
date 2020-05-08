@@ -18,7 +18,6 @@ import {RootState} from "../../store";
 
 const mapStateToProps = (state: RootState) => ({
     user: state.auth.user,
-    isAuth: state.auth.isAuth,
     categoriesList: state.categories.categories,
     categoriesLoading: state.categories.loading,
     lecturesList: state.lectures.lectures,
@@ -32,7 +31,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const HeaderContainer = ({isAuth, categoriesList,categoriesLoading, lecturesList,lecturesLoading, getLectures, getCategories}: PropsFromRedux) => {
+const HeaderContainer = ({user, categoriesList,categoriesLoading, lecturesList,lecturesLoading, getLectures, getCategories}: PropsFromRedux) => {
     const [activeItem, setActiveItem] = useState('');
     const handleItemClick = (_: any, data: MenuItemProps) => {setActiveItem(data.name || '')};
 
@@ -60,7 +59,7 @@ const HeaderContainer = ({isAuth, categoriesList,categoriesLoading, lecturesList
                         {!lecturesLoading && <HeaderSearch lecturesList={lecturesList}/>}
                     </Menu.Item>
                 </Menu.Menu>
-                {isAuth ? (
+                {user ? (
                         <Menu.Menu position='right'>
                             <HeaderPrimaryMenu/>
                         </Menu.Menu>

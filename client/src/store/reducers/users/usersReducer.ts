@@ -15,7 +15,7 @@ export default function (state = initialState, action: UsersActions): UsersState
             };
         case USERS_SUCCESS:
             return {
-                loading: false,
+                ...state,
                 users: action.payload
             };
         case USERS_STOP:

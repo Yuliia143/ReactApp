@@ -22,19 +22,10 @@ const Admin = () => {
         setActiveItem(name);
     };
     return (
-        <div className="adminMenu" style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
+        <div className="adminMenu" style={{display: 'flex', justifyContent: 'center', marginTop: '50px', marginBottom: '20px'}}>
             <Accordion as={Menu} pointing vertical>
-                {/*<Menu.Item style={{padding: '14px 0'}}>*/}
-                {/*<Accordion.Title*/}
-                {/*                 active={activeIndex === 0 && activeItem === 'users'}*/}
-                {/*                 name='users'*/}
-                {/*                 content='Users'*/}
-                {/*                 index={0}*/}
-                {/*                 onClick={handleClick}*/}
-                {/*                 icon={{display: 'none'}}/>*/}
-                {/*</Menu.Item>*/}
                 <Accordion.Title as={Menu.Item}
-                                 active={activeIndex === 0 && activeItem === 'users'}
+                                 active={activeItem === 'users'}
                                  name='users'
                                  content='Users'
                                  index={0}
@@ -56,5 +47,16 @@ const Admin = () => {
         </div>
     )
 };
+
+
+{/*<Menu.Item style={{padding: '14px 0'}}>*/}
+{/*<Accordion.Title*/}
+{/*                 active={activeIndex === 0 && activeItem === 'users'}*/}
+{/*                 name='users'*/}
+{/*                 content='Users'*/}
+{/*                 index={0}*/}
+{/*                 onClick={handleClick}*/}
+{/*                 icon={{display: 'none'}}/>*/}
+{/*</Menu.Item>*/}
 
 export default Admin;

@@ -30,9 +30,9 @@ function App() {
                                 <Route path="/signup" component={SignUp}/>
                                 <Route path="/signin" component={SignIn}/>
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
-                                <PrivateRoute path="/admin" component={Admin}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
+                                <PrivateRoute path="/admin" component={Admin}/>
                                 <Route component={NoMatch}/>
                             </Switch>
                         </div>

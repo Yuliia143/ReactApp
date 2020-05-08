@@ -2,14 +2,13 @@ import React from 'react';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 
 const DeleteUserModal = ({id, config}:any) => {
-    console.log(id);
     return (
         <Modal open={config.modalOpen}
                onClose={config.handleClose}>
             <Header icon='trash alternate' content='Delete user'/>
             <Modal.Content>
                 <p>
-                    Are you sure you want to permanently delete this user?{id}
+                    Are you sure you want to permanently delete this user?
                 </p>
             </Modal.Content>
             <Modal.Actions>

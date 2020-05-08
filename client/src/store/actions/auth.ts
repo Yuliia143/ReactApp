@@ -23,8 +23,9 @@ export const signUp = (credential:any):AppThunk<Promise<void>> => (dispatch) => 
 export const signIn = (credential:any):AppThunk<Promise<void>> => (dispatch) => {
     dispatch({type: AUTH_LOADING});
     return login(credential).then((response) => {
-        const config = {token:response.headers["access-token"], user: response.data};
-        dispatch({type: SIGN_IN_SUCCESS, payload: config})
+        window.localStorage.setItem("Access-Token", response.headers["access-token"]);
+        window.localStorage.setItem("User", JSON.stringify(response.data));
+        dispatch({type: SIGN_IN_SUCCESS, payload: response.data})
     }).catch(() => {
         dispatch({type: SIGN_IN_FAIL})
     })
@@ -32,6 +33,8 @@ export const signIn = (credential:any):AppThunk<Promise<void>> => (dispatch) => 
 
 export const signOut = ():AppThunk => (dispatch) => {
     dispatch({type: AUTH_LOADING});
+    window.localStorage.removeItem("Access-Token");
+    window.localStorage.removeItem("User");
     dispatch({type: SIGN_OUT_SUCCESS})
 };
 

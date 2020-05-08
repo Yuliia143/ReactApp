@@ -26,7 +26,7 @@ const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
         setIsActiveDropdownMenu(status);
     };
     return (
-        <Dropdown item icon='user large'
+        <Dropdown item icon='large user'
                   onMouseEnter={() => handleDropdownMenu(true)}
                   onMouseLeave={() => handleDropdownMenu()}
                   onClick={() => handleDropdownMenu()}
