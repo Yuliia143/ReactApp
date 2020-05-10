@@ -8,25 +8,13 @@ import AvatarCropper from './AvatarCropper'
 import './User.css';
 
 
-// interface Props {
-//     imageUrlProps: string
-//     setPhoto: (url: string) => void
-// }
-
-// : React.FC<Props> = ({
-//     imageUrlProps,
-//     setPhoto
-// })
-
 const EditPhoto = (props) => {
     const [ uploadedFile, setUploadedFile ] = useState(null)
     const [ loading, setLoading ] = useState(false)
-    // const [ isDisabled, setIsDisabled ] = useState(true)
     const [ cropWindow,  showCropWindow] = useState(false)
     const [ newAvatar, setNewAvatar ] = useState(null)
-    const [ error, setError ] = useState(null)
-    const [ success, setSuccess ] = useState(null)
-    // const [ message, setMessage ] = useState(null)
+    const [ error, setError ] = useState('')
+    const [ success, setSuccess ] = useState('')
     
     const isFileValid = (file) => {
         if (!file) return false
@@ -45,13 +33,11 @@ const EditPhoto = (props) => {
         return true 
     }
     
-    // event: React.ChangeEvent<HTMLInputElement>
     const singleFileChangedHandler = (event) => {
-        setSuccess(null)
+        setSuccess('')
         
         const reader = new FileReader();
         const file = event.target.files[0];
-        // todo test if non-file choosed
         const valid = isFileValid(file)
         if (!valid) return 
         setLoading(true)
@@ -60,7 +46,7 @@ const EditPhoto = (props) => {
         reader.onloadend = () => {
             setUploadedFile(file)
             setNewAvatar(reader.result)
-            setError(null)
+            setError('')
             showCropWindow(true) 
             setLoading(false)
         }
@@ -93,10 +79,10 @@ const EditPhoto = (props) => {
             }
             
             data.append('avatarImage', uploadedFile, uploadedFile.name);
-            http.get('/api/aws/upload-avatar', data, requestOptions)
+            http.post('/api/aws/upload-avatar', data, requestOptions)
                 .then( response => {
                     setLoading(false)
-                    setError(null)
+                    setError('')
                     setSuccess('Avatar has successfully updated')
                     
                     const avatar = response.data.updatedUser.imageUrl
@@ -107,7 +93,7 @@ const EditPhoto = (props) => {
                 .catch( error => {
                     setLoading(false)
                     setError('Something went wrong. Please, try again!')
-                    setSuccess(null)
+                    setSuccess('')
                 })
         }
     }

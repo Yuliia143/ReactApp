@@ -32,7 +32,7 @@ const UserEditPage : React.FC<Props> =  ({
         updateUser(Object.assign({}, user, data))
     }
     
-    const { name, surName, email } = user
+    const { name, surName } = user
  
     return (
         <div className="edit-profile">
