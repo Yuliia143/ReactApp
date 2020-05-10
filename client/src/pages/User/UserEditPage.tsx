@@ -13,22 +13,23 @@ import EditEmail from './EditEmail';
 
 import './User.css';
 
+
 interface Props {
-    user: User
+    user: User,
+    updateUser: (data: User) => void
 }
 
-const UserEditPage = ({user}: Props) => { 
+const UserEditPage : React.FC<Props> =  ({
+    user,
+    updateUser
+}) => { 
     const [ activeItem, setActiveItem ] = useState('profile')
-    const [ imageUrl, setImageUrl ] = useState('https://react.semantic-ui.com/images/wireframe/square-image.png')
+    const [ avatar, setAvatar ] = useState('https://react.semantic-ui.com/images/wireframe/square-image.png')
     
     const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>, data: MenuItemProps) => setActiveItem(data.name || '')
 
-    const setPhoto = (url: string) => {
-        setImageUrl(url)
-    }
-
     const updateProfile = (data: object) => {
-        updateProfile(Object.assign({}, user, data))
+        updateUser(Object.assign({}, user, data))
     }
     
     const { name, surName, email } = user
@@ -38,7 +39,7 @@ const UserEditPage = ({user}: Props) => {
             <Menu pointing vertical>
                 <Menu.Item>
                     <div className="edit-menu-data">
-                        <Image className="edit-menu-item" src={imageUrl} size='small' circular />
+                        <Image className="edit-menu-item" src={avatar} size='small' circular />
                         <div className="edit-menu-item">{name + ' ' + surName}</div>
                     </div>
                 </Menu.Item>
@@ -66,22 +67,18 @@ const UserEditPage = ({user}: Props) => {
             <div className="edit-content">
                 {activeItem == 'profile' && <EditProfile 
                     user={user}
-                    updateProfile={updateProfile} 
-                    // name={name} 
-                    // email={email} 
-                    // surName={surName}  
+                    updateProfile={updateProfile}  
                 />}
                 {activeItem == 'photo' && <EditPhoto 
-                    imageUrl={imageUrl} 
-                    setPhoto={setPhoto} 
+                    avatar={avatar} 
+                    setAvatar={setAvatar} 
                 />} 
                 {activeItem == 'email' && <EditEmail 
-                    // email={email} 
                     user={user}
                     updateProfile={updateProfile} 
                 />}
                 {activeItem == 'password' && <EditPassword 
-                    email={email}
+                    user={user}
                 />}
             </div>
         </div>
@@ -89,7 +86,7 @@ const UserEditPage = ({user}: Props) => {
 }
 
 const mapDispatchToProps = (dispatch: Function) =>({
-    updateProfile: (user: User[]) => dispatch({ type: 'UPDATE_PROFILE', payload: user })
+    updateUser: (user: User) => dispatch({ type: 'UPDATE_PROFILE', payload: user })
 });
 
 const mapStateToProps = (state: any) => ({

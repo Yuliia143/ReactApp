@@ -62,8 +62,8 @@ const EditProfile: React.FC<Props> =  ({
         http.put('/api/edit/editName', data )
             .then(response => {
                 setLoading(false)
-                
-                updateProfile.bind({
+                // debugger
+                updateProfile({
                     name: userFullName.name,
                     surName: userFullName.surName
                 })
