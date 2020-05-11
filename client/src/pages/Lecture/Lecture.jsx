@@ -11,7 +11,9 @@ export default class Lecture extends React.Component {
   };
 
 
+
 fetchLecture = async () => {
+
     const { match } = this.props;
     getLecture(match.params.id)
       .then((lecture) => {

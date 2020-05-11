@@ -14,10 +14,12 @@ import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import FooterContainer from "./components/FooterContainer";
 import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
+import Admin from "./pages/Admin/Admin";
 import Webinar from "./pages/Webinar/Webinar";
 import socketIoClient from 'socket.io-client';
-import {BASE_URL, RTC_CONFIG} from "./config";
+import {BASE_URL} from "./config";
 import Webinars from "./pages/Webinars/Webinars";
+
 
 const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
 
@@ -36,6 +38,7 @@ function App() {
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
+                                <PrivateRoute path="/admin" component={Admin} isAdmin/>
                                 <PrivateRoute path="/webinar/new" component={Webinar}/>
                                 <PrivateRoute path="/webinar/all" component={Webinars}/>
                                 <Route component={NoMatch}/>

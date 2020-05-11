@@ -1,13 +1,18 @@
 import React from 'react';
 import {Image} from "semantic-ui-react";
 
-export default function (props) {
-    return(
+interface Props {
+    image: string
+}
+
+const Logo = ({image}: Props) => {
+    return (
         <Image
-            src={props.image}
+            src={image}
             size="tiny"
             alt="Logo"
             style={{width: '100px'}}
         />
     )
-}
+};
+export default Logo;

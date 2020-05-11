@@ -5,12 +5,9 @@ import {
     SIGN_UP_SUCCESS,
     SIGN_UP_FAIL,
     SIGN_OUT_SUCCESS,
-    UPDATE_PROFILE
 } from "../types/auth";
 import {signUp as registration} from "../../api/auth"
 import {signIn as login} from "../../api/auth"
-import {Action} from "redux";
-import User from "../../models/user";
 import {AppThunk} from "../index";
 
 

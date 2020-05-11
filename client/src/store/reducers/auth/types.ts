@@ -8,11 +8,9 @@ import {
     SIGN_UP_SUCCESS, UPDATE_PROFILE
 } from "../../types/auth";
 
-export interface AuthState {
+export interface AuthState{
     loading: boolean,
-    user: User|null,
-    isAuth: boolean,
-    token: string|null
+    user: null | User
 }
 
 interface AuthLoadingAction {
