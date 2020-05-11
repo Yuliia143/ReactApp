@@ -19,7 +19,7 @@ interface Props {
 const List = (props: Props) => {
 
     const deleteFavLection = async (id: any) => {
-        await http.delete(`/api/lectures/${id}/fav_lectures`)
+        await http.remove(`/api/lectures/${id}/fav_lectures`)
     }
 
     const { author, description, _id, imgUrl, title } = props.item;

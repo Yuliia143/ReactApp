@@ -16,14 +16,17 @@ const FavoriteLections = () => {
 
   useEffect(() => {
     updateFav();
+  }, [])
+
+  useEffect(() => {
     return () => {
       updateFav();
     }
   }, [favLections])
 
+
   const renderLectures = (arr: any) => {
     let fav = arr.favouriteLectures;
-    console.log(arr)
     if (fav) {
       return fav.map((item: any, index: any) => {
         return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Menu, Image } from 'semantic-ui-react';
+import { Menu, Image, Accordion } from 'semantic-ui-react';
 
 import { connect } from "react-redux";
 
@@ -13,7 +13,7 @@ import './User.css';
 
 
 class UserEditPage extends Component {
-    state = { 
+    state = {
         activeItem: 'profile',
         imageUrl: 'https://react.semantic-ui.com/images/wireframe/square-image.png'
     }
@@ -49,7 +49,8 @@ class UserEditPage extends Component {
                         active={activeItem === 'profile'}
                         onClick={this.handleItemClick}
                     ></Menu.Item>
-                    <Menu.Item 
+                
+                    <Menu.Item
                         name='photo'
                         active={activeItem === 'photo'}
                         onClick={this.handleItemClick}
@@ -66,17 +67,17 @@ class UserEditPage extends Component {
                     />
                 </Menu>
                 <div className="edit-content">
-                    {activeItem == 'profile' && <EditProfile name={name} email={email} surName={surName}  updateProfile={this.updateProfile} />}
-                    {activeItem == 'photo' && <EditPhoto imageUrl={imageUrl} setPhoto={this.setPhoto} />} 
-                    {activeItem == 'email' && <EditEmail email={email} updateProfile={this.updateProfile} />}
-                    {activeItem == 'password' && <EditPassword email={email}/>}
+                    {activeItem === 'profile' && <EditProfile name={name} email={email} surName={surName} updateProfile={this.updateProfile} />}
+                    {activeItem === 'photo' && <EditPhoto imageUrl={imageUrl} setPhoto={this.setPhoto} />}
+                    {activeItem === 'email' && <EditEmail email={email} updateProfile={this.updateProfile} />}
+                    {activeItem === 'password' && <EditPassword email={email} />}
                 </div>
             </div>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch) =>({
+const mapDispatchToProps = (dispatch) => ({
     updateProfile: (user) => dispatch({ type: 'UPDATE_PROFILE', payload: user })
 });
 

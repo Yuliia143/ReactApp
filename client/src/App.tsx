@@ -15,7 +15,15 @@ import FooterContainer from "./components/FooterContainer";
 import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
 import FavoriteLections from "./pages/Home/FavoriteLections/FavoriteLections";
+import Admin from "./pages/Admin/Admin";
+import Webinar from "./pages/Webinar/Webinar";
+import socketIoClient from 'socket.io-client';
+import {BASE_URL} from "./config";
+import Webinars from "./pages/Webinars/Webinars";
 
+
+
+const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
 
 function App() {
     return (
@@ -33,7 +41,10 @@ function App() {
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
                                 <PrivateRoute path="/favorite-lections" component={FavoriteLections}/>
-                               
+                                <PrivateRoute path="/admin" component={Admin} isAdmin/>
+                                <PrivateRoute path="/webinar/new" component={Webinar}/>
+                                <PrivateRoute path="/webinar/all" component={Webinars}/>
+
                                 <Route component={NoMatch}/>
                             </Switch>
                         </div>
@@ -45,6 +56,6 @@ function App() {
     );
 }
 
-export default App;
+export {App, socket};
 
 

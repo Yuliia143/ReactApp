@@ -1,0 +1,25 @@
+.remoteVideo{
+   width: 60%;
+}
+
+.videoContainer{
+    margin-top: 20px;
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.commentsGroup{
+    width: 37%;
+    top: 0;
+}
+
+.commentTitle{
+    text-align: center;
+}
+
+.commentsForm{
+    transform: translateY(340%);
+}
