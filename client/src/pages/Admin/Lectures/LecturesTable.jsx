@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Checkbox } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getLectures } from "../../../store/actions/getLectures";
 import BodyTable from './BodyTable';
 import Pagination from './Pagination';
+import UpdatePage from '../../Lectures/Create/UpdatePage'
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -16,7 +17,9 @@ const mapStateToProps = (state) => ({
 
 const LecturesTable = ({ lecturesList, getLectures }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [lecturesPerPage] = useState(5)
+    const [lecturesPerPage] = useState(5);
+    const [openDetails, setOpenDetails] = useState(false);
+    const [editPage, setEditPage] = useState(null);
 
     useEffect(() => {
         getLectures();
@@ -28,8 +31,15 @@ const LecturesTable = ({ lecturesList, getLectures }) => {
     const currentLecturesList = lecturesList.slice(indexOfFirstLecture, indexofLastLecture);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const handleCloseDetails = () => setOpenDetails(false);
 
     return (
+    <div className="adminContent">
+        {openDetails && <UpdatePage
+                editPage={editPage}
+                closeDetails={handleCloseDetails}/>}
+
+        {!openDetails && 
         <Table celled>
             <Table.Header>
                 <Table.Row>
@@ -39,12 +49,16 @@ const LecturesTable = ({ lecturesList, getLectures }) => {
                     <Table.HeaderCell></Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
-            <BodyTable lecturesList={currentLecturesList} />
+            <BodyTable lecturesList={currentLecturesList} 
+                handleEditPage={setEditPage}
+                handleOpenDetails={setOpenDetails} />
             <Pagination
                 lecturesPerPage={lecturesPerPage}
                 totalLectures={lecturesList.length}
                 paginate={paginate} />
         </Table>
+        }
+    </div>
     )
 }
 

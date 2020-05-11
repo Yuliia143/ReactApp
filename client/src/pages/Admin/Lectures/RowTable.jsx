@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
-import { Table, Button, Checkbox, Label} from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Table, Button, Checkbox, Label } from 'semantic-ui-react';
 import ModalWindow from './ModalWindow';
 import { withRouter } from "react-router-dom";
 
-const RowTable = ({ id, title, videoUrl, history }) => {
+const RowTable = (props) => {
+
+    const {id, title, videoUrl} = props.lecture; 
+    const {handleEditPage, handleOpenDetails} = props;
+    const {history} = props;
 
     const [modalState, setModalState] = useState(false);
     const [dimmer, setDimmer] = useState(true);
-    
+
     const redirectToSingleLecture = (lectureId) => {
         history.push(`/lecture/${lectureId}`);
     }
@@ -26,17 +30,18 @@ const RowTable = ({ id, title, videoUrl, history }) => {
             <Table.Cell><Label href={videoUrl}>{videoUrl}</Label></Table.Cell>
             <Table.Cell>
                 <Button.Group>
-                    <Button onClick={()=>redirectToSingleLecture(id)} color='blue'>View</Button>
+                    <Button onClick={() => redirectToSingleLecture(id)} color='blue'>View</Button>
                     <Button.Or />
-                    <Button color='teal'>Edit</Button>
+                    <Button onClick={() => {
+                        handleOpenDetails(true)
+                        handleEditPage(props.lecture)
+                    }} color='teal'>Edit</Button>
                     <Button.Or />
                     <Button onClick={show('blurring')} color='red'>Delete</Button>
 
                 </Button.Group>
             </Table.Cell>
         </Table.Row>
-
-        
     )
 }
 

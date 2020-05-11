@@ -16,9 +16,14 @@ const put = async (url, data, options = {}) => {
     return axios.put(BASE_URL+url, data, {...options, headers: {'Access-Token': token}})
 }
 
-const remove = async (url) => {
+const remove = async (url, data=null) => {
     const token = localStorage.getItem("Access-Token");
-    return axios.delete(BASE_URL+url, {headers: {'Access-Token': token}});
+    return axios.delete(BASE_URL+url, {
+        headers: {
+            'Access-Token': token
+        },
+    data:data
+    });
 }
 
 export default {get, put, post, remove};

@@ -2,16 +2,16 @@ import React from 'react';
 import RowTable from './RowTable';
 import {Table} from 'semantic-ui-react';
 
-const BodyTable = ({lecturesList}) =>{ 
+const BodyTable = ({lecturesList, handleEditPage, handleOpenDetails}) =>{ 
     return(
         <Table.Body>
             {lecturesList.map((lecture,i)=>{
                 return (       
                         <RowTable 
-                            key ={i} 
-                            id={lecturesList[i].id} 
-                            title={lecturesList[i].title} 
-                            videoUrl={lecturesList[i].videoUrl} />
+                            key ={i}
+                            lecture ={lecture}  
+                            handleEditPage={handleEditPage}
+                            handleOpenDetails={handleOpenDetails} />
                        );
                 })
             }

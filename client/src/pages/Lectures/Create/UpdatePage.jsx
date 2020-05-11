@@ -6,6 +6,7 @@ import FileLoaderProgress from './FileLoaderProgress';
 import classes from './CreatePage.module.css';
 import * as Yup from 'yup';
 import { withRouter } from "react-router-dom";
+import './Admin.css';
 
 
 const validationSchema = Yup.object().shape({
@@ -20,6 +21,8 @@ const validationSchema = Yup.object().shape({
     .required("Please add video URL or upload your own")
 })
 
+
+
 const errorFormHandlind = (touchedName, errorName) =>{
   if (touchedName && typeof(errorName) !== 'undefined'){
     return { 
@@ -31,7 +34,7 @@ const errorFormHandlind = (touchedName, errorName) =>{
   }
 }
 
-const CreatePage = ({history}) => {
+const UpdatePage = ({history, closeDetails, editPage}) => {
 
   const onSubmitLecture = async (values) => {
     const result = await createLecture(values);
@@ -39,7 +42,7 @@ const CreatePage = ({history}) => {
   }
 
   return (
-    <Formik initialValues={{ title: "", description: "", videoUrl:'', file: null }} 
+    <Formik initialValues={{ title: editPage.title, description: editPage.description, videoUrl:editPage.videoUrl, file: null }} 
       validationSchema = {validationSchema}
       onSubmit={(values, {setSubmitting, resetForm}) => {
         onSubmitLecture(values)
@@ -84,8 +87,16 @@ const CreatePage = ({history}) => {
           <FileLoaderProgress file={values.file} onUploaded={(url)=>{
             setFieldValue('videoUrl', url);
           }} />
-          <div>
-              <Button type="submit" disabled={!isValid} color='teal'>Add Lecture</Button>
+          <div> 
+              {editPage &&
+              <div>
+                <Button type="button" color='red' inverted onClick={closeDetails}>Cancel</Button>
+                <Button type="submit" disabled={!isValid} color='teal'>Change Lecture</Button>
+                </div>
+              }
+              {!editPage && 
+               <Button type="submit" disabled={!isValid} color='teal'>Add Lecture</Button>
+              }
           </div>
         </Form>
       }
@@ -93,4 +104,4 @@ const CreatePage = ({history}) => {
   )
 }
 
-export default withRouter(CreatePage);
+export default withRouter(UpdatePage);
