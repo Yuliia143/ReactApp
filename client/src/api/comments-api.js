@@ -8,7 +8,7 @@ import http from './http';
    const postComment = async(lectureId, comment) => {
     const url = `/api/lectures/${lectureId}/messages`;
       const response = await http.post(url, comment);
-      console.log(response.data); 
+      return response.data; 
     };
 
 
