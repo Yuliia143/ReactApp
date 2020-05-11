@@ -18,7 +18,7 @@ import FavoriteLections from "./pages/Home/FavoriteLections/FavoriteLections";
 import Admin from "./pages/Admin/Admin";
 import Webinar from "./pages/Webinar/Webinar";
 import socketIoClient from 'socket.io-client';
-import {BASE_URL} from "./config";
+import {BASE_URL, RTC_CONFIG} from "./config";
 import Webinars from "./pages/Webinars/Webinars";
 
 
