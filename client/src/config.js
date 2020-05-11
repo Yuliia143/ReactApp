@@ -1,5 +1,4 @@
 export const BASE_URL =  "http://localhost:3030";
-
 export const RTC_CONFIG = {
     iceServers: [
         {
@@ -7,3 +6,4 @@ export const RTC_CONFIG = {
         }
     ]
 }
+

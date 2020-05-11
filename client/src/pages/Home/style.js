@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LectionWrapper = styled.div`
+export const LectionWrapper = styled.div `
     .slick-arrow{
         background-color: #80808070;
         height: 30px;
@@ -11,7 +11,6 @@ export const LectionWrapper = styled.div`
     .slick-slide{
         width: 242px;
         height: 280px;
-
     }
     .slick-track{
         height: 295px;
@@ -19,10 +18,27 @@ export const LectionWrapper = styled.div`
     .slick-list{
         width: 102%;
     }
- 
+    @media screen and (max-width:1200px){
+            .slick-list{
+                margin: auto;
+                width: 89%;
+            }
+            .slick-prev {
+                left: 40px;
+            }
+            .slick-next {
+                right: 16px;
+            }
+        }
+
+    @media screen and (max-width:768px){
+        .slick-prev {
+            left: 17px;
+        }
+    }
 `;
 
-export const LectionWrapperNav = styled.div`
+export const LectionWrapperNav = styled.div `
     .slick-arrow{
         background-color: #80808070;
         height: 30px;
@@ -38,7 +54,6 @@ export const LectionWrapperNav = styled.div`
         height: 283px;
         width: 813px;
         outline: none;
-
     }
    
     .slick-prev{
@@ -47,5 +62,15 @@ export const LectionWrapperNav = styled.div`
     .slick-next{
         margin-right: 3px;
     }
- 
+    @media screen and (max-width:768px){
+        .slick-list {
+            width: 601px;
+        }
+        .slick-next {
+            right: -8px;
+        }
+        .slick-prev {
+            left: -31px;
+        }
+    }
 `;
