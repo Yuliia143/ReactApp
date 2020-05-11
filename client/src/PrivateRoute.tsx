@@ -12,30 +12,41 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export interface ProtectedRouteProps extends PropsFromRedux, RouteProps {
     children?: React.ReactNode,
+    isAdmin?: boolean
 }
 
-const PrivateRoute = ({user, children, ...rest}: ProtectedRouteProps) => {
-    return (
-        user ? (
-            <Route
-                {...rest}
-                render={() => children}
-            />
-        ) : (
-            <Route
+const PrivateRoute = ({user, children, isAdmin = false, ...rest}: ProtectedRouteProps) => {
+    if (user) {
+        if (user.role !== 'admin' && isAdmin) {
+            return (<Route
                 path={rest.path}
                 render={({location}) =>
                     <Redirect
                         to={{
-                            pathname: "/signin",
+                            pathname: "/",
                             state: {from: location}
                         }}
                     />
                 }
-            />
-        )
-
-    );
+            />)
+        }
+        return (<Route
+            {...rest}
+            render={() => children}
+        />)
+    } else {
+        return (<Route
+            path={rest.path}
+            render={({location}) =>
+                <Redirect
+                    to={{
+                        pathname: "/signin",
+                        state: {from: location}
+                    }}
+                />
+            }
+        />)
+    }
 };
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Fragment} from 'react';
 import {RootState} from "../../../store";
 import {connect, ConnectedProps} from "react-redux";
 import {getUsers} from "../../../store/actions/getUsers";
@@ -25,7 +25,7 @@ const Users = ({getUsers, usersList, usersLoading}: PropsFromRedux) => {
         getUsers();
     }, [getUsers]);
     return (
-        <div className="adminContent">
+        <Fragment>
             {usersLoading && <h1 className="loading">Loading...</h1>}
             {!openDetails && (!usersLoading &&  usersList) && <UsersList
                 usersList={usersList}
@@ -33,10 +33,9 @@ const Users = ({getUsers, usersList, usersLoading}: PropsFromRedux) => {
                 handleSetUser={setEditedUser}
             />}
             {openDetails && <UserDetails
-                usersList={usersList}
                 editedUser={editedUser}
                 closeDetails={handleCloseDetails}/>}
-        </div>
+        </Fragment>
     )
 };
 

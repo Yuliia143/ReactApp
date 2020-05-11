@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 
-const DeleteUserModal = ({id, config}:any) => {
+const DeleteUserModal = ({user, config}:any) => {
     return (
         <Modal open={config.modalOpen}
                onClose={config.handleClose}>
@@ -15,7 +15,9 @@ const DeleteUserModal = ({id, config}:any) => {
                 <Button color='red' inverted onClick={config.handleClose}>
                     <Icon name='remove'/> No
                 </Button>
-                <Button color='green' inverted onClick={() => config.handleRemove(id)}>
+                <Button color='green' inverted onClick={() => {
+                    config.handleRemove(user.id)
+                }}>
                     <Icon name='checkmark'/> Yes
                 </Button>
             </Modal.Actions>

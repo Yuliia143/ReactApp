@@ -32,7 +32,7 @@ function App() {
                                 <PrivateRoute path="/lecture/new" component={CreateLecture}/>
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
-                                <PrivateRoute path="/admin" component={Admin}/>
+                                <PrivateRoute path="/admin" component={Admin} isAdmin/>
                                 <Route component={NoMatch}/>
                             </Switch>
                         </div>

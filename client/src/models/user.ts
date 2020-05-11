@@ -5,6 +5,7 @@ interface User {
     surName: string
     role: string
     imageUrl: string
+    [key: string]:string
 }
 
 export default User;

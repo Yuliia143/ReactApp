@@ -6,11 +6,24 @@ import {SearchProps} from "semantic-ui-react/dist/commonjs/modules/Search/Search
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router-dom";
 
-interface Props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
     lecturesList: Lecture[]
 }
 
+interface SearchLecture {
+    id: string,
+    title: string,
+    description: string
+}
+
 const HeaderSearch = ({lecturesList, history}: Props) => {
+    const list = lecturesList.map(lecture => {
+        return {
+            id: lecture.id,
+            title: lecture.title,
+            description: lecture.description,
+        }
+    });
     const [searchLectField, setSearchLectField] = useState('');
 
     const handleResultSelect = (_: any, data: MenuItemProps) => {
@@ -20,12 +33,12 @@ const HeaderSearch = ({lecturesList, history}: Props) => {
     const handleSearchSelect = (event: React.MouseEvent<HTMLElement>, data: SearchProps) => {
         setSearchLectField(data.value || '');
     };
-    const handleSearchChange = (list: Lecture[] = []) => {
+    const handleSearchChange = (list: SearchLecture[] = []) => {
         return list.filter(item => {
             return item.title.toLowerCase().includes(searchLectField.toLowerCase())
         });
     };
-    const res = handleSearchChange(lecturesList);
+    const res = handleSearchChange(list);
     return (
         <Search
             placeholder="Search..."

@@ -1,4 +1,12 @@
-import {USERS_FAIL, USERS_LOADING, USERS_STOP, USERS_SUCCESS} from "../../types/users";
+import {
+    USER_ADD,
+    USER_DELETE,
+    USER_UPDATE,
+    USERS_FAIL,
+    USERS_LOADING,
+    USERS_STOP,
+    USERS_SUCCESS
+} from "../../types/users";
 import User from "../../../models/user";
 
 export interface UsersState {
@@ -23,9 +31,27 @@ interface UsersFailAction {
     type: typeof USERS_FAIL
 }
 
+interface UsersUpdateAction{
+    type: typeof USER_UPDATE
+    payload: User
+}
+
+interface UsersAddAction{
+    type: typeof USER_ADD
+    payload: User
+}
+interface UsersDeleteAction{
+    type: typeof USER_DELETE
+    payload: string
+}
+
+
 
 export type UsersActions =
     UsersLoadingAction
     | UsersSuccessAction
     | UsersStopAction
-    | UsersFailAction;
+    | UsersFailAction
+    | UsersUpdateAction
+    | UsersAddAction
+    | UsersDeleteAction;

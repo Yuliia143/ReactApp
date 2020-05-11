@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Dropdown} from 'semantic-ui-react';
+import {Dropdown, Icon} from 'semantic-ui-react';
 
 import {connect, ConnectedProps} from "react-redux";
 import {signOut} from "../../store/actions/auth";
@@ -26,7 +26,7 @@ const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
         setIsActiveDropdownMenu(status);
     };
     return (
-        <Dropdown item icon='large user'
+        <Dropdown item icon={<Icon name="user" size="large"/>}
                   onMouseEnter={() => handleDropdownMenu(true)}
                   onMouseLeave={() => handleDropdownMenu()}
                   onClick={() => handleDropdownMenu()}
