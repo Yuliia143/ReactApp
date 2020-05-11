@@ -4,15 +4,15 @@ import classes from './Lections.module.css';
 import ModalFooter from './ModalFooter';
 
 interface CardProps {
-  imgUrl:string,
+  imgUrl: string,
   title: string,
-  author: string, 
-  defaultRating: string, 
-  description: string, 
+  author: string,
+  defaultRating: string,
+  description: string,
   id: string,
 }
 
-interface Props{
+interface Props {
   item: CardProps
 }
 
@@ -34,7 +34,7 @@ const CardItem = (props: Props) => {
               <img src={imgUrl}></img>
             </div>
 
-            <div className="content" id = {classes.content}>
+            <div className="content" id={classes.content}>
               <div className="header" id={classes.headerTitle}>{title}</div>
               <div className="meta">
                 <p>{author} </p>

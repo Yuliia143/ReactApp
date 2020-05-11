@@ -10,5 +10,4 @@ export const readLectures = () => {
         .catch(error => {
             console.log(error);
         })
-
 };

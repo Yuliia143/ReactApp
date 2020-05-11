@@ -33,6 +33,7 @@ function App() {
                                 <PrivateRoute path="/lecture/:id" component={Lecture}/>
                                 <PrivateRoute path="/edit-page" component={UserEditPage}/>
                                 <PrivateRoute path="/favorite-lections" component={FavoriteLections}/>
+                               
                                 <Route component={NoMatch}/>
                             </Switch>
                         </div>

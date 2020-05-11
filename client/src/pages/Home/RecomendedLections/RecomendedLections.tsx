@@ -13,7 +13,7 @@ const RecomendedLections = () => {
         <p className={classes.text}>Choose from over 100 online video courses with new additions published every month</p>
       </div>
 
-      <div >
+      <div className={classes.wrapForCenter}>
         <NavBar />
         <LectionWrapperNav>
           <Lections />

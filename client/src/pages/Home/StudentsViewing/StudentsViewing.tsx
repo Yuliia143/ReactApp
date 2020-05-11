@@ -12,7 +12,8 @@ import { RootState } from "../../../store";
 
 
 const mapStateToProps = (state: RootState) => ({
-  lecturesList: state.lectures.lectures
+  lecturesList: state.lectures.lectures,
+  lecturesLoading: state.lectures.loading
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -22,15 +23,17 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const StudentsViewing = ({lecturesList}: PropsFromRedux) => {
+const StudentsViewing = ({lecturesList, lecturesLoading}: PropsFromRedux) => {
 
   const renderLectures = (arr: any) => {
     console.log(arr)
-    return arr.map((item: any, index: any) => {
-      return (
-        <CardItem item={item} key={index}/>
-      )
-    })
+    if(!lecturesLoading && lecturesList){
+      return arr.map((item: any, index: any) => {
+        return (
+          <CardItem item={item} key={index} />
+        )
+      })
+    }
   }
 
   const lectionCard = renderLectures(lecturesList);
@@ -43,12 +46,38 @@ const StudentsViewing = ({lecturesList}: PropsFromRedux) => {
     slidesToScroll: 4
   };
 
+  const settings_2 = {
+    dots: false,
+    infinite: false,
+    speed: 900,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  };
+
+  const settings_3 = {
+    dots: false,
+    infinite: false,
+    speed: 900,
+    slidesToShow: 2,
+    slidesToScroll: 2
+  };
+
   return (
     <div className={classes.wrapper}>
       <p className={classes.textStudent}>Students are viewing</p>
-      <Slider {...settings}>
+      
+      <Slider {...settings} className={classes.slider_1}>
         {lectionCard}
       </Slider>
+
+      <Slider {...settings_2} className={classes.slider_2}>
+        {lectionCard}
+      </Slider>
+
+      <Slider {...settings_3} className={classes.slider_3}>
+        {lectionCard}
+      </Slider>
+
     </div>
   )
 }

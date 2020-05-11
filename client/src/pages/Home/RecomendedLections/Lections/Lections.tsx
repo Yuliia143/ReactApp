@@ -24,17 +24,18 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const Lections = ({ lecturesList }: PropsFromRedux) => {
 
   const renderLectures = (arr: any) => {
-    console.log(arr)
-    return arr.map((item: any, index: any) => {
-      return (
-        <CardItem item={item} key={index} />
-      )
-    })
+    if(arr!== undefined){
+      return arr.map((item: any, index: any) => {
+        return (
+          <CardItem item={item} key={index} />
+        )
+      })
+    }
   }
 
   const lectionCard = renderLectures(lecturesList);
 
-  const settings = {
+  const settings_1 = {
     dots: false,
     infinite: false,
     speed: 900,
@@ -42,16 +43,28 @@ const Lections = ({ lecturesList }: PropsFromRedux) => {
     slidesToScroll: 3
   };
 
+  const settings_2 = {
+    dots: false,
+    infinite: false,
+    speed: 900,
+    slidesToShow: 2,
+    slidesToScroll: 2
+  };
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.cardsFlex}>
-        <Slider {...settings} >
+        <Slider {...settings_1} className={classes.slider_1}>
+          {lectionCard}
+        </Slider>
+        <Slider {...settings_2} className={classes.slider_2}>
           {lectionCard}
         </Slider>
       </div>
     </div>
   )
 }
+
 
 export default connector(Lections);
 

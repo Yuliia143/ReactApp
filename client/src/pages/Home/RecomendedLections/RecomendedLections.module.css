@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     width: 85%;
     margin: 0 auto;
     margin-top: 43px;
@@ -6,7 +6,7 @@
     justify-content: space-between;
 }
 
-.info{
+.info {
     width: 40%;
     height: 350px;
     background-color: rgba(0, 0, 0, 0.034);
@@ -15,19 +15,24 @@
     justify-content: center;
 }
 
-.title{
+.title {
     font-size: 20px;
     color: rgba(0, 0, 0, 0.836);
     margin: 3px 35px;
 }
 
-.text{
+.text {
     font-size: 17px;
     color: rgba(0, 0, 0, 0.616);
     margin: 0 35px;
 }
-@media screen and (max-width:768px){
-    .info{
+
+@media screen and (max-width:1200px) {
+    .info {
         display: none;
+    }
+
+    .wrapForCenter {
+        margin: 0 auto;
     }
 }
