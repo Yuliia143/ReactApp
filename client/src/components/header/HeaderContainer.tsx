@@ -15,11 +15,13 @@ import {getLectures} from "../../store/actions/getLectures";
 import {MenuItemProps} from "semantic-ui-react/dist/commonjs/collections/Menu/MenuItem";
 import {RootState} from "../../store";
 
+
 const mapStateToProps = (state: RootState) => ({
     user: state.auth.user,
-    isAuth: state.auth.isAuth,
     categoriesList: state.categories.categories,
-    lecturesList: state.lectures.lectures
+    categoriesLoading: state.categories.loading,
+    lecturesList: state.lectures.lectures,
+    lecturesLoading: state.lectures.loading,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -29,14 +31,14 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const HeaderContainer = ({isAuth, categoriesList, lecturesList, getLectures, getCategories}: PropsFromRedux) => {
+const HeaderContainer = ({user, categoriesList,categoriesLoading, lecturesList,lecturesLoading, getLectures, getCategories}: PropsFromRedux) => {
     const [activeItem, setActiveItem] = useState('');
-    const handleItemClick = (_: any, data: MenuItemProps) => setActiveItem(data.name || '');
+    const handleItemClick = (_: any, data: MenuItemProps) => {setActiveItem(data.name || '')};
 
     useEffect(() => {
         getLectures();
         getCategories()
-    }, []);
+    }, [getLectures, getCategories]);
 
     return (
         <Segment color="teal" inverted style={{borderRadius: '0', padding: '10px 30px', marginBottom: '0'}}>
@@ -51,13 +53,13 @@ const HeaderContainer = ({isAuth, categoriesList, lecturesList, getLectures, get
                         <Logo image={LogoImg}/>
                     </Menu.Item>
                     <Menu.Item>
-                        <HeaderCategories categoriesList={categoriesList}/>
+                        {!categoriesLoading && <HeaderCategories categoriesList={categoriesList}/>}
                     </Menu.Item>
                     <Menu.Item>
-                        <HeaderSearch lecturesList={lecturesList}/>
+                        {!lecturesLoading && <HeaderSearch lecturesList={lecturesList}/>}
                     </Menu.Item>
                 </Menu.Menu>
-                {isAuth ? (
+                {user ? (
                         <Menu.Menu position='right'>
                             <HeaderPrimaryMenu/>
                         </Menu.Menu>

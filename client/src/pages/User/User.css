@@ -79,13 +79,14 @@ form.form {
     margin-top: 30px;
 }
   
-.description-edit, .text-edit-photo {
+.description-edit {
     font-size: 15px;
     margin: 15px 0 30px 0;
 }
  
 .imgPreview {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     margin: 5px 15px;
     height: 200px;
     width: 60%;
@@ -111,4 +112,24 @@ form.form {
 
 .ui.negative.message, .ui.success.message {
     margin-top: 20px;
+}
+
+ .css-1dkwqii  {
+    margin-bottom: 80px !important;
+ }
+
+ .crop-modal {
+    width: 95%;
+    height: 95%;
+}  
+
+#cropper-window {
+    background-color: gray;
+    opacity: 10%;
+    z-index: 100;
+} 
+
+.crop-button {
+    position: absolute;
+    right: 30px;
 }

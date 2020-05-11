@@ -50,3 +50,42 @@
     font-size: 16px;
     margin-left: 5px;
 }
+
+.slider_2{
+    display: none;
+}
+
+.slider_3{
+    display: none;
+}
+
+@media screen and (max-width:1200px){
+    .slider_1{
+        display: none;
+    }
+    .slider_2{
+        display: block;
+    }
+    .textStudent{
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .slider_3{
+        display: none;
+    }
+}
+
+@media screen and (max-width:768px){
+    .slider_1{
+        display: none;
+    }
+    .slider_2{
+        display: none;
+    }
+    .slider_3{
+        display: block;
+    }
+    
+}
+
