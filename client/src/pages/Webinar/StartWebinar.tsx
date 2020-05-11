@@ -1,34 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styles from './Webinar.module.css';
-import {socket, peerConnection, RTCSessionDescription} from '../../App';
 import {Button, Input} from "semantic-ui-react";
-import WebCamera from './WebCamera';
+import UsersAndCamera from './UsersAndCamera';
+import Comments from "./Comments";
 
 export default function () {
 
     const [startWebinar, setStartWebinar] = useState(false);
     const [webinareName, setWebinareName] = useState('');
 
-    const showCamera = async  () => {
-        await socket.emit('new_user_joined', '');
-
+    const showCamera = () => {
         setStartWebinar(true);
     }
 
-    const textInputOnchange = e => {
+    const textInputOnchange = (e: {target: HTMLInputElement}) => {
         setWebinareName(e.target.value);
     }
 
     if (startWebinar === true) {
         return (
-            <WebCamera/>
+            <div className={styles.container}>
+                <UsersAndCamera/>
+                <Comments/>
+            </div>
         )
     } else {
         return (
             <div className={styles.startWebinar}>
                 <Input type='text' className={styles.webinarName} placeholder='Webinar name' value={webinareName}
                        onChange={textInputOnchange}/>
-                <Button disabled={!webinareName} className="ui inverted green button" onClick={showCamera}>
+                <Button disabled={!webinareName} className="ui teal button" onClick={showCamera}>
                     Start new webinar
                 </Button>
             </div>

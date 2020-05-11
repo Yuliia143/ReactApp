@@ -16,12 +16,10 @@ import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
 import Webinar from "./pages/Webinar/Webinar";
 import socketIoClient from 'socket.io-client';
-import {BASE_URL} from "./config";
+import {BASE_URL, RTC_CONFIG} from "./config";
 import Webinars from "./pages/Webinars/Webinars";
 
 const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
-const {RTCPeerConnection, RTCSessionDescription} = window;
-const peerConnection = new RTCPeerConnection();
 
 function App() {
     return (
@@ -51,6 +49,6 @@ function App() {
     );
 }
 
-export {App, socket, peerConnection, RTCSessionDescription};
+export {App, socket};
 
 
