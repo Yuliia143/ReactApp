@@ -4,8 +4,6 @@ import { getLecture} from "../../api/comments-api";
 import "./Lecture.css";
 import Comments from "./Comments";
 
-
-
 export default class Lecture extends React.Component {
   state = {
     lecture: null,
@@ -32,7 +30,6 @@ fetchLecture = async () => {
 
   componentDidMount() {
     this.fetchLecture();
-
   }
 
 

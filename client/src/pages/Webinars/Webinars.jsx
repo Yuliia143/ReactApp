@@ -1,15 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import {socket, peerConnection, RTCSessionDescription} from "../../App";
+import {socket} from "../../App";
 import styles from './Webinars.module.css';
+import {Comment, Header} from "semantic-ui-react";
+import {RTC_CONFIG} from "../../config";
+import CommentForm from "./CommentForm";
+
+const {RTCPeerConnection, RTCSessionDescription} = window;
+const peerConnection = new RTCPeerConnection(RTC_CONFIG);
 
 export default function () {
 
-    peerConnection.ontrack = function ({streams: [stream]}) {
-        console.log(stream);
+    peerConnection.ontrack = event => {
         const remoteVideo = document.getElementById("remote-video");
         if (remoteVideo) {
-            alert('nice');
-            remoteVideo.srcObject = stream;
+            remoteVideo.srcObject = event.streams[0];
+            remoteVideo.onloadedmetadata = e => {
+                remoteVideo.play();
+            };
         }
     };
 
@@ -17,11 +24,19 @@ export default function () {
 
         socket.emit('new_user_joined', '');
 
+        socket.on("candidate", (id, candidate) => {
+            peerConnection
+                .addIceCandidate(new RTCIceCandidate(candidate))
+                .catch(e => console.error(e));
+        });
+
+
         socket.on('offer-made', async data => {
-            console.log(data);
+
             await peerConnection.setRemoteDescription(
                 new RTCSessionDescription(data.offer)
             );
+
             const answer = await peerConnection.createAnswer();
             await peerConnection.setLocalDescription(new RTCSessionDescription(answer));
 
@@ -30,22 +45,27 @@ export default function () {
                 to: data.socket
             });
 
-        });
+            /*peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    socket.emit("candidate", data.socket, event.candidate);
+                }
+            };*/
 
-        socket.on("answer-made", async data => {
-            console.log(data);
-            await peerConnection.setRemoteDescription(
-                new RTCSessionDescription(data.answer)
-            );
         });
 
     });
 
     return (
-        <div id='video'>
-            <video autoplay id='remote-video' height='300px' width='300px'>
-
-            </video>
+        <div id='video' className={styles.videoContainer}>
+            <video autoplay muted id='remote-video' className={styles.remoteVideo}></video>
+            <Comment.Group className={styles.commentsGroup}>
+                <Header as="h3" dividing className={styles.commentTitle}>
+                    Comments
+                </Header>
+                <div className="commentCard">
+                </div>
+                <CommentForm/>
+            </Comment.Group>
         </div>
     )
 

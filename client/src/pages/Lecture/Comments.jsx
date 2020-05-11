@@ -17,9 +17,9 @@ export default class Comments extends React.Component {
 
     componentDidMount() {
         this.setState({messages: this.props.messages});
-        window.addEventListener('beforeunload', this.leave_room);
         socket.emit('join_room', this.props.lectureId);
         socket.on('send_message', this.addNewComment);
+        window.addEventListener('beforeunload', this.leave_room);
     }
 
     componentWillUnmount() {
