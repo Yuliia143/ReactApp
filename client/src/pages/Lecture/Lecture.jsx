@@ -1,11 +1,8 @@
 import React from "react";
 import ReactPlayer from "react-player";
-import { Button, Comment, Form, Header, Statistic } from "semantic-ui-react";
-import axios from "axios";
-import { getLecture, postComment } from "../../api/comments-api";
-import CommentForm from "./CommentForm";
-import { RenderComments } from "./RenderComments";
+import { getLecture} from "../../api/comments-api";
 import "./Lecture.css";
+import Comments from "./Comments";
 
 export default class Lecture extends React.Component {
   state = {
@@ -13,7 +10,8 @@ export default class Lecture extends React.Component {
     loading: true,
   };
 
-  fetchLecture = async () => {
+
+fetchLecture = async () => {
     const { match } = this.props;
     getLecture(match.params.id)
       .then((lecture) => {
@@ -29,16 +27,11 @@ export default class Lecture extends React.Component {
       });
   };
 
+
   componentDidMount() {
     this.fetchLecture();
   }
-  onPostComment = (comment) =>
-    this.setState((prevState) => ({
-      lecture: {
-        ...prevState.lecture,
-        messages: [...prevState.lecture.messages, comment],
-      },
-    }));
+
 
   render() {
     const lectureId = this.props.match.params.id;
@@ -61,18 +54,7 @@ export default class Lecture extends React.Component {
           This video is about: {lecture.description}
 
         </div>
-        <Comment.Group id="commentGroup">
-          <Header as="h3" dividing>
-            Comments
-          </Header>
-          <div className="commentCard">
-            <RenderComments comments={lecture.messages || []}/>
-          </div>
-          <CommentForm
-            lectureId={lectureId}
-            onPostComment={this.onPostComment}
-          />
-        </Comment.Group>
+        <Comments messages={lecture.messages} lectureId={lectureId}/>
       </div>
     );
   }

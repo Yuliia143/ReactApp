@@ -20,9 +20,6 @@ export default class CommentForm extends Component {
     onPostComment(comment);
   };
 
-
-
-
   render() {
     const { comment, loading } = this.state;
     return (
