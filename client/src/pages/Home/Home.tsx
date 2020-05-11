@@ -10,7 +10,6 @@ import {LectionWrapper} from './style'
 
 export default function Home() {
 
-    
     return(
         <div>
             <Banner />
