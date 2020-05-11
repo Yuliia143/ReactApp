@@ -1,4 +1,4 @@
-.nav{
+.nav {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,16 +6,33 @@
     border-bottom: 1px solid #dedfe0;
 
 }
-.item{
+
+.item {
     font-size: 17px;
     margin-left: 15px;
 }
-a{
+
+a {
     color: rgba(0, 0, 0, 0.616);
 }
-button{
-    border:none;
+
+button {
+    border: none;
     background-color: white;
     margin-bottom: 15px;
-    outline: none;  
+    outline: none;
+}
+
+@media screen and (max-width:1200px) {
+    .nav {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .nav {
+        width: 80%;
+        flex-wrap: wrap;
+        margin: auto;
+    }
 }

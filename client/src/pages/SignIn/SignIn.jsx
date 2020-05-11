@@ -1,63 +1,84 @@
-import React, {Component} from 'react'
-import {Formik,Form} from 'formik';
-import {BASE_URL} from '../../config';
+import React, { Component } from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { BASE_URL } from '../../config';
 import './SignIn.css';
-import {Button, Input} from "semantic-ui-react";
-import {connect} from "react-redux";
-import {object, string} from "yup";
-import {signIn} from "../../store/actions/auth";
+import { Button } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/auth";
+import * as Yup from 'yup';
 
-const validationSchema = object({
-    email:string().required(),
-    password:string().required(),
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string()
+        .email('Email is invalid')
+        .required('Email is required'),
+
+    password: Yup.string()
+        .required('Password is required'),
 });
 
 
 class SignIn extends Component {
-    handleSignIn = async(values) =>{
-        const {onSignIn, history} = this.props;
-        await onSignIn(values);
-        history.push("/");
+    handleSignIn = async (value, formikActions) => {
+        const { onSignIn, history } = this.props;
+        const result = await onSignIn(value);
+        if (!result) {
+            history.push("/");
+        }
+        if (result || result.err) {
+            formikActions.setErrors(result.err);
+
+        }
     };
 
     render() {
         return (
             <div className="modalContentIn">
                 <div className="headerPopIn">
-                    <h4 className="logClassIn">Log In to Your SoftServe Account!</h4>
+                    <h4 className="logClassIn">Log In to Your StudyHard Account!</h4>
                 </div>
-                <hr/>
+                <hr />
                 <div className="fieldsIn">
-                    <a className="logText fieldsIn" href="#">
-                        <Button>
+                    <a className="logText fieldsIn" href={`${BASE_URL}/api/facebook`}>
+                        <Button className='buttonsSignIn'>
                             Continue with Facebook
                         </Button>
                     </a>
                     <a className="logText fieldsIn" href={`${BASE_URL}/api/google`}>
-                        <Button>
+                        <Button className='buttonsSignIn'>
                             Continue with Google
                         </Button>
                     </a>
                     <a className="logText fieldsIn" href="#">
-                        <Button>
+                        <Button className='buttonsSignIn'>
                             Continue with Apple
                         </Button>
                     </a>
                     <Formik validationSchema={validationSchema}
-                        initialValues={{email:"", password:""}} 
+                        initialValues={{ email: "", password: "" }}
                         onSubmit={this.handleSignIn}>
-                        {({values, handleSubmit,handleChange, isSubmiting, isValid})=>
+                        {({ values, handleSubmit, handleChange, isSubmiting, isValid, errors, touched }) =>
                             <Form>
                                 <div className="inpAreaIn">
-                                    <Input type="email" name="email" value={values.email}
-                                           className="textInp" onChange={handleChange} placeholder="Email"/>
-                                    <Input type="password" name="password" placeholder="Password"
-                                           className="textInp" value={values.password} onChange={handleChange}/>
+
+                                    <Field type="email" name="email" className="textInp" placeholder="Email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="email" component="div" className="invalid-feedback" />
+
+                                    <Field type="password" name="password" placeholder="Password" className="textInp"
+                                        value={values.password}
+                                        onChange={handleChange}
+                                        className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="password" component="div" className="invalid-feedback" />
+
                                 </div>
+
                                 <div className="logBtnIn fieldsIn">
 
                                     {isSubmiting && 'Loading'}
-                                    <Button type="submit" disabled={isSubmiting || !isValid} onClick={handleSubmit}>Log In</Button>
+                                    <Button className='buttonsSignIn' type="submit" disabled={isSubmiting || !isValid} onClick={handleSubmit}>Log In</Button>
 
                                 </div>
                                 <div className="changeAccIn">
@@ -79,11 +100,9 @@ const mapStateToProps = (state) => ({
     loading: state.auth.loading
 });
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
     return {
-        onSignIn: (credential) => {
-            dispatch(signIn(credential))
-        }
+        onSignIn: (credential) => dispatch(signIn(credential))
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
