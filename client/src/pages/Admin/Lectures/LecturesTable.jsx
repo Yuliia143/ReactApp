@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getLectures } from "../../../store/actions/getLectures";
 import BodyTable from './BodyTable';
 import Pagination from './Pagination';
-import UpdatePage from '../../Lectures/Create/UpdatePage'
+import UpdatePage from '../../Lectures/Update/UpdatePage'
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,13 +40,13 @@ const LecturesTable = ({ lecturesList, getLectures }) => {
                 closeDetails={handleCloseDetails}/>}
 
         {!openDetails && 
-        <Table celled>
+        <Table celled compact style={{border: 'none', padding: '0 20px'}}>
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell></Table.HeaderCell>
-                    <Table.HeaderCell>Name</Table.HeaderCell>
-                    <Table.HeaderCell>Video</Table.HeaderCell>
-                    <Table.HeaderCell></Table.HeaderCell>
+                    <Table.HeaderCell width={3}></Table.HeaderCell>
+                    <Table.HeaderCell width={5}>Name</Table.HeaderCell>
+                    <Table.HeaderCell width={8}>Video</Table.HeaderCell>
+                    <Table.HeaderCell width={4}>Edit</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <BodyTable lecturesList={currentLecturesList} 

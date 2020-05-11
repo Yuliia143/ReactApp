@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Progress } from 'semantic-ui-react';
-import http from '../../../api/http';
+import http from '../../api/http';
 
 
 const FileLoaderProgress = (props) => {

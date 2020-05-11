@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button, Checkbox, Label } from 'semantic-ui-react';
+import { Table, Button, Checkbox, Label, Icon } from 'semantic-ui-react';
 import ModalWindow from './ModalWindow';
 import { withRouter } from "react-router-dom";
 
@@ -30,14 +30,20 @@ const RowTable = (props) => {
             <Table.Cell><Label href={videoUrl}>{videoUrl}</Label></Table.Cell>
             <Table.Cell>
                 <Button.Group>
-                    <Button onClick={() => redirectToSingleLecture(id)} color='blue'>View</Button>
+                    <Button onClick={() => redirectToSingleLecture(id)}>
+                        <Icon link name='hand point left' color='blue' style={{margin: '0'}} />
+                    </Button>
                     <Button.Or />
                     <Button onClick={() => {
                         handleOpenDetails(true)
                         handleEditPage(props.lecture)
-                    }} color='teal'>Edit</Button>
+                    }}>
+                        <Icon link name='pencil alternate' color='teal' style={{margin: '0'}}/>
+                    </Button>
                     <Button.Or />
-                    <Button onClick={show('blurring')} color='red'>Delete</Button>
+                    <Button onClick={show('blurring')}>
+                        <Icon link name='trash alternate' color='red' style={{margin: '0'}} />
+                    </Button>
 
                 </Button.Group>
             </Table.Cell>

@@ -1,13 +1,7 @@
-import { BASE_URL } from "../config"
-import axios from "axios";
+import http from './http'
 
 export const createLecture = async(values) => {
-    const token = localStorage.getItem("Access-Token");
-    const response = await axios.post(`${BASE_URL}/api/lectures`, values, {
-        headers: {
-            "Access-token": token
-        }
-    })
+    const response = await http.post('/api/lectures', values)
     return response.data;
 }
 
@@ -15,8 +9,9 @@ export const deleteLecture = () => {
     
 }
 
-export const editLecture = () => {
-    
+export const editLecture = async (id, values) => {
+    const response = await http.put(`/api/lectures/${id}`, values)
+    return response.data;
 }
 
 export const getAllLectures = () => {
