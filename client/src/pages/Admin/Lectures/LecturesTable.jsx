@@ -40,7 +40,7 @@ const LecturesTable = ({ lecturesList, getLectures }) => {
                 closeDetails={handleCloseDetails}/>}
 
         {!openDetails && 
-        <Table celled compact style={{border: 'none', padding: '0 20px'}}>
+        <Table celled compact style={{border: 'none', padding: '0 20px', marginTop:'10px'}}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell width={3}></Table.HeaderCell>

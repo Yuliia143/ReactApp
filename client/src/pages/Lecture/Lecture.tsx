@@ -39,7 +39,7 @@ export default function Lecture(props: RouteComponentProps<{id:string}>) {
 
   useEffect(() => {
     fetchLecture();
-  });
+  },[]);
 
   const lectureId = props.match.params.id;
   if (loading) return <h1 className="loading">Loading...</h1>;
@@ -51,6 +51,7 @@ export default function Lecture(props: RouteComponentProps<{id:string}>) {
         <ReactPlayer
           className="video-item"
           url={lecture.videoUrl}
+          controls={true}
           width="100%"
           height="450px"
         />

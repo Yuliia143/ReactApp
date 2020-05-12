@@ -5,32 +5,30 @@ import List from "./List";
 
 
 const FavoriteLections = () => {
-
+  
+  const [clickedDelete, setClickedDelete] = useState(false);
   const [favLections, setFavLections] = useState([]);
-  const updateFav = () => {
-    getFavorites()
-      .then((favLections) => {
-        setFavLections(favLections)
-      })
-  }
+  
+
 
   useEffect(() => {
-    updateFav();
-  }, [])
-
-  useEffect(() => {
-    return () => {
-      updateFav();
+    const updateFav = async () => {
+      const favLections = await getFavorites();
+      setFavLections(favLections);  
     }
-  }, [favLections])
+
+    updateFav();
+
+  }, [clickedDelete])
 
 
-  const renderLectures = (arr: any) => {
+
+  const renderLectures = (arr) => {
     let fav = arr.favouriteLectures;
     if (fav) {
-      return fav.map((item: any, index: any) => {
+      return fav.map((item, index) => {
         return (
-          <List item={item} key={index} />
+          <List handleClick={setClickedDelete} item={item} key={index} />
         )
       })
     }

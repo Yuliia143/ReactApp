@@ -14,7 +14,7 @@ import CreateLecture from "./pages/Lectures/Create/CreatePage";
 import FooterContainer from "./components/FooterContainer";
 import Lecture from "./pages/Lecture/Lecture";
 import {NoMatch} from "./components/NoMatch";
-import FavoriteLections from "./pages/Home/FavoriteLections/FavoriteLections";
+import FavoriteLections from "./pages/Home/FavoriteLections/FavoriteLections"
 import Admin from "./pages/Admin/Admin";
 import Webinar from "./pages/Webinar/Webinar";
 import socketIoClient from 'socket.io-client';

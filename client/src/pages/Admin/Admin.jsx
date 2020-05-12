@@ -57,7 +57,7 @@ const Admin = () => {
                     </div>
                 } />
             </Accordion>
-            <div className="adminContent" style={{ width: '70%', border: '1px solid lightgray', borderRadius: '4px', minHeight: 'calc(100vh - 240px)', position: 'relative' }}>
+            <div className="adminContent" style={{ width: '70%', border: '1px solid lightgray', borderRadius: '4px', minHeight: 'calc(100vh - 500px)', position: 'relative' }}>
                 {activeItem === 'users' && <Users />}
                 {activeItem === 'All lectures' && <LecturesTable />}
                 {activeItem === 'Add new' && <CreatePage />}

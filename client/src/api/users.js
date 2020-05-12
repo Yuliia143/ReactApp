@@ -4,7 +4,7 @@ import {BASE_URL} from "../config";
 export const readUsers = () => {
     const token = localStorage.getItem("Access-Token");
     return axios
-        .get('http://localhost:3030/api/users/all',
+        .get(`${BASE_URL}/api/users/all`,
             {
                 headers: {
                     "Access-token": token
@@ -21,7 +21,7 @@ export const readUsers = () => {
 export const removeUser = (id) => {
     const token = localStorage.getItem("Access-Token");
     return axios
-        .delete(`http://localhost:3030/api/users/${id}`,
+        .delete(`${BASE_URL}/api/users/${id}`,
             {
                 headers: {
                     "Access-Token": token
@@ -38,7 +38,7 @@ export const removeUser = (id) => {
 export const updateUserInfo = (user) => {
     const token = localStorage.getItem("Access-Token");
     return axios
-        .put(`http://localhost:3030/api/users/${user.id}`, {user},
+        .put(`${BASE_URL}/api/users/${user.id}`, {user},
             {
                 headers: {
                     "Access-Token": token
@@ -55,7 +55,7 @@ export const updateUserInfo = (user) => {
 export const addUserInfo = (user) => {
     const token = localStorage.getItem("Access-Token");
     return axios
-        .post('http://localhost:3030/api/users/all', {user},
+        .post(`${BASE_URL}/api/users/all`, {user},
             {
                 headers: {
                     "Access-Token": token

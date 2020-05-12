@@ -37,9 +37,9 @@ const GeneralForm = ({initialValues, formSubmiting, closeDetails, editPage}) => 
             justifyContent: 'center',
             alignItems: 'center',
             width: '80%',
-            border: '1px solid lightgray',
+            border: 'none',
             padding: '20px',
-            margin: '0 auto'}} >
+            margin: '10px auto'}} >
             <Formik initialValues= {initialValues}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting, resetForm }) => {

@@ -15,7 +15,7 @@ const UpdatePage = ({history, closeDetails, editPage}) => {
   }
   
   const onUpdateLecture = async (values) => {
-    const result = await editLecture(editPage.id, values);
+    await editLecture(editPage.id, values);
     history.push(`/lecture/${editPage.id}`);
   }
 
