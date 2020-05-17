@@ -13,7 +13,7 @@ export const readUsers = () => {
 
 export const removeUser = (id) => {
     return http
-        .delete(`/api/users/${id}`)
+        .remove(`/api/users/${id}`)
         .then(response => {
             return response.data;
         })
