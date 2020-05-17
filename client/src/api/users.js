@@ -1,15 +1,8 @@
-import axios from "axios";
-import {BASE_URL} from "../config";
+import http from './http';
 
 export const readUsers = () => {
-    const token = localStorage.getItem("Access-Token");
-    return axios
-        .get('http://localhost:3030/api/users/all',
-            {
-                headers: {
-                    "Access-token": token
-                }
-            })
+    return http
+        .get('/api/users/all')
         .then(response => {
             return response.data;
         })
@@ -19,14 +12,8 @@ export const readUsers = () => {
 };
 
 export const removeUser = (id) => {
-    const token = localStorage.getItem("Access-Token");
-    return axios
-        .delete(`http://localhost:3030/api/users/${id}`,
-            {
-                headers: {
-                    "Access-Token": token
-                }
-            })
+    return http
+        .delete(`/api/users/${id}`)
         .then(response => {
             return response.data;
         })
@@ -36,14 +23,8 @@ export const removeUser = (id) => {
 };
 
 export const updateUserInfo = (user) => {
-    const token = localStorage.getItem("Access-Token");
-    return axios
-        .put(`http://localhost:3030/api/users/${user.id}`, {user},
-            {
-                headers: {
-                    "Access-Token": token
-                }
-            })
+    return http
+        .put(`/api/users/${user.id}`, {user})
         .then(response => {
             return response.data;
         })
@@ -53,14 +34,8 @@ export const updateUserInfo = (user) => {
 };
 
 export const addUserInfo = (user) => {
-    const token = localStorage.getItem("Access-Token");
-    return axios
-        .post('http://localhost:3030/api/users/all', {user},
-            {
-                headers: {
-                    "Access-Token": token
-                }
-            })
+    return http
+        .post('/api/users/all', {user})
         .then(response => {
             return response.data;
         })

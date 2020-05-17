@@ -13,7 +13,7 @@ const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface UserDetailsProps extends PropsFromRedux {
-    closeDetails: any //Todo,
+    closeDetails: any,
     editedUser: null | User,
 }
 
