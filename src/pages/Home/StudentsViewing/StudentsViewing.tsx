@@ -26,7 +26,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const StudentsViewing = ({lecturesList, lecturesLoading}: PropsFromRedux) => {
 
   const renderLectures = (arr: any) => {
-    console.log(arr)
     if(!lecturesLoading && lecturesList){
       return arr.map((item: any, index: any) => {
         return (

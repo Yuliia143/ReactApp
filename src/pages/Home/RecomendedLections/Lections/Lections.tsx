@@ -11,7 +11,8 @@ import { getLectures } from "../../../../store/actions/getLectures";
 import { RootState } from "../../../../store";
 
 const mapStateToProps = (state: RootState) => ({
-  lecturesList: state.lectures.lectures
+  lecturesList: state.lectures.lectures,
+  lecturesLoading: state.lectures.loading
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -21,10 +22,10 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Lections = ({ lecturesList }: PropsFromRedux) => {
+const Lections = ({ lecturesList, lecturesLoading }: PropsFromRedux) => {
 
   const renderLectures = (arr: any) => {
-    if(arr!== undefined){
+    if(!lecturesLoading && lecturesList){
       return arr.map((item: any, index: any) => {
         return (
           <CardItem item={item} key={index} />

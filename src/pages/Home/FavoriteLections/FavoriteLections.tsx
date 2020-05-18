@@ -7,22 +7,16 @@ import List from "./List";
 const FavoriteLections = () => {
 
   const [favLections, setFavLections] = useState([]);
-  const updateFav = () => {
-    getFavorites()
-      .then((favLections) => {
-        setFavLections(favLections)
-      })
+  const [clickedDelete, setClickedDelete] = useState(false);
+  
+  const updateFav = async () => {
+    const favLections = await getFavorites();
+    setFavLections(favLections);  
   }
 
   useEffect(() => {
     updateFav();
-  }, [])
-
-  useEffect(() => {
-    return () => {
-      updateFav();
-    }
-  }, [favLections])
+  }, [clickedDelete]);
 
 
   const renderLectures = (arr: any) => {
@@ -30,7 +24,7 @@ const FavoriteLections = () => {
     if (fav) {
       return fav.map((item: any, index: any) => {
         return (
-          <List item={item} key={index} />
+          <List handleClick={setClickedDelete} item={item} key={index} />
         )
       })
     }
