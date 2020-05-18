@@ -13,13 +13,17 @@ interface CardProps {
 }
 
 interface Props {
-    item: CardProps
+    item: CardProps,
+    handleClick: Function
 }
 
 const List = (props: Props) => {
+    const {handleClick} = props;
 
     const deleteFavLection = async (id: any) => {
-        await http.remove(`/api/lectures/${id}/fav_lectures`)
+        handleClick(true);
+        await http.remove(`/api/lectures/${id}/fav_lectures`);
+        handleClick(false);
     }
 
     const { author, description, _id, imgUrl, title } = props.item;

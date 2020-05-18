@@ -9,7 +9,6 @@ const ModalFooter = ({ id, onClose, userData }: any) => {
 
   const favoriteLection = async (id: any) => {
     const responce = await http.put(`/api/lectures/${id}/fav_lectures`, {})
-    console.log(responce.data);
     onClose();
   }
 

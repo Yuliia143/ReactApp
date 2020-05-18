@@ -39,7 +39,7 @@ export default function Lecture(props: RouteComponentProps<{id:string}>) {
 
   useEffect(() => {
     fetchLecture();
-  });
+  },[]);
 
   const lectureId = props.match.params.id;
   if (loading) return <h1 className="loading">Loading...</h1>;
