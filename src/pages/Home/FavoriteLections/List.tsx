@@ -4,14 +4,22 @@ import classes from './FavoriteLections.module.css';
 import { Link } from 'react-router-dom';
 import http from '../../../api/http';
 
+interface CardProps {
+    imgUrl: string,
+    title: string,
+    author: string,
+    description: string,
+    '_id': string,
+}
 
-const List = (props) => {
+interface Props {
+    item: CardProps
+}
 
-    const {handleClick} = props
-    const deleteFavLection = async (id) => {
-        handleClick(true);
+const List = (props: Props) => {
+
+    const deleteFavLection = async (id: any) => {
         await http.remove(`/api/lectures/${id}/fav_lectures`)
-        handleClick(false);
     }
 
     const { author, description, _id, imgUrl, title } = props.item;
