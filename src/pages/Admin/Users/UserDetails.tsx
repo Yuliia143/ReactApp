@@ -35,10 +35,10 @@ const UserDetails = ({closeDetails, editedUser = null, updateUser, addUser}: Use
         {key: 'lector', text: 'Lector', value: 'lector'},
         {key: 'student', text: 'Student', value: 'student'},
     ];
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData, key: any) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData, key: string) => {
         setUser(Object.assign({}, user, {[key]: data.value}));
     };
-    const handleSubmit = (event: React.SyntheticEvent<HTMLElement>, data: FormProps, key: any) => {
+    const handleSubmit = (event: React.SyntheticEvent<HTMLElement>, data: FormProps, key: string) => {
         setUser(Object.assign({}, user, {[key]: data.value}));
     };
     const handleUser = () => {

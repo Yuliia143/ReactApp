@@ -2,8 +2,13 @@ import React, {useState} from 'react';
 import {Button, Form, Icon, Popup} from "semantic-ui-react";
 
 const regex = new RegExp('^[a-zA-Z0-9 ]+$');
-
-const UsersOptions = ({query, handleQuery, totalCount, handleOpenDetails}: any) => {
+interface OptionsProps {
+    query: string;
+    handleQuery: Function;
+    totalCount: number;
+    handleOpenDetails: Function;
+}
+const UsersOptions = ({query, handleQuery, totalCount, handleOpenDetails}: OptionsProps) => {
     const [filterValid, setFilterValid] = useState(true);
     const [popupMessage, setPopupMessage] = useState('');
     const handleOnChange = (event: any, {value}: any) => {

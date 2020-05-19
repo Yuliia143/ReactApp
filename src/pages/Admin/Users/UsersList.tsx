@@ -7,12 +7,18 @@ import UsersOptions from "./UsersOptions";
 import {deleteUser} from "../../../store/actions/deleteUser";
 import {connect, ConnectedProps} from "react-redux";
 
-interface Props {
-    usersList: User[]
-}
-
+// interface Config{
+//     modalOpen: boolean;
+//     handleOpen: Function;
+//     handleClose: Function;
+//     handleRemove: Function;
+// }
+// interface RenderTableProps extends UsersListProps{
+//     list: User[];
+//     config: Config;
+// }
 const RenderTableUser = ({list, config, handleOpenDetails, handleSetUser}: any) => {
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState<User>(Object);
     return list.map((user: User, index: number) => {
         const {name, email, surName, role} = user;
         return (
@@ -79,7 +85,8 @@ const UsersList = ({usersList, handleOpenDetails, handleSetUser, deleteUser}: Us
     const paginate = (event: React.MouseEvent<HTMLAnchorElement>, data: PaginationProps) => setCurrentPage(data.activePage as number);
 
     //sort
-    const [column, setColumn] = useState(null);
+    type ColumnProps = null | string;
+    const [column, setColumn] = useState<ColumnProps>(null);
     type DirectionProps = undefined | "ascending" | "descending";
     const [direction, setDirection] = useState<DirectionProps>(undefined);
 
@@ -99,10 +106,17 @@ const UsersList = ({usersList, handleOpenDetails, handleSetUser, deleteUser}: Us
             }
         }
 
-        const setType = (type: any) => {
-            if (type === 'ascending') return 'descending';
-            else if (type === 'descending') return undefined;
-            else if (type === undefined) return 'ascending';
+        const setType = (type: DirectionProps) => {
+            switch (type) {
+                case "ascending":
+                    return 'descending';
+                case "descending":
+                    return undefined;
+                case undefined:
+                    return 'ascending';
+                default:
+                    return undefined;
+            }
         };
         setDirection(setType(direction));
     };
@@ -163,7 +177,6 @@ const UsersList = ({usersList, handleOpenDetails, handleSetUser, deleteUser}: Us
                         handleOpenDetails={handleOpenDetails}
                         handleSetUser={handleSetUser}
                     />
-
                 </Table.Body>
 
 
