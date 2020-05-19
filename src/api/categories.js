@@ -1,15 +1,15 @@
-import axios from "axios";
-import {BASE_URL} from "../config";
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 export const readCategories = () => {
     return axios
         .get(`${BASE_URL}/api/categories/all`)
-        .then(response => {
+        .then((response) => {
             return response.data;
         })
-        .catch(error => {
-            console.log(error);
-        })
+        .catch((error) => {
+            throw new Error(error);
+        });
 };
 
-//замінити на http service
+// замінити на http service

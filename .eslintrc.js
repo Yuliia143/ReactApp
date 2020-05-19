@@ -5,7 +5,7 @@ module.exports = {
     parserOptions: {
         project: './tsconfig.json',
         ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-        sourceType: "module" // Allows for the use of imports
+        sourceType: 'module' // Allows for the use of imports
     },
     extends: [
         'airbnb-typescript',
@@ -14,7 +14,8 @@ module.exports = {
         'prettier/react'
     ],
     rules: {
-        "func-names" : "off",
-        "import/prefer-default-export": "off"
+        'func-names': 'off',
+        'import/prefer-default-export': 'off',
+        'react/jsx-props-no-spreading': 'off'
     }
 };

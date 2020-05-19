@@ -1,26 +1,26 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import classes from './FavoriteLections.module.css';
 import { Link } from 'react-router-dom';
+// @ts-ignore
+import classes from './FavoriteLections.module.css';
 import http from '../../../api/http';
 
 interface CardProps {
-    imgUrl: string,
-    title: string,
-    author: string,
-    description: string,
-    '_id': string,
+    imgUrl: string;
+    title: string;
+    author: string;
+    description: string;
+    _id: string;
 }
 
 interface Props {
-    item: CardProps
+    item: CardProps;
 }
 
 const List = (props: Props) => {
-
     const deleteFavLection = async (id: any) => {
-        await http.remove(`/api/lectures/${id}/fav_lectures`)
-    }
+        await http.remove(`/api/lectures/${id}/fav_lectures`);
+    };
 
     const { author, description, _id, imgUrl, title } = props.item;
     return (
@@ -28,11 +28,24 @@ const List = (props: Props) => {
             <div className="item">
                 <div className="right floated content" id={classes.forButtons}>
                     <Link to={`/lecture/${_id}`}>
-                        <Button className="ui button" content="Watch" color='green'></Button>
+                        <Button
+                            className="ui button"
+                            content="Watch"
+                            color="green"
+                        />
                     </Link>
-                    <Button className="ui button" content="Delete" color='red' onClick={() => deleteFavLection(_id)} ></Button>
+                    <Button
+                        className="ui button"
+                        content="Delete"
+                        color="red"
+                        onClick={() => deleteFavLection(_id)}
+                    />
                 </div>
-                <img className="ui avatar image" id={classes.imgLection} src={imgUrl} />
+                <img
+                    className="ui avatar image"
+                    id={classes.imgLection}
+                    src={imgUrl}
+                />
                 <div className="content">
                     <div className={classes.headerTitle}>{title}</div>
                     <div className={classes.author}>{author}</div>
@@ -40,6 +53,6 @@ const List = (props: Props) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 export default List;

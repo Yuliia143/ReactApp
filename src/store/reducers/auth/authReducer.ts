@@ -1,12 +1,18 @@
-import {AUTH_LOADING, SIGN_IN_SUCCESS, SIGN_UP_SUCCESS, SIGN_OUT_SUCCESS, UPDATE_PROFILE} from "../../types/auth";
-import {AuthState, AuthActions} from "./types";
+import {
+    AUTH_LOADING,
+    SIGN_IN_SUCCESS,
+    SIGN_UP_SUCCESS,
+    SIGN_OUT_SUCCESS,
+    UPDATE_PROFILE
+} from '../../types/auth';
+import { AuthState, AuthActions } from './types';
 
 const initialState: AuthState = {
     loading: false,
     user: null
 };
 
-export default function (state = initialState, action:AuthActions) {
+export default function (state = initialState, action: AuthActions) {
     switch (action.type) {
         case AUTH_LOADING:
             return {
@@ -28,12 +34,12 @@ export default function (state = initialState, action:AuthActions) {
             return {
                 ...state,
                 user: null,
-                loading: false,
+                loading: false
             };
         case UPDATE_PROFILE:
             return {
-                ...state, 
-                user: action.payload, 
+                ...state,
+                user: action.payload,
                 loading: false
             };
         default:
