@@ -56,7 +56,7 @@ http://localhost:3000
 - [mongodb](https://www.mongodb.com/cloud/atlas) - For data storage
 
 ## Link
-[Study Hard](study-hard-e89c8.web.app)
+[Study Hard](https://study-hard-e89c8.web.app/)
 
 ## Contributors 
 Thanks to the following members for maintaining the project.
