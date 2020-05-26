@@ -4,20 +4,27 @@ import User from "../../../models/user";
 import {updateUser} from "../../../store/actions/updateUser";
 import {connect, ConnectedProps} from "react-redux";
 import {addUser} from "../../../store/actions/addUser";
+import { useHistory, useParams } from 'react-router-dom';
+import {RootState} from "../../../store";
 
+const mapStateToProps = (state: RootState) => ({
+    usersList: state.users.users,
+});
 const mapDispatchToProps = (dispatch: Function) => ({
     updateUser: (user: User) => dispatch(updateUser(user)),
     addUser: (user: User) => dispatch(addUser(user))
 });
-const connector = connect(null, mapDispatchToProps);
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface UserDetailsProps extends PropsFromRedux {
-    closeDetails: any,
     editedUser: null | User,
 }
 
-const UserDetails = ({closeDetails, editedUser = null, updateUser, addUser}: UserDetailsProps) => {
+const UserDetails = ({usersList, updateUser, addUser}: UserDetailsProps) => {
+    let { id } = useParams();
+    let editedUser = usersList.find(user => user.id === id);
     if (!editedUser) {
         editedUser = {
             id: '',
@@ -41,13 +48,19 @@ const UserDetails = ({closeDetails, editedUser = null, updateUser, addUser}: Use
     const handleSubmit = (event: React.SyntheticEvent<HTMLElement>, data: FormProps, key: string) => {
         setUser(Object.assign({}, user, {[key]: data.value}));
     };
+    let history = useHistory();
+
     const handleUser = () => {
       if(editedUser && !editedUser.id){
           addUser(user);
-      }  else{
+      }  else {
           updateUser(user);
       }
-        closeDetails(true);
+        history.goBack();
+    };
+
+    const handleCancel = () => {
+        history.goBack();
     };
     return (
         <div className="userDetails" style={{padding: '30px'}}>
@@ -91,7 +104,7 @@ const UserDetails = ({closeDetails, editedUser = null, updateUser, addUser}: Use
                 )}
 
                 <Form.Field style={{textAlign: 'end', marginTop: '30px'}}>
-                    <Button color='red' inverted onClick={closeDetails}>Cancel</Button>
+                    <Button color='red' inverted onClick={handleCancel}>Cancel</Button>
                     <Button type='submit' color='green'
                             onClick={handleUser}
                     >Save</Button>

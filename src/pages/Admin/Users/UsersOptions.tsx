@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import {Button, Form, Icon, Popup} from "semantic-ui-react";
+import {useHistory, useRouteMatch} from "react-router-dom";
 
 const regex = new RegExp('^[a-zA-Z0-9 ]+$');
-interface OptionsProps {
+interface OptionsProps{
     query: string;
     handleQuery: Function;
     totalCount: number;
-    handleOpenDetails: Function;
 }
-const UsersOptions = ({query, handleQuery, totalCount, handleOpenDetails}: OptionsProps) => {
+
+const UsersOptions = ({query, handleQuery, totalCount}: OptionsProps) => {
+    const history = useHistory();
     const [filterValid, setFilterValid] = useState(true);
     const [popupMessage, setPopupMessage] = useState('');
     const handleOnChange = (event: any, {value}: any) => {
@@ -21,7 +23,7 @@ const UsersOptions = ({query, handleQuery, totalCount, handleOpenDetails}: Optio
         }
         totalCount === 0 && setPopupMessage('No results found.');
     };
-
+    let {url} = useRouteMatch();
     return (
         <div className="tableUsersOptions" style={{
             display: 'flex',
@@ -54,13 +56,10 @@ const UsersOptions = ({query, handleQuery, totalCount, handleOpenDetails}: Optio
                     </Form.Field>
                 </Form.Group>
             </Form>
-            <Button style={{width: '20%', minHeight: '40px'}}
-            onClick={()=>handleOpenDetails(true)}>
-                Add new user
-                <Icon style={{marginLeft: '5px'}} name="plus"/>
+            <Button style={{width: '20%', minHeight: '40px'}} onClick={(()=>history.push(`${url}/new`))}>
+                Add new user<Icon style={{marginLeft: '5px'}} name="plus"/>
             </Button>
         </div>
     )
 };
-
 export default UsersOptions;

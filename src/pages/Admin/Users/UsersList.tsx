@@ -6,21 +6,26 @@ import DeleteUserModal from "./DeleteUserModal";
 import UsersOptions from "./UsersOptions";
 import {deleteUser} from "../../../store/actions/deleteUser";
 import {connect, ConnectedProps} from "react-redux";
+import {useHistory, useRouteMatch} from "react-router-dom";
 
-// interface Config{
-//     modalOpen: boolean;
-//     handleOpen: Function;
-//     handleClose: Function;
-//     handleRemove: Function;
-// }
-// interface RenderTableProps extends UsersListProps{
-//     list: User[];
-//     config: Config;
-// }
-const RenderTableUser = ({list, config, handleOpenDetails, handleSetUser}: any) => {
+interface Config {
+    modalOpen: boolean;
+    handleOpen: Function;
+    handleClose: Function;
+    handleRemove: Function;
+}
+
+interface RenderTableProps {
+    list: User[];
+    config: Config;
+}
+
+const RenderTableUser = ({list, config}: RenderTableProps) => {
     const [currentUser, setCurrentUser] = useState<User>(Object);
-    return list.map((user: User, index: number) => {
-        const {name, email, surName, role} = user;
+    let {url} = useRouteMatch();
+    const history = useHistory();
+    const elements = list.map((user: User, index: number) => {
+        const {id, name, email, surName, role} = user;
         return (
             <Table.Row key={index}>
                 <Table.Cell width={5}>{`${name} ${surName || ''}`}</Table.Cell>
@@ -28,10 +33,7 @@ const RenderTableUser = ({list, config, handleOpenDetails, handleSetUser}: any) 
                 <Table.Cell width={3}>{role}</Table.Cell>
                 <Table.Cell width={4}>
                     <Button style={{marginRight: '15px'}}
-                            onClick={() => {
-                                handleOpenDetails(true);
-                                handleSetUser(user);
-                            }}>
+                            onClick={() => history.push(`${url}/${id}`)}>
                         <Icon link name='pencil alternate' style={{margin: '0'}}/>
                     </Button>
                     <Button onClick={() => {
@@ -44,7 +46,8 @@ const RenderTableUser = ({list, config, handleOpenDetails, handleSetUser}: any) 
                 <DeleteUserModal user={currentUser} config={config}/>
             </Table.Row>
         )
-    })
+    });
+    return <Fragment>{elements}</Fragment>
 };
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -54,12 +57,10 @@ const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface UsersListProps extends PropsFromRedux {
-    usersList: User[],
-    handleOpenDetails: Function,
-    handleSetUser: Function
+    usersList: User[]
 }
 
-const UsersList = ({usersList, handleOpenDetails, handleSetUser, deleteUser}: UsersListProps) => {
+const UsersList = ({usersList, deleteUser}: UsersListProps) => {
     const originalList = [...usersList];
     const [list, setList] = useState([...usersList]); // Todo naming
 
@@ -144,9 +145,7 @@ const UsersList = ({usersList, handleOpenDetails, handleSetUser, deleteUser}: Us
         <Fragment>
             <UsersOptions query={query}
                           handleQuery={onHandleQuery}
-                          totalCount={posts.length}
-                          handleOpenDetails={handleOpenDetails}
-            />
+                          totalCount={posts.length}/>
             <Table sortable singleLine compact style={{border: 'none', padding: '0 20px'}}>
                 <Table.Header>
                     <Table.Row>
@@ -174,11 +173,8 @@ const UsersList = ({usersList, handleOpenDetails, handleSetUser, deleteUser}: Us
                             handleClose: handleClose,
                             handleRemove: handleRemove,
                         }}
-                        handleOpenDetails={handleOpenDetails}
-                        handleSetUser={handleSetUser}
                     />
                 </Table.Body>
-
 
                 <Table.Footer>
                     <Table.Row>

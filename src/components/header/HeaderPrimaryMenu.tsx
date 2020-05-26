@@ -44,7 +44,7 @@ const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
                 {user && user.role === 'admin' ? (
                     <Dropdown.Item as={Link}
                                    name='admin'
-                                   to="/admin">Admin page</Dropdown.Item>
+                                   to="/admin/users">Admin page</Dropdown.Item>
                 ) : null}
                 <Dropdown.Item as={Link}
                                name='webinar'
