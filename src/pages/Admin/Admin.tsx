@@ -7,6 +7,7 @@ import {MenuItemProps} from "semantic-ui-react/dist/commonjs/collections/Menu/Me
 import {AccordionTitleProps} from "semantic-ui-react/dist/commonjs/modules/Accordion/AccordionTitle";
 import {useRouteMatch, Switch, useHistory} from "react-router-dom";
 import PrivateRoute from "../../PrivateRoute";
+import styles from "./Admin.module.css";
 
 const Admin = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -27,8 +28,7 @@ const Admin = () => {
     let {path} = useRouteMatch();
     return (
         <>
-            <div className="adminMenu"
-                 style={{display: 'flex', justifyContent: 'center', marginTop: '50px', marginBottom: '20px'}}>
+            <div className={styles.adminMenu}>
                 <Accordion as={Menu} pointing vertical>
                     <Accordion.Title as={Menu.Item}
                                      active={activeItem === 'users'}
@@ -37,8 +37,7 @@ const Admin = () => {
                                      index={0}
                                      onClick={handleClick}
                                      icon={{display: 'none'}}
-                                     style={{padding: '14px 20px'}}
-                    >
+                                     className={styles.adminItem}>
                     </Accordion.Title>
                     <Accordion.Title as={Menu.Item}
                                      active={activeIndex === 1}
@@ -46,8 +45,8 @@ const Admin = () => {
                                      content='Lectures'
                                      index={1}
                                      onClick={handleClick}
-                                     style={{padding: '14px 20px'}}>
-                    </Accordion.Title>
+                                     className={styles.adminItem}>
+                </Accordion.Title>
                     <Accordion.Content
                         active={activeIndex === 1}
                         content={
@@ -65,13 +64,7 @@ const Admin = () => {
                             </div>
                         }/>
                 </Accordion>
-                <div className="adminContent" style={{
-                    width: '70%',
-                    border: '1px solid lightgray',
-                    borderRadius: '4px',
-                    minHeight: 'calc(100vh - 240px)',
-                    position: 'relative'
-                }}>
+                <div className={styles.adminContent}>
                     <Switch>
                         <PrivateRoute path={`${path}/users`} component={Users} isAdmin/>
                         <PrivateRoute path={`${path}/lectures`} component={LecturesTable} isAdmin/>
