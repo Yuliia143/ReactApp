@@ -5,6 +5,8 @@ import {Dropdown, Icon} from 'semantic-ui-react';
 import {connect, ConnectedProps} from "react-redux";
 import {signOut} from "../../store/actions/auth";
 import {RootState} from "../../store";
+import styles from "./Header.module.css"
+
 
 const mapStateToProps = (state: RootState) => ({
     user: state.auth.user
@@ -26,13 +28,13 @@ const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
         setIsActiveDropdownMenu(status);
     };
     return (
-        <Dropdown item icon={<Icon name="user" size="large"/>}
+        <Dropdown item icon={<Icon name="user" size="big"/>}
                   onMouseEnter={() => handleDropdownMenu(true)}
                   onMouseLeave={() => handleDropdownMenu()}
                   onClick={() => handleDropdownMenu()}
                   open={isActiveDropdownMenu}
         >
-            <Dropdown.Menu direction='left' style={{marginTop: 0, width: '200px', maxHeight: '200px'}}>
+            <Dropdown.Menu direction='left' className={styles.primaryDropDown}>
                 <Dropdown.Item as={Link}
                                name='profile'
                                to="/edit-page">My profile</Dropdown.Item>

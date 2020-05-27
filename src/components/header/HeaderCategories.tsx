@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Dropdown, Input} from "semantic-ui-react";
 import Category from "../../models/category";
+import styles from "./Header.module.css"
 
 interface Props {
     categoriesList: Category[]
@@ -30,7 +31,7 @@ const HeaderCategories = ({categoriesList}: Props) => {
                   onMouseLeave={() => handleDropdownCategories()}
                   open={isActiveDropdownCategories}
         >
-            <Dropdown.Menu style={{marginTop: 0}}>
+            <Dropdown.Menu className={styles.headerDropDown}>
                 <Input
                     icon='search'
                     iconPosition='left'
@@ -46,6 +47,6 @@ const HeaderCategories = ({categoriesList}: Props) => {
             </Dropdown.Menu>
         </Dropdown>
     )
-}
+};
 
 export default HeaderCategories;

@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
 import {Button, Menu} from "semantic-ui-react";
 import {NavLink} from "react-router-dom";
+import styles from "./Header.module.css"
 
 interface Props {
     activeItem: string,
@@ -15,17 +16,17 @@ const HeaderAuthButtons = ({activeItem, handleActiveItem}: Props) => {
                         onClick={handleActiveItem}
                         inverted
                         to="/signin"
-                        style={{padding: '13px 40px'}}>
+                        className={styles.headerButton}>
                     Sign in
                 </Button>
             </Menu.Item>
-            <Menu.Item style={{paddingRight: '0'}}>
+            <Menu.Item>
                 <Button as={NavLink}
                         active={activeItem === 'signup'}
                         onClick={handleActiveItem}
                         inverted
                         to="/signup"
-                        style={{marginLeft: '0.5em', padding: '13px 40px'}}>
+                        className={styles.headerButton}>
                     Sign Up
                 </Button>
             </Menu.Item>

@@ -5,6 +5,7 @@ import {MenuItemProps} from "semantic-ui-react/dist/commonjs/collections/Menu/Me
 import {SearchProps} from "semantic-ui-react/dist/commonjs/modules/Search/Search";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router-dom";
+import styles from "./Header.module.css"
 
 interface Props extends RouteComponentProps {
     lecturesList: Lecture[]
@@ -43,11 +44,11 @@ const HeaderSearch = ({lecturesList, history}: Props) => {
         <Search
             placeholder="Search..."
             input={{fluid: true}}
-            style={{width: '300px'}}
             value={searchLectField}
             onSearchChange={handleSearchSelect}
             onResultSelect={handleResultSelect}
-            results={res}/>
+            results={res}
+            className={styles.headerSearch}/>
     )
 };
 

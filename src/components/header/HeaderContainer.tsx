@@ -14,6 +14,7 @@ import {getCategories} from "../../store/actions/getCategories";
 import {getLectures} from "../../store/actions/getLectures";
 import {MenuItemProps} from "semantic-ui-react/dist/commonjs/collections/Menu/MenuItem";
 import {RootState} from "../../store";
+import styles from "./Header.module.css"
 
 
 const mapStateToProps = (state: RootState) => ({
@@ -41,8 +42,8 @@ const HeaderContainer = ({user, categoriesList,categoriesLoading, lecturesList,l
     }, [getLectures, getCategories]);
 
     return (
-        <Segment color="teal" inverted style={{borderRadius: '0', padding: '10px 30px', marginBottom: '0'}}>
-            <Menu attached='top' inverted secondary style={{height: "50px"}}>
+        <Segment color="teal" inverted className={styles.headerContainer}>
+            <Menu attached='top' inverted secondary className={styles.headerMenu}>
                 <Menu.Menu>
                     <Menu.Item as={NavLink}
                                name='home'

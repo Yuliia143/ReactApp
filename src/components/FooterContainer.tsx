@@ -3,19 +3,14 @@ import LogoImg from "../assets/images/logoblack.png";
 import {Segment, Menu} from "semantic-ui-react";
 import {Link} from 'react-router-dom';
 import Logo from "./Logo";
+import styles from "./Footer.module.css"
+
 
 const FooterContainer = () => {
     return (
         <Segment inverted
                  attached={"bottom"}
-                 style={{
-                     borderRadius: '0',
-                     padding: '10px 30px',
-                     backgroundColor: 'white',
-                     borderBottom: '6px solid teal',
-                     color: 'black',
-                     marginTop: '20px'
-                 }}>
+                className={styles.footerContainer}>
             <Menu attached='top'
                   inverted
                   secondary
