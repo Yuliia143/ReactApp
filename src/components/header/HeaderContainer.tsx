@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { Menu, Segment } from 'semantic-ui-react';
 import { connect, ConnectedProps } from 'react-redux';
 import { MenuItemProps } from 'semantic-ui-react/dist/commonjs/collections/Menu/MenuItem';
-// const LogoImg = require ('../../assets/images/logowhite.png');
-
 import Logo from '../Logo';
 import HeaderCategories from './HeaderCategories';
 import HeaderSearch from './HeaderSearch';
@@ -15,7 +13,7 @@ import { getCategories } from '../../store/actions/getCategories';
 import { getLectures } from '../../store/actions/getLectures';
 import { RootState } from '../../store';
 
-const LogoImg = require('../../assets/images/logowhite.png');
+import LogoImg from  '../../assets/images/logowhite.png';
 
 const mapStateToProps = (state: RootState) => ({
     user: state.auth.user,

@@ -1,10 +1,8 @@
 import React from 'react';
 import { Segment, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-// import LogoImg from '../assets/images/logoblack.png';
+import LogoImg from '../assets/images/logoblack.png';
 import Logo from './Logo';
-
-const LogoImg = require('../assets/images/logoblack.png');
 
 const FooterContainer = () => {
     return (
