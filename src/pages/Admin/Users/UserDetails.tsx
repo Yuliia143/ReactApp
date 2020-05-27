@@ -6,6 +6,8 @@ import {connect, ConnectedProps} from "react-redux";
 import {addUser} from "../../../store/actions/addUser";
 import { useHistory, useParams } from 'react-router-dom';
 import {RootState} from "../../../store";
+import styles from "./Users.module.css";
+
 
 const mapStateToProps = (state: RootState) => ({
     usersList: state.users.users,
@@ -63,7 +65,7 @@ const UserDetails = ({usersList, updateUser, addUser}: UserDetailsProps) => {
         history.goBack();
     };
     return (
-        <div className="userDetails" style={{padding: '30px'}}>
+        <div className={styles.userDetails}>
             <Form size='large'>
                 <Form.Input
                     label="First Name"
@@ -103,7 +105,7 @@ const UserDetails = ({usersList, updateUser, addUser}: UserDetailsProps) => {
                     />
                 )}
 
-                <Form.Field style={{textAlign: 'end', marginTop: '30px'}}>
+                <Form.Field className={styles.userButtons}>
                     <Button color='red' inverted onClick={handleCancel}>Cancel</Button>
                     <Button type='submit' color='green'
                             onClick={handleUser}

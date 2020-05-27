@@ -7,6 +7,7 @@ import UsersOptions from "./UsersOptions";
 import {deleteUser} from "../../../store/actions/deleteUser";
 import {connect, ConnectedProps} from "react-redux";
 import {useHistory, useRouteMatch} from "react-router-dom";
+import styles from "./Users.module.css";
 
 interface Config {
     modalOpen: boolean;
@@ -32,15 +33,15 @@ const RenderTableUser = ({list, config}: RenderTableProps) => {
                 <Table.Cell width={6}>{email}</Table.Cell>
                 <Table.Cell width={3}>{role}</Table.Cell>
                 <Table.Cell width={4}>
-                    <Button style={{marginRight: '15px'}}
+                    <Button className={styles.tableButton}
                             onClick={() => history.push(`${url}/${id}`)}>
-                        <Icon link name='pencil alternate' style={{margin: '0'}}/>
+                        <Icon link name='pencil alternate' className={styles.tableIcon}/>
                     </Button>
                     <Button onClick={() => {
                         setCurrentUser(user);
                         config.handleOpen(true);
                     }}>
-                        <Icon link name='trash alternate' color='red' style={{margin: '0'}}/>
+                        <Icon link name='trash alternate' color='red' className={styles.tableIcon}/>
                     </Button>
                 </Table.Cell>
                 <DeleteUserModal user={currentUser} config={config}/>
@@ -146,7 +147,7 @@ const UsersList = ({usersList, deleteUser}: UsersListProps) => {
             <UsersOptions query={query}
                           handleQuery={onHandleQuery}
                           totalCount={posts.length}/>
-            <Table sortable singleLine compact style={{border: 'none', padding: '0 20px'}}>
+            <Table sortable singleLine compact className={styles.tableUsers}>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell width={5}
@@ -176,9 +177,9 @@ const UsersList = ({usersList, deleteUser}: UsersListProps) => {
                     />
                 </Table.Body>
 
-                <Table.Footer>
+                <Table.Footer className={styles.tablePagination}>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='4' style={{textAlign: 'center'}}>
+                        <Table.HeaderCell colSpan='4'>
                             {posts.length &&
                             <Pagination
                                 defaultActivePage={1}

@@ -1,0 +1,40 @@
+.tableUsers{
+    padding: 0 20px;
+    border: none !important;
+}
+.tablePagination{
+    text-align: center;
+}
+.tableButton{
+    margin-right: 15px !important;
+}
+.tableIcon{
+    margin: 0 !important;
+}
+
+.userDetails{
+    padding: 30px;
+}
+.userButtons{
+    text-align: end;
+    margin-top: 30px !important;
+}
+
+.tableOptions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+    border-bottom: 1px solid teal;
+}
+.optionsForm{
+    width: 65% !important;
+}
+.optionsButton{
+    width: 20%;
+    min-height: 40px !important;
+}
+.optionsIcon{
+    margin-left: 5px !important;
+}
