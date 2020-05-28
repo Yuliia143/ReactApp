@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch: Function) => {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
+const HeaderPrimaryMenu = ({user, onSignOut}: PropsFromRedux) => {
     const [isActiveDropdownMenu, setIsActiveDropdownMenu] = useState(false);
 
     const handleDropdownMenu = (status = false) => {
@@ -42,7 +42,7 @@ const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
                     <Dropdown.Item as={Link}
                                    name='favorite'
                                    to="/favorite-lections">Favorites</Dropdown.Item>
-                ):null}
+                ) : null}
                 {user && user.role === 'admin' ? (
                     <Dropdown.Item as={Link}
                                    name='admin'

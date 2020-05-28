@@ -26,15 +26,17 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-        getCategories: () => dispatch(getCategories()),
-        getLectures: () => dispatch(getLectures())
+    getCategories: () => dispatch(getCategories()),
+    getLectures: () => dispatch(getLectures())
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const HeaderContainer = ({user, categoriesList,categoriesLoading, lecturesList,lecturesLoading, getLectures, getCategories}: PropsFromRedux) => {
+const HeaderContainer = ({user, categoriesList, categoriesLoading, lecturesList, lecturesLoading, getLectures, getCategories}: PropsFromRedux) => {
     const [activeItem, setActiveItem] = useState('');
-    const handleItemClick = (_: any, data: MenuItemProps) => {setActiveItem(data.name || '')};
+    const handleItemClick = (_: any, data: MenuItemProps) => {
+        setActiveItem(data.name || '')
+    };
 
     useEffect(() => {
         getLectures();

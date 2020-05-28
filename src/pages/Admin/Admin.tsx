@@ -69,9 +69,6 @@ const Admin = () => {
                         <PrivateRoute path={`${path}/users`} component={Users} isAdmin/>
                         <PrivateRoute path={`${path}/lectures`} component={LecturesTable} isAdmin/>
                     </Switch>
-                    {/*{activeItem === 'users' && <Users/>}*/}
-                    {/*{activeItem === 'All lectures' && <LecturesTable/>}*/}
-                    {/*{activeItem === 'Add new' && <CreatePage/>}*/}
                 </div>
             </div>
 
