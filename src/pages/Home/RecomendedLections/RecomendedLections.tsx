@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import classes from './RecomendedLections.module.css';
 import NavBar from './NavBar/NavBar';
 import Lections from './Lections/Lections';

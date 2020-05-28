@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import styles from './Webinar.module.css';
 
 export default function () {

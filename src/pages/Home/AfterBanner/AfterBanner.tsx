@@ -1,6 +1,5 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
-// @ts-ignore
 import classes from './AfterBanner.module.css';
 
 const AfterBanner = () => {

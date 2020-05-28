@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-// @ts-ignore
 import classes from './FavoriteLections.module.css';
 import http from '../../../api/http';
 

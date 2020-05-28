@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Button } from 'semantic-ui-react';
-// @ts-ignore
 import styles from './Webinar.module.css';
 import { socket } from '../../App';
 import { RTC_CONFIG } from '../../config';

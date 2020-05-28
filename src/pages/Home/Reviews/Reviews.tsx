@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import classes from './Reviews.module.css';
 import TrustedCompanies from './TrustedCompanies/TrustedCompanies';
 import Offer from './Offer/Offer';

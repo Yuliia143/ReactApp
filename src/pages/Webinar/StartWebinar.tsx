@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Input } from 'semantic-ui-react';
-// @ts-ignore
 import styles from './Webinar.module.css';
 import UsersAndCamera from './UsersAndCamera';
 import Comments from './Comments';

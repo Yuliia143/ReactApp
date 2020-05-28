@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card, Rating, Header, Image, Modal } from 'semantic-ui-react';
-// @ts-ignore
 import classes from './Lections.module.css';
 import ModalFooter from './ModalFooter';
 

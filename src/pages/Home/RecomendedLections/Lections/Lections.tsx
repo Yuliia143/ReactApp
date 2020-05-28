@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick';
-// @ts-ignore
 import classes from './Lections.module.css';
 import CardItem from './CardItem';
 

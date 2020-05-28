@@ -1,6 +1,5 @@
 import React from 'react';
 import { Icon, Button } from 'semantic-ui-react';
-// @ts-ignore
 import classes from './Offer.module.css';
 
 const Offer = () => {

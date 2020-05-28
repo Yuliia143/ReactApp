@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-// @ts-ignore
 import classes from './Recommendations.module.css';
 
 const Recommendations = () => {

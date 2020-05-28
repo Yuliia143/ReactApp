@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// @ts-ignore
 import classes from './FavoriteLections.module.css';
 import { getFavorites } from '../../../api/favorite-lectures';
 import List from './List';

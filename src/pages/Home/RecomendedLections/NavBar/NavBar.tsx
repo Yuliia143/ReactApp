@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import classes from './NavBar.module.css';
 
 const NavBar = () => {
