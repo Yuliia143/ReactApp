@@ -30,14 +30,14 @@ const HeaderSearch = ({lecturesList, user}: Props) => {
     let history = useHistory();
     const [currentLecture, setCurrentLecture] = useState<SearchLecture>(Object);
 
-    const list = lecturesList.map(lecture => {
+    const list = lecturesList ? lecturesList.map(lecture => {
         return {
             id: lecture.id,
             title: lecture.title,
             description: lecture.description,
             imgurl: lecture.imgUrl
         }
-    });
+    }): [];
     const [searchLectField, setSearchLectField] = useState('');
 
     const handleResultSelect = (_: any, data: MenuItemProps) => {

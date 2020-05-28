@@ -56,10 +56,10 @@ const HeaderContainer = ({user, categoriesList, categoriesLoading, lecturesList,
                         <Logo image={LogoImg}/>
                     </Menu.Item>
                     <Menu.Item>
-                        {!categoriesLoading && <HeaderCategories categoriesList={categoriesList}/>}
+                        {!categoriesLoading && categoriesList && <HeaderCategories categoriesList={categoriesList}/>}
                     </Menu.Item>
                     <Menu.Item>
-                        {!lecturesLoading && <HeaderSearch lecturesList={lecturesList}/>}
+                        {!lecturesLoading && lecturesList && <HeaderSearch lecturesList={lecturesList}/>}
                     </Menu.Item>
                 </Menu.Menu>
                 {user ? (
