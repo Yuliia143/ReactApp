@@ -6,6 +6,7 @@ import { getLectures } from '../../../store/actions/getLectures';
 import BodyTable from './BodyTable';
 import Pagination from './Pagination';
 import UpdatePage from '../../Lectures/Update/UpdatePage';
+import Lecture from '../../../models/lecture';
 
 const mapDispatchToProps = (dispatch: Function) => ({
     getLectures: () => dispatch(getLectures())
@@ -22,7 +23,7 @@ const LecturesTable = ({ lecturesList, getLectures }: PropsFromRedux) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [lecturesPerPage] = useState(5);
     const [openDetails, setOpenDetails] = useState(false);
-    const [editPage, setEditPage] = useState(null);
+    const [editPage, setEditPage] = useState<null | Lecture>(null);
 
     // const useIsMounted = () => {
     //     const isMounted = useRef(false);

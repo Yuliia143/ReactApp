@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { createLecture } from '../../../api/lectures-api';
+import Lecture from '../../../models/lecture';
 import GeneralForm from '../GeneralForm';
 
 interface Props extends RouteComponentProps {}
 
-const initialValues = {
+const initialValues: Lecture = {
     title: '',
     description: '',
     videoUrl: '',

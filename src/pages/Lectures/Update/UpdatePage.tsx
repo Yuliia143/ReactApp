@@ -6,20 +6,20 @@ import GeneralForm from '../GeneralForm';
 
 interface Props extends RouteComponentProps {
     closeDetails: () => void;
-    editPage: Lecture;
+    editPage: Lecture | null;
 }
 
 const UpdatePage = ({ history, closeDetails, editPage }: Props) => {
     const initialValues = {
-        title: editPage.title,
-        description: editPage.description,
-        videoUrl: editPage.videoUrl,
+        title: editPage!.title,
+        description: editPage!.description,
+        videoUrl: editPage!.videoUrl,
         file: null
     };
 
     const onUpdateLecture = async (values: any) => {
-        await editLecture(editPage.id, values);
-        history.push(`/lecture/${editPage.id}`);
+        await editLecture(editPage!.id, values);
+        history.push(`/lecture/${editPage!.id}`);
     };
 
     return (

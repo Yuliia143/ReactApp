@@ -50,6 +50,8 @@ const FileLoaderProgress = (props: Props) => {
         await http.remove('/api/aws/upload-video', data);
     };
 
+    const prevFile = prevFileRef.current;
+
     useEffect(() => {
         setLoading(true);
         if (prevFile && props.file !== null) {
@@ -69,8 +71,6 @@ const FileLoaderProgress = (props: Props) => {
             onUploadVideo(props.file);
         };
     }, [file]);
-
-    const prevFile = prevFileRef.current;
 
     if (!file) {
         return null;

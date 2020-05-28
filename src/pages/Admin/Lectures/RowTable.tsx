@@ -23,7 +23,7 @@ const RowTable = (props: Props) => {
     const [modalState, setModalState] = useState(false);
     const [dimmer, setDimmer] = useState<string | boolean>(true);
 
-    const redirectToSingleLecture = (lectureId: string) => {
+    const redirectToSingleLecture = (lectureId: string | undefined) => {
         history.push(`/lecture/${lectureId}`);
     };
 

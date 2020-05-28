@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { Formik } from 'formik';
@@ -10,7 +11,7 @@ interface Props {
     initialValues: Lecture;
     formSubmiting: (values: any) => Promise<void>;
     closeDetails?: () => void;
-    editPage?: Lecture;
+    editPage?: Lecture | null;
 }
 
 const GeneralForm = ({
@@ -126,7 +127,8 @@ const GeneralForm = ({
                                 onChange={(event) => {
                                     setFieldValue(
                                         'file',
-                                        event.currentTarget.files[0]
+                                        event.currentTarget.files &&
+                                            event.currentTarget.files[0]
                                     );
                                 }}
                             />

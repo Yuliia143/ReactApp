@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Accordion, Form, Menu } from 'semantic-ui-react';
+import { Accordion, Menu } from 'semantic-ui-react';
 import Users from './Users/Users';
 import LecturesTable from './Lectures/LecturesTable';
 import CreatePage from '../Lectures/Create/CreatePage';

@@ -15,7 +15,7 @@ interface Props extends PropsFromRedux {
     modalState: boolean;
     dimmer: any;
     onClose: () => void;
-    id: string;
+    id: string | undefined;
     videoUrl: string;
 }
 
@@ -36,7 +36,7 @@ const ModalWindow = ({
         await http.remove('/api/aws/upload-video', data);
     };
 
-    const deleteLecture = async (lectureId: string) => {
+    const deleteLecture = async (lectureId: string | undefined) => {
         await http.remove(`/api/lectures/${lectureId}`);
         await updateLectureList();
         await deleteFromAws(videoUrl);
