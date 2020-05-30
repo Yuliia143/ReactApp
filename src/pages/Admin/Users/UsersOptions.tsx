@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
-import {Button, Form, Icon, Popup} from "semantic-ui-react";
-import {useHistory, useRouteMatch} from "react-router-dom";
-import styles from "./Users.module.css";
+import React, { useState } from 'react';
+import { Button, Form, Icon, Popup } from 'semantic-ui-react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import styles from './Users.module.css';
 
 const regex = new RegExp('^[a-zA-Z0-9 ]+$');
-interface OptionsProps{
+interface OptionsProps {
     query: string;
     handleQuery: Function;
     totalCount: number;
 }
 
-const UsersOptions = ({query, handleQuery, totalCount}: OptionsProps) => {
+const UsersOptions = ({ query, handleQuery, totalCount }: OptionsProps) => {
     const history = useHistory();
     const [filterValid, setFilterValid] = useState(true);
     const [popupMessage, setPopupMessage] = useState('');
-    const handleOnChange = (event: any, {value}: any) => {
+    const handleOnChange = (event: any, { value }: any) => {
         if (value !== '' && !regex.test(value)) {
             setFilterValid(false);
             setPopupMessage('Invalid character.');
@@ -22,9 +22,11 @@ const UsersOptions = ({query, handleQuery, totalCount}: OptionsProps) => {
             setFilterValid(true);
             handleQuery(value);
         }
-        totalCount === 0 && setPopupMessage('No results found.');
+        if (totalCount === 0) {
+            setPopupMessage('No results found.');
+        }
     };
-    let {url} = useRouteMatch();
+    const { url } = useRouteMatch();
     return (
         <div className={styles.tableOptions}>
             <Form className={styles.optionsForm}>
@@ -50,11 +52,14 @@ const UsersOptions = ({query, handleQuery, totalCount}: OptionsProps) => {
                     </Form.Field>
                 </Form.Group>
             </Form>
-            <Button className={styles.optionsButton}
-                    onClick={(()=>history.push(`${url}/new`))}>
-                Add new user<Icon className={styles.optionsIcon} name="plus"/>
+            <Button
+                className={styles.optionsButton}
+                onClick={() => history.push(`${url}/new`)}
+            >
+                Add new user
+                <Icon className={styles.optionsIcon} name="plus" />
             </Button>
         </div>
-    )
+    );
 };
 export default UsersOptions;

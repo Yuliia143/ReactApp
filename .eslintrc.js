@@ -1,5 +1,9 @@
 module.exports = {
     root: true,
+    env: {
+        browser: true,
+        node: true
+    },
     parser: '@typescript-eslint/parser',
 
     parserOptions: {
@@ -15,6 +19,7 @@ module.exports = {
     ],
     rules: {
         'func-names': 'off',
+        'no-shadow': 'off',
         'import/prefer-default-export': 'off',
         'react/jsx-props-no-spreading': 'off'
     }
