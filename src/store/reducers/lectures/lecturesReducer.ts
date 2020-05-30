@@ -1,5 +1,10 @@
-import {LECTURES_LOADING, LECTURES_SUCCESS, LECTURES_FAIL, LECTURES_STOP} from "../../types/lectures";
-import {LecturesActions, LecturesState} from "./types";
+import {
+    LECTURES_LOADING,
+    LECTURES_SUCCESS,
+    LECTURES_FAIL,
+    LECTURES_STOP
+} from '../../types/lectures';
+import { LecturesActions, LecturesState } from './types';
 
 const initialState: LecturesState = {
     loading: false,

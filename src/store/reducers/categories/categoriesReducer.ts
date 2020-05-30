@@ -1,12 +1,20 @@
-import {CATEGORIES_LOADING, CATEGORIES_SUCCESS, CATEGORIES_FAIL, CATEGORIES_STOP} from "../../types/categories";
-import {CategoriesActions, CategoriesState} from "./types";
+import {
+    CATEGORIES_LOADING,
+    CATEGORIES_SUCCESS,
+    CATEGORIES_FAIL,
+    CATEGORIES_STOP
+} from '../../types/categories';
+import { CategoriesActions, CategoriesState } from './types';
 
 const initialState: CategoriesState = {
     loading: false,
     categories: []
 };
 
-export default function (state = initialState, action: CategoriesActions): CategoriesState {
+export default function (
+    state = initialState,
+    action: CategoriesActions
+): CategoriesState {
     switch (action.type) {
         case CATEGORIES_LOADING:
             return {
@@ -19,12 +27,12 @@ export default function (state = initialState, action: CategoriesActions): Categ
                 categories: action.payload
             };
         case CATEGORIES_STOP:
-            return{
+            return {
                 ...state,
                 loading: false
             };
         case CATEGORIES_FAIL:
-            return{
+            return {
                 ...state,
                 loading: false
             };

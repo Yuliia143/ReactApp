@@ -1,22 +1,22 @@
 import React from 'react';
+import { Table } from 'semantic-ui-react';
 import RowTable from './RowTable';
-import {Table} from 'semantic-ui-react';
 
-const BodyTable = ({lecturesList, handleEditPage, handleOpenDetails}) =>{ 
-    return(
+const BodyTable = ({ lecturesList, handleEditPage, handleOpenDetails }) => {
+    return (
         <Table.Body>
-            {lecturesList.map((lecture,i)=>{
-                return (       
-                        <RowTable 
-                            key ={i}
-                            lecture ={lecture}  
-                            handleEditPage={handleEditPage}
-                            handleOpenDetails={handleOpenDetails} />
-                       );
-                })
-            }
+            {lecturesList.map((lecture, i) => {
+                return (
+                    <RowTable
+                        key={i}
+                        lecture={lecture}
+                        handleEditPage={handleEditPage}
+                        handleOpenDetails={handleOpenDetails}
+                    />
+                );
+            })}
         </Table.Body>
     );
-}
+};
 
-export default BodyTable
+export default BodyTable;
