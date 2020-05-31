@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { createLecture } from '../../../api/lectures-api';
-import Lecture from '../../../models/lecture';
-import GeneralForm from '../GeneralForm';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { createLecture } from "../../../api/lectures-api";
+import Lecture from "../../../models/lecture";
+import GeneralForm from "../GeneralForm";
 
 const initialValues: Lecture = {
-  title: '',
-  description: '',
-  videoUrl: '',
+  title: "",
+  description: "",
+  videoUrl: "",
   file: null,
 };
 

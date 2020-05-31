@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Table } from 'semantic-ui-react';
-import BodyTable from './BodyTable';
-import Pagination from './Pagination';
-import Lecture from '../../../models/lecture';
+import React, { useState } from "react";
+import { Table } from "semantic-ui-react";
+import BodyTable from "./BodyTable";
+import Pagination from "./Pagination";
+import Lecture from "../../../models/lecture";
 
 interface Props {
   lecturesList: Lecture[];
@@ -27,9 +27,9 @@ const LecturesTable = ({ lecturesList }: Props) => {
       celled
       compact
       style={{
-        border: 'none',
-        padding: '0 20px',
-        marginTop: '10px',
+        border: "none",
+        padding: "0 20px",
+        marginTop: "10px",
       }}
     >
       <Table.Header>

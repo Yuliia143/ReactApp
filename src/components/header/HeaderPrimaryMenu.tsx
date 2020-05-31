@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Dropdown, Icon } from 'semantic-ui-react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Dropdown, Icon } from "semantic-ui-react";
 
-import { connect, ConnectedProps } from 'react-redux';
-import { signOut } from '../../store/actions/auth';
-import { RootState } from '../../store';
-import styles from './Header.module.css';
+import { connect, ConnectedProps } from "react-redux";
+import { signOut } from "../../store/actions/auth";
+import { RootState } from "../../store";
+import styles from "./Header.module.css";
 
 const mapStateToProps = (state: RootState) => ({
   user: state.auth.user,
@@ -39,12 +39,12 @@ const HeaderPrimaryMenu = ({ user, onSignOut }: PropsFromRedux) => {
         <Dropdown.Item as={Link} name="profile" to="/edit-page">
           My profile
         </Dropdown.Item>
-        {user && user.role === 'student' ? (
+        {user && user.role === "student" ? (
           <Dropdown.Item as={Link} name="favorite" to="/favorite-lections">
             Favorites
           </Dropdown.Item>
         ) : null}
-        {user && user.role === 'admin' ? (
+        {user && user.role === "admin" ? (
           <Dropdown.Item as={Link} name="admin" to="/admin/users">
             Admin page
           </Dropdown.Item>

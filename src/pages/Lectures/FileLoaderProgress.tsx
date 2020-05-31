@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Progress } from 'semantic-ui-react';
-import http from '../../api/http';
+import React, { useEffect, useState, useRef } from "react";
+import { Progress } from "semantic-ui-react";
+import http from "../../api/http";
 
 interface Props {
   file: any;
@@ -10,16 +10,16 @@ interface Props {
 const FileLoaderProgress = (props: Props) => {
   const { file, onUploaded } = props;
   const prevFileRef = useRef();
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState("");
   const [loading, setLoading] = useState(false);
   const [localReader, setLocalReader] = useState(false);
   const [percentCompleted, setPercentCompleted] = useState(0);
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState("");
 
   const separator = Date.now().toString();
 
   const onUploadVideo = async (uploadedFile: File) => {
-    const newFileName = uploadedFile.name.split('.').join(`-${separator}.`);
+    const newFileName = uploadedFile.name.split(".").join(`-${separator}.`);
     const config = {
       onUploadProgress: (progressEvent: any) => {
         setPercentCompleted(
@@ -28,11 +28,11 @@ const FileLoaderProgress = (props: Props) => {
       },
     };
     const formdata = new FormData();
-    formdata.append('lectureVideo', file, newFileName);
-    const response = await http.post('/api/aws/upload-video', formdata, {
+    formdata.append("lectureVideo", file, newFileName);
+    const response = await http.post("/api/aws/upload-video", formdata, {
       ...config,
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
     setVideoUrl(response.data.videoUrl);
@@ -45,7 +45,7 @@ const FileLoaderProgress = (props: Props) => {
     const data = {
       file: prevFileName,
     };
-    await http.remove('/api/aws/upload-video', data);
+    await http.remove("/api/aws/upload-video", data);
   };
 
   const prevFile = prevFileRef.current;

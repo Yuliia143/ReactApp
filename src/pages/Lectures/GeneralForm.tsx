@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
-import { Button, Form } from 'semantic-ui-react';
-import { Formik } from 'formik';
-import { useHistory } from 'react-router-dom';
-import * as Yup from 'yup';
-import FileLoaderProgress from './FileLoaderProgress';
-import Lecture from '../../models/lecture';
-import styles from './GeneralForm.module.css';
+import React from "react";
+import { Button, Form } from "semantic-ui-react";
+import { Formik } from "formik";
+import { useHistory } from "react-router-dom";
+import * as Yup from "yup";
+import FileLoaderProgress from "./FileLoaderProgress";
+import Lecture from "../../models/lecture";
+import styles from "./GeneralForm.module.css";
 
 interface Props {
   initialValues: Lecture;
@@ -17,20 +17,20 @@ interface Props {
 const GeneralForm = ({ initialValues, formSubmiting, editPage }: Props) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string()
-      .min(2, 'Must have a character')
-      .max(255, 'Must be shorter than 255')
-      .required('Must be a title'),
+      .min(2, "Must have a character")
+      .max(255, "Must be shorter than 255")
+      .required("Must be a title"),
     description: Yup.string()
-      .max(255, 'Must be shorter than 255')
-      .required('Must add description'),
-    videoUrl: Yup.string().required('Please add video URL or upload your own'),
+      .max(255, "Must be shorter than 255")
+      .required("Must add description"),
+    videoUrl: Yup.string().required("Please add video URL or upload your own"),
   });
 
   const errorFormHandlind = (touchedName: any, errorName: any) => {
-    if (touchedName && typeof errorName !== 'undefined') {
+    if (touchedName && typeof errorName !== "undefined") {
       return {
         content: errorName,
-        pointing: 'below',
+        pointing: "below",
       };
     }
     return false;
@@ -104,7 +104,7 @@ const GeneralForm = ({ initialValues, formSubmiting, editPage }: Props) => {
               type="file"
               onChange={(event) => {
                 setFieldValue(
-                  'file',
+                  "file",
                   event.currentTarget.files && event.currentTarget.files[0]
                 );
               }}
@@ -113,7 +113,7 @@ const GeneralForm = ({ initialValues, formSubmiting, editPage }: Props) => {
             <FileLoaderProgress
               file={values.file}
               onUploaded={(url) => {
-                setFieldValue('videoUrl', url);
+                setFieldValue("videoUrl", url);
               }}
             />
             <div>

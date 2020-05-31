@@ -1,8 +1,8 @@
-import React from 'react';
-import { Modal, Button } from 'semantic-ui-react';
-import { connect, ConnectedProps } from 'react-redux';
-import { getLectures } from '../../../store/actions/getLectures';
-import http from '../../../api/http';
+import React from "react";
+import { Modal, Button } from "semantic-ui-react";
+import { connect, ConnectedProps } from "react-redux";
+import { getLectures } from "../../../store/actions/getLectures";
+import http from "../../../api/http";
 
 const mapDispatchToProps = (dispatch: Function) => ({
   updateLectureList: () => dispatch(getLectures()),
