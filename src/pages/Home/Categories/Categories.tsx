@@ -5,34 +5,46 @@ import { RootState } from "../../../store";
 import { getCategories } from "../../../store/actions/getCategories";
 import Category from "../../../models/category";
 
-const classes = require('./Categories.module.css');
-
+const classes = require("./Categories.module.css");
 
 const mapStateToProps = (state: RootState) => ({
   categoriesList: state.categories.categories,
   categoriesLoading: state.categories.loading,
-  lecturesList: state.lectures.lectures
+  lecturesList: state.lectures.lectures,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCategories: () => dispatch(getCategories())
+  getCategories: () => dispatch(getCategories()),
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Categories = ({ categoriesList, categoriesLoading}: PropsFromRedux) => {
-  
+const Categories = ({ categoriesList, categoriesLoading }: PropsFromRedux) => {
   const renderCategoryList = (categories: Category[] = []) => {
     if (!categoriesLoading && categoriesList) {
       return categories.map((item: any) => {
         return (
-          <div className={classes.text} key={item.id} onClick={()=>{console.log(item.title)}} role="button" tabIndex={0} onKeyPress={()=>{console.log( 'for users with physical disabilities who cannot use a mouse')}}>
+          <div
+            className={classes.text}
+            key={item.id}
+            onClick={() => {
+              console.log(item.title);
+            }}
+            role="button"
+            tabIndex={0}
+            onKeyPress={() => {
+              console.log(
+                "for users with physical disabilities who cannot use a mouse"
+              );
+            }}
+          >
             <Link to={`/category/${item.id}`}>{item.title}</Link>
           </div>
-        )
-      })
-    }return null;
-  }
+        );
+      });
+    }
+    return null;
+  };
 
   const categories = renderCategoryList(categoriesList);
 
@@ -40,12 +52,10 @@ const Categories = ({ categoriesList, categoriesLoading}: PropsFromRedux) => {
     <div className={classes.wrapper}>
       <p className={classes.title}>Top categories</p>
       <div className={classes.flexCategories}>
-        <div className={classes.row}>
-          {categories}
-        </div>
+        <div className={classes.row}>{categories}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default connector(Categories);

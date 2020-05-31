@@ -1,24 +1,24 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import PrivateRoute from './PrivateRoute';
-import HeaderContainer from './components/header/HeaderContainer';
-import Home from './pages/Home/Home';
-import SignUp from './pages/SignUp/SignUp';
-import SignIn from './pages/SignIn/SignIn';
-import UserEditPage from './pages/User/UserEditPage';
-import { store, persistor } from './store';
-import CreateLecture from './pages/Lectures/Create/CreatePage';
-import FooterContainer from './components/FooterContainer';
-import Lecture from './pages/Lecture/Lecture';
-import { NoMatch } from './components/NoMatch';
-import FavoriteLections from './pages/Home/FavoriteLections/FavoriteLections';
-import Admin from './pages/Admin/Admin';
-import Webinar from './pages/Webinar/Webinar';
-import WebinarList from './pages/WebinarList/WebinarList';
-import Webinars from './pages/Webinars/Webinars';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import PrivateRoute from "./PrivateRoute";
+import HeaderContainer from "./components/header/HeaderContainer";
+import Home from "./pages/Home/Home";
+import SignUp from "./pages/SignUp/SignUp";
+import SignIn from "./pages/SignIn/SignIn";
+import UserEditPage from "./pages/User/UserEditPage";
+import { store, persistor } from "./store";
+import CreateLecture from "./pages/Lectures/Create/CreatePage";
+import FooterContainer from "./components/FooterContainer";
+import Lecture from "./pages/Lecture/Lecture";
+import { NoMatch } from "./components/NoMatch";
+import FavoriteLections from "./pages/Home/FavoriteLections/FavoriteLections";
+import Admin from "./pages/Admin/Admin";
+import Webinar from "./pages/Webinar/Webinar";
+import WebinarList from "./pages/WebinarList/WebinarList";
+import Webinars from "./pages/Webinars/Webinars";
 
 function App() {
   return (

@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Comment, Header } from 'semantic-ui-react';
-import socketIoClient from 'socket.io-client';
-import { BASE_URL } from '../../config';
-import CommentForm from './CommentForm';
-import { RenderComments } from './RenderComments';
-import './Lecture.css';
-import { Comment as CommentI } from './Lecture';
+import React, { useState, useEffect } from "react";
+import { Comment, Header } from "semantic-ui-react";
+import socketIoClient from "socket.io-client";
+import { BASE_URL } from "../../config";
+import CommentForm from "./CommentForm";
+import { RenderComments } from "./RenderComments";
+import "./Lecture.css";
+import { Comment as CommentI } from "./Lecture";
 
-const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
+const socket = socketIoClient(BASE_URL || "http://localhost:3030");
 
 export default function Comments(props: {
   messages: CommentI[];
   lectureId: string;
 }) {
-  const [messages, setMessages] = useState<CommentI[]>(props.messages);
+  const { messages } = props;
+  const [comments, setComments] = useState<CommentI[]>(messages);
 
   const leaveRoom = () => {
-    socket.emit('Leave room', props.lectureId);
+    socket.emit("Leave room", props.lectureId);
   };
 
   const addNewComment = (comment: CommentI) => {
-    setMessages((prevMessages) => {
+    setComments((prevMessages) => {
       if (!prevMessages.find((item) => item._id === comment._id)) {
         return [...prevMessages, comment];
       }
@@ -29,11 +30,11 @@ export default function Comments(props: {
   };
 
   useEffect(() => {
-    window.addEventListener('beforeunload', leaveRoom);
-    socket.emit('join_room', props.lectureId);
-    socket.on('send_message', addNewComment);
+    window.addEventListener("beforeunload", leaveRoom);
+    socket.emit("join_room", props.lectureId);
+    socket.on("send_message", addNewComment);
     return () => {
-      window.removeEventListener('beforeunload', leaveRoom);
+      window.removeEventListener("beforeunload", leaveRoom);
     };
   }, []);
 
@@ -45,7 +46,7 @@ export default function Comments(props: {
         Comments
       </Header>
       <div className="commentCard">
-        <RenderComments comments={messages} />
+        <RenderComments comments={comments} />
       </div>
       <CommentForm lectureId={lectureId} onPostComment={addNewComment} />
     </Comment.Group>

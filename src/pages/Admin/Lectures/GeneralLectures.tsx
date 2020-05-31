@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import { Switch, useRouteMatch } from 'react-router-dom';
-import { RootState } from '../../../store';
-import { getLectures } from '../../../store/actions/getLectures';
-import LecturesTable from './LecturesTable';
-import UpdatePage from '../../Lectures/Update/UpdatePage';
-import PrivateRoute from '../../../PrivateRoute';
+import React, { useEffect } from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { Switch, useRouteMatch } from "react-router-dom";
+import { RootState } from "../../../store";
+import { getLectures } from "../../../store/actions/getLectures";
+import LecturesTable from "./LecturesTable";
+import UpdatePage from "../../Lectures/Update/UpdatePage";
+import PrivateRoute from "../../../PrivateRoute";
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getLectures: () => dispatch(getLectures()),

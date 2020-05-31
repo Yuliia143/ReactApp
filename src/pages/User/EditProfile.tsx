@@ -1,124 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { Form, Button, Message } from 'semantic-ui-react';
+import { Form, Button, Message } from "semantic-ui-react";
 
-import http from '../../api/http';
-import User from '../../models/user';
+import http from "../../api/http";
+import User from "../../models/user";
 
-import './User.css';
+import "./User.css";
 
 interface Props {
-    user: User;
-    updateProfile: (data: object) => void;
+  user: User;
+  updateProfile: (data: object) => void;
 }
 
-const EditProfile: React.FC<Props> = ({ user, updateProfile }:Props) => {
-    const [userFullName, setUserFullName] = useState({
-        name: user.name,
-        surName: user.surName
-    });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+const EditProfile: React.FC<Props> = ({ user, updateProfile }: Props) => {
+  const [userFullName, setUserFullName] = useState({
+    name: user.name,
+    surName: user.surName,
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-    const textInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setUserFullName((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
+  const textInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserFullName((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
 
-        setError(false);
+    setError(false);
+  };
+
+  const isFieldsEmpty = () => {
+    if (userFullName.name.length === 0 || userFullName.surName.length === 0) {
+      setError(true);
+    }
+  };
+
+  const getMessage = () => {
+    if (error) {
+      return <Message negative header="All fields are required." />;
+    }
+
+    return null;
+  };
+
+  const saveFields = () => {
+    setLoading(true);
+
+    const data = {
+      oldData: {
+        email: user.email,
+      },
+      newData: {
+        first_name: userFullName.name,
+        surName: userFullName.surName,
+      },
     };
 
-    const isFieldsEmpty = () => {
-        if (
-            userFullName.name.length === 0 ||
-            userFullName.surName.length === 0
-        ) {
-            setError(true);
-        }
-    };
+    http
+      .put("/api/edit/editName", data)
+      .then(() => {
+        setLoading(false);
+        updateProfile({
+          name: userFullName.name,
+          surName: userFullName.surName,
+        });
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+  };
 
-    const getMessage = () => {
-        if (error) {
-            return <Message negative header="All fields are required." />;
-        }
-
-        return null;
-    };
-
-    const saveFields = () => {
-        setLoading(true);
-
-        const data = {
-            oldData: {
-                email: user.email
-            },
-            newData: {
-                first_name: userFullName.name,
-                surName: userFullName.surName
-            }
-        };
-
-        http.put('/api/edit/editName', data)
-            .then(() => {
-                setLoading(false);
-                updateProfile({
-                    name: userFullName.name,
-                    surName: userFullName.surName
-                });
-            })
-            .catch(() => {
-                setError(true);
-                setLoading(false);
-            });
-    };
-
-    return (
-        <div className="edit-profile">
-            <div className="edit-content">
-                <div className="title-edit">Public profile</div>
-                <div className="description-edit">
-                    Add information about yourself
-                </div>
-                <div className="inputs">
-                    <Form loading={loading} onSubmit={isFieldsEmpty}>
-                        <Form.Field>
-                            <label htmlFor="firstName">
-                                First Name
-                                <input
-                                    id="firstName"
-                                    onChange={textInputOnChange}
-                                    value={userFullName.name}
-                                    name="name"
-                                    placeholder="First Name"
-                                />
-                                </label>
-                        </Form.Field>
-                        <Form.Field>
-                            <label htmlFor="lastName">
-                                Last Name
-                                <input
-                                    id="lastName"
-                                    onChange={textInputOnChange}
-                                    value={userFullName.surName}
-                                    name="surName"
-                                    placeholder="Last Name"
-                                />
-                            </label>
-                        </Form.Field>
-                        <div className="save-btn">
-                            <Button onClick={saveFields} color="red">
-                                Save
-                            </Button>
-                        </div>
-                    </Form>
-                </div>
-                <div>{getMessage()}</div>
+  return (
+    <div className="edit-profile">
+      <div className="edit-content">
+        <div className="title-edit">Public profile</div>
+        <div className="description-edit">Add information about yourself</div>
+        <div className="inputs">
+          <Form loading={loading} onSubmit={isFieldsEmpty}>
+            <Form.Field>
+              <label htmlFor="firstName">
+                First Name
+                <input
+                  id="firstName"
+                  onChange={textInputOnChange}
+                  value={userFullName.name}
+                  name="name"
+                  placeholder="First Name"
+                />
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor="lastName">
+                Last Name
+                <input
+                  id="lastName"
+                  onChange={textInputOnChange}
+                  value={userFullName.surName}
+                  name="surName"
+                  placeholder="Last Name"
+                />
+              </label>
+            </Form.Field>
+            <div className="save-btn">
+              <Button onClick={saveFields} color="red">
+                Save
+              </Button>
             </div>
+          </Form>
         </div>
-    );
+        <div>{getMessage()}</div>
+      </div>
+    </div>
+  );
 };
-
 
 export default EditProfile;

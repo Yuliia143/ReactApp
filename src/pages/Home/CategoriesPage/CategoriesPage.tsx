@@ -1,18 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import SortedLections from "./SortedLections"
+import SortedLections from "./SortedLections";
 import { LectionWrapper } from "../style";
 
-  const CategoriesPage = () => {
-  const {id} = useParams();
+const CategoriesPage = () => {
+  const { id } = useParams();
   return (
-      <div>
+    <div>
       <LectionWrapper>
-        <SortedLections categoryId={id}/>
+        <SortedLections categoryId={id} />
       </LectionWrapper>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
 export default CategoriesPage;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { editLecture } from '../../../api/lectures-api';
-import Lecture from '../../../models/lecture';
-import GeneralForm from '../GeneralForm';
+import React from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { editLecture } from "../../../api/lectures-api";
+import Lecture from "../../../models/lecture";
+import GeneralForm from "../GeneralForm";
 
 interface Props {
   lecturesList: Lecture[];

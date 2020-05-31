@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Comment, Header } from 'semantic-ui-react';
-import socketIoClient from 'socket.io-client';
-import styles from './Webinars.module.css';
-import { RTC_CONFIG, BASE_URL } from '../../config';
-import RenderComments from '../Webinar/RenderComments';
-import { CommentI, Candidate } from '../Webinar/Interfaces';
-import WebinarStopped from './WebinarStopped';
-import CommentForm from './CommentForm';
-import { checkUserImage } from './checkUserImage.';
-import Loader from '../Webinar/Loader';
+import React, { useState, useEffect } from "react";
+import { Comment, Header } from "semantic-ui-react";
+import socketIoClient from "socket.io-client";
+import styles from "./Webinars.module.css";
+import { RTC_CONFIG, BASE_URL } from "../../config";
+import RenderComments from "../Webinar/RenderComments";
+import { CommentI, Candidate } from "../Webinar/Interfaces";
+import WebinarStopped from "./WebinarStopped";
+import CommentForm from "./CommentForm";
+import { checkUserImage } from "./checkUserImage.";
+import Loader from "../Webinar/Loader";
 
 const { RTCPeerConnection, RTCSessionDescription } = window;
 
-let socket = socketIoClient(BASE_URL || 'http://localhost:3030');
+let socket = socketIoClient(BASE_URL || "http://localhost:3030");
 
 interface OfferResponse {
   offer: any;
@@ -39,7 +39,7 @@ export default function ({ match }: any) {
 
   peerConnection.ontrack = (event: RTCTrackEvent) => {
     const remoteVideo = document.getElementById(
-      'remote-video'
+      "remote-video"
     ) as HTMLVideoElement;
     if (!remoteVideo) {
       return;
@@ -53,7 +53,7 @@ export default function ({ match }: any) {
 
   const leaveFromPage = (userId: string, lectureId: string) => {
     peerConnection.close();
-    socket.emit('disconnect_user', {
+    socket.emit("disconnect_user", {
       userId,
       lectureId,
     });
@@ -61,19 +61,19 @@ export default function ({ match }: any) {
   };
 
   useEffect(() => {
-    socket = socketIoClient(BASE_URL || 'http://localhost:3030');
+    socket = socketIoClient(BASE_URL || "http://localhost:3030");
 
-    const userStr = localStorage.getItem('User') as string;
+    const userStr = localStorage.getItem("User") as string;
     const { _id, name, surName, imageUrl } = JSON.parse(userStr);
 
-    socket.emit('new_user_joined', {
+    socket.emit("new_user_joined", {
       lectureId: params.id,
       userId: _id,
       userName: `${name} ${surName}`,
       imageUrl: checkUserImage(imageUrl),
     });
 
-    socket.on('candidate', (id: string, candidate: Candidate) => {
+    socket.on("candidate", (id: string, candidate: Candidate) => {
       peerConnection
         .addIceCandidate(new RTCIceCandidate(candidate))
         .catch((e) => {
@@ -81,7 +81,7 @@ export default function ({ match }: any) {
         });
     });
 
-    socket.on('offer-made', async (data: OfferResponse) => {
+    socket.on("offer-made", async (data: OfferResponse) => {
       await peerConnection.setRemoteDescription(
         new RTCSessionDescription(data.offer)
       );
@@ -91,41 +91,41 @@ export default function ({ match }: any) {
         new RTCSessionDescription(answer)
       );
 
-      socket.emit('make-answer', {
+      socket.emit("make-answer", {
         answer,
         to: data.socket,
       });
     });
 
-    socket.on('new_comment', (comment: CommentI) => {
+    socket.on("new_comment", (comment: CommentI) => {
       const localComment = comment;
       if (localComment.authorId === _id) {
-        localComment.author = 'Me';
+        localComment.author = "Me";
       }
       addNewComment(localComment);
     });
 
-    socket.on('get_all_comments', (allComments: CommentI[]) => {
+    socket.on("get_all_comments", (allComments: CommentI[]) => {
       allComments.filter((item) => {
         const el = item;
         if (el.authorId === _id) {
-          el.author = 'Me';
+          el.author = "Me";
         }
         return el;
       });
       setComments(allComments);
     });
 
-    socket.on('webinar_stoped', () => {
+    socket.on("webinar_stoped", () => {
       setOpenModal(true);
     });
 
-    window.addEventListener('beforeunload', () =>
+    window.addEventListener("beforeunload", () =>
       leaveFromPage(_id, params.id)
     );
 
     return () => {
-      window.removeEventListener('beforeunload', () =>
+      window.removeEventListener("beforeunload", () =>
         leaveFromPage(_id, params.id)
       );
 

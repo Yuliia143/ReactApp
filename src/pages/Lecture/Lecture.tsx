@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import ReactPlayer from 'react-player';
-import { RouteComponentProps } from 'react-router-dom';
-import { getLecture } from '../../api/comments-api';
-import './Lecture.css';
-import Comments from './Comments';
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import { RouteComponentProps } from "react-router-dom";
+import { getLecture } from "../../api/comments-api";
+import "./Lecture.css";
+import Comments from "./Comments";
 
 export interface Lection {
   id: string;

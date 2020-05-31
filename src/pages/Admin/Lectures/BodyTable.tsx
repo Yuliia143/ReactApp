@@ -1,7 +1,7 @@
-import React from 'react';
-import { Table } from 'semantic-ui-react';
-import Lecture from '../../../models/lecture';
-import RowTable from './RowTable';
+import React from "react";
+import { Table } from "semantic-ui-react";
+import Lecture from "../../../models/lecture";
+import RowTable from "./RowTable";
 
 // handleEditPage: (value: object | ((prevVar: object) => object)) => void;
 
