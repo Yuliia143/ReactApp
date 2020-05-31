@@ -64,6 +64,10 @@ export default function ({ socket }: any) {
       addNewUser(user);
     });
 
+    socket.on("candidate", (id: string, candidate: Candidate) => {
+            peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
+        });
+    
     socket.on("remove-user", (user: UserI) => {
       removeUser(user);
       if (peerConnections[user.id] !== undefined) {
