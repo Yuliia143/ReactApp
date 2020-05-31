@@ -25,5 +25,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'no-underscore-dangle': 'off',
     'prefer-destructuring': ['error', { object: true, array: true }],
+    'consistent-return': 'off',
+    'import/no-cycle': 'off',
   },
 };

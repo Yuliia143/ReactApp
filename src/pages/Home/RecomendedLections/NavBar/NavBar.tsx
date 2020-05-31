@@ -26,7 +26,7 @@ const NavBar = ({ categoriesList, categoriesLoading }: PropsFromRedux) => {
     if (!categoriesLoading && categoriesList) {
       return categories.map((item: any) => {
         return (
-          <div className={classes.item} key={item.id} onClick={() => setSelectedCategory(item.id) } role="button" tabIndex={0} onKeyPress={()=>{console.log( 'for users with physical disabilities who cannot use a mouse')}}>
+          <div className={classes.item} key={item.id} onClick={() => setSelectedCategory(item.id) } role="button" tabIndex={0} onKeyPress={()=>false}>
             <button type="button"><p>{item.title}</p></button>
           </div>
         )

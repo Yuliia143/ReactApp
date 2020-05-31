@@ -26,7 +26,7 @@ const Categories = ({ categoriesList, categoriesLoading}: PropsFromRedux) => {
     if (!categoriesLoading && categoriesList) {
       return categories.map((item: any) => {
         return (
-          <div className={classes.text} key={item.id} onClick={()=>{console.log(item.title)}} role="button" tabIndex={0} onKeyPress={()=>{console.log( 'for users with physical disabilities who cannot use a mouse')}}>
+          <div className={classes.text} key={item.id} role="button" tabIndex={0} onKeyPress={()=>false}>
             <Link to={`/category/${item.id}`}>{item.title}</Link>
           </div>
         )
