@@ -1,39 +1,54 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { Button, Input } from 'semantic-ui-react';
 import styles from './Webinar.module.css';
-import {Button, Input} from "semantic-ui-react";
 import UsersAndCamera from './UsersAndCamera';
-import Comments from "./Comments";
+import Comments from './Comments';
 
-export default function () {
-
+export default function ({ socket }: any) {
     const [startWebinar, setStartWebinar] = useState(false);
-    const [webinareName, setWebinareName] = useState('');
+    const [webinarName, setWebinarName] = useState('');
 
     const showCamera = () => {
-        setStartWebinar(true);
-    }
+        const userStr = localStorage.getItem('User') as string;
+        const user = JSON.parse(userStr);
 
-    const textInputOnchange = (e: {target: HTMLInputElement}) => {
-        setWebinareName(e.target.value);
-    }
+        socket.emit('add_new_webinar', {
+            webinarName,
+            firstName: user.name,
+            surName: user.surName
+        });
+
+        setStartWebinar(true);
+    };
+
+    const textInputOnchange = (e: { target: HTMLInputElement }) => {
+        setWebinarName(e.target.value);
+    };
 
     if (startWebinar === true) {
         return (
             <div className={styles.container}>
-                <UsersAndCamera/>
-                <Comments/>
+                <UsersAndCamera socket={socket}/>
+                <Comments socket={socket}/>
             </div>
-        )
-    } else {
-        return (
-            <div className={styles.startWebinar}>
-                <Input type='text' className={styles.webinarName} placeholder='Webinar name' value={webinareName}
-                       onChange={textInputOnchange}/>
-                <Button disabled={!webinareName} className="ui teal button" onClick={showCamera}>
-                    Start new webinar
-                </Button>
-            </div>
-        )
+        );
     }
-
+    return (
+        <div className={styles.startWebinar}>
+            <Input
+                type="text"
+                className={styles.webinarName}
+                placeholder="Webinar name"
+                value={webinarName}
+                onChange={textInputOnchange}
+            />
+            <Button
+                disabled={!webinarName}
+                className="ui teal button"
+                onClick={showCamera}
+            >
+                Start new webinar
+            </Button>
+        </div>
+    );
 }

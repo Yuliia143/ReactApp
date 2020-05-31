@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Card, Rating, Header, Image, Modal } from 'semantic-ui-react';
-import classes from './Lections.module.css';
 import ModalFooter from './ModalFooter';
+
+const classes = require('./Lections.module.css');
 
 interface CardProps {
   imgUrl: string,
@@ -16,14 +17,12 @@ interface Props {
   item: CardProps
 }
 
-const CardItem = (props: Props) => {
+const CardItem = ({item:{imgUrl, title, author, defaultRating, description, id}}:Props) => {
+
   const [open, setOpen] = useState(false);
 
   const show = () => setOpen(true);
   const close = () => setOpen(false);
-
-
-  const { imgUrl, title, author, defaultRating, description, id } = props.item;
 
   return (
     <div >
@@ -31,7 +30,7 @@ const CardItem = (props: Props) => {
         <div className="ui link three cards">
           <div className="card" id={classes.cards}>
             <div className="image">
-              <img src={imgUrl}></img>
+              <img src={imgUrl} alt='img'/>
             </div>
 
             <div className="content" id={classes.content}>

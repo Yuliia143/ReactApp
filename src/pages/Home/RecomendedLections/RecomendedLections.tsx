@@ -1,8 +1,7 @@
 import React from "react";
-import classes from './RecomendedLections.module.css';
 import NavBar from "./NavBar/NavBar";
-import Lections from "./Lections/Lections";
-import { LectionWrapperNav } from "../style";
+
+const classes = require('./RecomendedLections.module.css');
 
 const RecomendedLections = () => {
   return (
@@ -15,9 +14,6 @@ const RecomendedLections = () => {
 
       <div className={classes.wrapForCenter}>
         <NavBar />
-        <LectionWrapperNav>
-          <Lections />
-        </LectionWrapperNav>
       </div>
 
     </div>

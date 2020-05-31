@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
-import { getLecture } from "../../api/comments-api";
-import "./Lecture.css";
-import Comments from "./Comments";
-import { RouteComponentProps } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
+import { RouteComponentProps } from 'react-router-dom';
+import { getLecture } from '../../api/comments-api';
+import './Lecture.css';
+import Comments from './Comments';
 
 export interface Lection {
   id: string;
@@ -21,13 +21,16 @@ export interface Comment {
   createdOn: string;
 }
 
-export default function Lecture(props: RouteComponentProps<{id:string}>) {
+export default function Lecture(props: RouteComponentProps<{ id: string }>) {
   const [lecture, setLecture] = useState<Lection>();
   const [loading, setLoading] = useState<boolean>(true);
+  const { match } = props;
+  const {
+    params: { id },
+  } = match;
 
   const fetchLecture = async () => {
-    const { match } = props;
-    getLecture(match.params.id)
+    getLecture(id)
       .then((lecture: Lection) => {
         setLecture(lecture);
         setLoading(false);
@@ -39,11 +42,10 @@ export default function Lecture(props: RouteComponentProps<{id:string}>) {
 
   useEffect(() => {
     fetchLecture();
-  });
+  }, []);
 
-  const lectureId = props.match.params.id;
   if (loading) return <h1 className="loading">Loading...</h1>;
-  if (!lecture) return <h1>404 Not Found</h1>;
+  if (!lecture) return <h1 className="not-found-lecture">404 Not Found</h1>;
   return (
     <div>
       <h1 className="comment-title">{lecture.title}</h1>
@@ -51,6 +53,7 @@ export default function Lecture(props: RouteComponentProps<{id:string}>) {
         <ReactPlayer
           className="video-item"
           url={lecture.videoUrl}
+          controls
           width="100%"
           height="450px"
         />
@@ -58,7 +61,7 @@ export default function Lecture(props: RouteComponentProps<{id:string}>) {
       <div className="comment-description">
         This video is about: {lecture.description}
       </div>
-      <Comments messages={lecture.messages} lectureId={lectureId} />
+      <Comments messages={lecture.messages} lectureId={id} />
     </div>
   );
 }

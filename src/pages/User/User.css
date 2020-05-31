@@ -53,16 +53,17 @@ form.form {
     visibility: hidden;
 }
   
-[type="file"] + label {
+[type="file"] , .label-image {
     border: 2px solid #db2828;
     border-radius: 3px;
     display: inline-block;
     font-size: inherit;
     padding: 1rem 25px;
     margin-bottom: 50px;
+    margin-top: 30px;
 }
   
-[type="file"] + label:hover {
+[type="file"] + .label-image:hover {
     cursor: pointer;
 }
   
@@ -132,4 +133,61 @@ form.form {
 .crop-button {
     position: absolute;
     right: 30px;
+}
+
+
+@media screen and (max-width: 1024px) { 
+    .edit-content {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 768px) { 
+    .edit-content {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .edit-content {
+        width: 100%;
+    }
+
+    .edit-content > .inputs {
+        width: 85%;
+    }
+    
+    .edit-content {
+        padding: 20px 10px;
+    }
+
+    .edit-content > .inputs {
+        width: 100%;
+    }
+
+    .ui.vertical.menu {
+        width: 9rem;
+    }
+
+    .title-edit {
+        font-size: 20px;
+    }
+
+    .description-edit {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 480px) { 
+    .ui.vertical.menu {
+        width: 7rem;
+    }
+
+    .imgPreview {
+        width: 100%;
+    }
+
+    .edit-menu-item {
+        padding: 4px;
+    }
 }

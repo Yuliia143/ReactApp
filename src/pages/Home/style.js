@@ -18,6 +18,7 @@ export const LectionWrapper = styled.div `
     .slick-list{
         width: 102%;
     }
+    
     @media screen and (max-width:1200px){
             .slick-list{
                 margin: auto;
@@ -30,7 +31,15 @@ export const LectionWrapper = styled.div `
                 right: 16px;
             }
         }
-
+        // @media screen and (max-width:1024px){
+        //     .slick-list {
+        //         width: 774px;
+        //     }
+        //     .slick-next {
+        //         margin-right: -4px;
+        //     }
+            
+        // }
     @media screen and (max-width:768px){
         .slick-prev {
             left: 17px;
@@ -62,6 +71,7 @@ export const LectionWrapperNav = styled.div `
     .slick-next{
         margin-right: 3px;
     }
+   
     @media screen and (max-width:768px){
         .slick-list {
             width: 601px;

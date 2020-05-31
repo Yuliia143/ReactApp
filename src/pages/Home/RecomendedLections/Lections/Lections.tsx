@@ -1,17 +1,18 @@
-import React from "react";
-import classes from './Lections.module.css';
-import CardItem from "./CardItem";
+import React, { useEffect, useState } from "react";
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import { connect, ConnectedProps } from "react-redux";
+
+import CardItem from "./CardItem";
 import { getLectures } from "../../../../store/actions/getLectures";
 import { RootState } from "../../../../store";
+import Lecture from "../../../../models/lecture";
+
+const classes = require('./Lections.module.css');
 
 const mapStateToProps = (state: RootState) => ({
-  lecturesList: state.lectures.lectures
+  lecturesList: state.lectures.lectures,
+  lecturesLoading: state.lectures.loading
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -21,21 +22,36 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Lections = ({ lecturesList }: PropsFromRedux) => {
+interface Props {
+  categoryId?: string
+}
 
-  const renderLectures = (arr: any) => {
-    if(arr!== undefined){
-      return arr.map((item: any, index: any) => {
-        return (
-          <CardItem item={item} key={index} />
-        )
-      })
+const Lections = ({ lecturesList, lecturesLoading, categoryId = '' }: PropsFromRedux & Props) => {
+
+  const renderLectures = (arr: Lecture[]) => {
+    if (arr.length === 0) {
+      return <h3 className={classes.titleNoLections}>No lectures</h3>
     }
+    if (arr && !lecturesLoading) {
+      return arr.map((item: any) =>
+        <CardItem item={item} key={item.id} />
+      )
+    } return null;
   }
 
-  const lectionCard = renderLectures(lecturesList);
+  const [filteredLections, setFilterLections] = useState<Lecture[]>(lecturesList || []);
 
-  const settings_1 = {
+  useEffect(() => {
+    if (categoryId) {
+      setFilterLections(lecturesList.filter(item => item.categoryId === categoryId));
+    } else {
+      setFilterLections(lecturesList);
+    }
+  }, [categoryId]);
+
+  const lectionCard = renderLectures(filteredLections);
+
+  const settings1 = {
     dots: false,
     infinite: false,
     speed: 900,
@@ -43,7 +59,7 @@ const Lections = ({ lecturesList }: PropsFromRedux) => {
     slidesToScroll: 3
   };
 
-  const settings_2 = {
+  const settings2 = {
     dots: false,
     infinite: false,
     speed: 900,
@@ -54,10 +70,10 @@ const Lections = ({ lecturesList }: PropsFromRedux) => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.cardsFlex}>
-        <Slider {...settings_1} className={classes.slider_1}>
+        <Slider {...settings1} className={classes.slider_1}>
           {lectionCard}
         </Slider>
-        <Slider {...settings_2} className={classes.slider_2}>
+        <Slider {...settings2} className={classes.slider_2}>
           {lectionCard}
         </Slider>
       </div>

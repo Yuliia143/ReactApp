@@ -7,9 +7,8 @@ import http from '../../../../api/http';
 
 const ModalFooter = ({ id, onClose, userData }: any) => {
 
-  const favoriteLection = async (id: any) => {
-    const responce = await http.put(`/api/lectures/${id}/fav_lectures`, {})
-    console.log(responce.data);
+  const favoriteLection = async (_id: string) => {
+    await http.put(`/api/lectures/${_id}/fav_lectures`, {})
     onClose();
   }
 
