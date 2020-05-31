@@ -5,6 +5,8 @@ import {Dropdown, Icon} from 'semantic-ui-react';
 import {connect, ConnectedProps} from "react-redux";
 import {signOut} from "../../store/actions/auth";
 import {RootState} from "../../store";
+import styles from "./Header.module.css"
+
 
 const mapStateToProps = (state: RootState) => ({
     user: state.auth.user
@@ -19,20 +21,20 @@ const mapDispatchToProps = (dispatch: Function) => {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
+const HeaderPrimaryMenu = ({user, onSignOut}: PropsFromRedux) => {
     const [isActiveDropdownMenu, setIsActiveDropdownMenu] = useState(false);
 
     const handleDropdownMenu = (status = false) => {
         setIsActiveDropdownMenu(status);
     };
     return (
-        <Dropdown item icon={<Icon name="user" size="large"/>}
+        <Dropdown item icon={<Icon name="user" size="big"/>}
                   onMouseEnter={() => handleDropdownMenu(true)}
                   onMouseLeave={() => handleDropdownMenu()}
                   onClick={() => handleDropdownMenu()}
                   open={isActiveDropdownMenu}
         >
-            <Dropdown.Menu direction='left' style={{marginTop: 0, width: '200px', maxHeight: '200px'}}>
+            <Dropdown.Menu direction='left' className={styles.primaryDropDown}>
                 <Dropdown.Item as={Link}
                                name='profile'
                                to="/edit-page">My profile</Dropdown.Item>
@@ -40,11 +42,11 @@ const HeaderPrimaryMenu = ({user, onSignOut}:PropsFromRedux) => {
                     <Dropdown.Item as={Link}
                                    name='favorite'
                                    to="/favorite-lections">Favorites</Dropdown.Item>
-                ):null}
+                ) : null}
                 {user && user.role === 'admin' ? (
                     <Dropdown.Item as={Link}
                                    name='admin'
-                                   to="/admin">Admin page</Dropdown.Item>
+                                   to="/admin/users">Admin page</Dropdown.Item>
                 ) : null}
                 <Dropdown.Item as={Link}
                                name='webinar'

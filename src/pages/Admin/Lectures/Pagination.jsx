@@ -5,7 +5,7 @@ const Pagination = ({ lecturesPerPage, totalLectures, paginate }) => {
     const [activeItem, setActiveItem] = useState(1);
 
     const handleItemClick = (number) => setActiveItem(number);
-    
+
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalLectures / lecturesPerPage); i++) {
@@ -15,24 +15,24 @@ const Pagination = ({ lecturesPerPage, totalLectures, paginate }) => {
     return (
         <Table.Footer>
             <Table.Row>
-                <Table.HeaderCell colSpan='4'>
-                    <Menu floated='right' pagination>
-                        {pageNumbers.map(number => (
+                <Table.HeaderCell colSpan="4">
+                    <Menu floated="right" pagination>
+                        {pageNumbers.map((number) => (
                             <Menu.Item
-                                key = {number}
+                                key={number}
                                 name={`${number}`}
                                 active={activeItem === number}
                                 onClick={() => {
-                                    handleItemClick(number)
-                                    paginate(number)
-                                }}>
-                            </Menu.Item>
+                                    handleItemClick(number);
+                                    paginate(number);
+                                }}
+                            />
                         ))}
                     </Menu>
                 </Table.HeaderCell>
             </Table.Row>
         </Table.Footer>
-    )
-}
+    );
+};
 
-export default Pagination
+export default Pagination;

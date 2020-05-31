@@ -1,9 +1,11 @@
-import React, {useEffect, useState, Fragment} from 'react';
-import {RootState} from "../../../store";
-import {connect, ConnectedProps} from "react-redux";
-import {getUsers} from "../../../store/actions/getUsers";
-import UserDetails from "./UserDetails";
-import UsersList from "./UsersList";
+import React, { useEffect } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { Switch, useRouteMatch } from 'react-router-dom';
+import { RootState } from '../../../store';
+import { getUsers } from '../../../store/actions/getUsers';
+import UserDetails from './UserDetails';
+import UsersList from './UsersList';
+import PrivateRoute from '../../../PrivateRoute';
 
 const mapStateToProps = (state: RootState) => ({
     usersList: state.users.users,
@@ -15,29 +17,33 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Users = ({getUsers, usersList, usersLoading}: PropsFromRedux) => {
-    const [openDetails, setOpenDetails] = useState(false);
-    const [editedUser, setEditedUser] = useState(null);
-
-    const handleCloseDetails = () => setOpenDetails(false);
-
+const Users = ({ getUsers, usersList, usersLoading }: PropsFromRedux) => {
+    const { path } = useRouteMatch();
     useEffect(() => {
         getUsers();
     }, [getUsers]);
     return (
-        <Fragment>
-            {usersLoading && <h1 className="loading">Loading...</h1>}
-            {!openDetails && (!usersLoading &&  usersList) && <UsersList
-                usersList={usersList}
-                handleOpenDetails={setOpenDetails}
-                handleSetUser={setEditedUser}
-            />}
-            {openDetails && <UserDetails
-                editedUser={editedUser}
-                closeDetails={handleCloseDetails}/>}
-        </Fragment>
-    )
+        <>
+            <Switch>
+                <PrivateRoute exact path={path} isAdmin>
+                    {usersLoading && <h1 className="loading">Loading...</h1>}
+                    {!usersLoading && usersList && (
+                        <UsersList usersList={usersList} />
+                    )}
+                </PrivateRoute>
+                <PrivateRoute
+                    path={`${path}/new`}
+                    component={UserDetails}
+                    isAdmin
+                />
+                <PrivateRoute
+                    path={`${path}/:id`}
+                    component={UserDetails}
+                    isAdmin
+                />
+            </Switch>
+        </>
+    );
 };
 
 export default connector(Users);
-

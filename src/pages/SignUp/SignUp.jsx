@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
-import { Checkbox, Button } from "semantic-ui-react";
-import './SignUp.css'
-import { connect } from "react-redux";
-import { signUp } from "../../store/actions/auth";
+import { Checkbox, Button } from 'semantic-ui-react';
+import './SignUp.css';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
+import { signUp } from '../../store/actions/auth';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -12,20 +12,17 @@ const validationSchema = Yup.object().shape({
         .max(40, 'Too Long!')
         .required('Full Name is required'),
 
-    email: Yup.string()
-        .email('Email is invalid')
-        .required('Email is required'),
+    email: Yup.string().email('Email is invalid').required('Email is required'),
 
     password: Yup.string()
         .min(6, 'Password must be at least 6 characters')
-        .required('Password is required'),
+        .required('Password is required')
 });
 
-
 const initialValues = {
-    email: "",
-    name: "",
-    password: ""
+    email: '',
+    name: '',
+    password: ''
 };
 
 class SignUp extends Component {
@@ -33,10 +30,10 @@ class SignUp extends Component {
         const { onSignUp, history } = this.props;
         const result = await onSignUp(credential);
         if (!result) {
-            history.push("/signin");
+            history.push('/signin');
         }
         if (result && result.err) {
-            formikActions.setErrors(result.err)
+            formikActions.setErrors(result.err);
         }
     };
 
@@ -48,49 +45,105 @@ class SignUp extends Component {
                 </div>
                 <hr />
                 <div>
-                    <Formik initialValues={initialValues} onSubmit={this.handleSignUp} validationSchema={validationSchema} >
-                        {({ values, handleSubmit, handleChange, isValid, errors, touched }) =>
+                    <Formik
+                        initialValues={initialValues}
+                        onSubmit={this.handleSignUp}
+                        validationSchema={validationSchema}
+                    >
+                        {({
+                            values,
+                            handleSubmit,
+                            handleChange,
+                            isValid,
+                            errors,
+                            touched
+                        }) => (
                             <Form className="fieldsUp">
-                                <Field type="text" name="name" placeholder="Full Name"
+                                <Field
+                                    type="text"
+                                    name="name"
+                                    placeholder="Full Name"
                                     value={values.name}
                                     onChange={handleChange}
-                                    className={'form-control' + (errors.name && touched.name ? ' is-invalid' : '')} />
-                                <ErrorMessage name="name" component="div" className="invalid-feedback" />
+                                    className={`form-control${
+                                        errors.name && touched.name
+                                            ? ' is-invalid'
+                                            : ''
+                                    }`}
+                                />
+                                <ErrorMessage
+                                    name="name"
+                                    component="div"
+                                    className="invalid-feedback"
+                                />
 
-                                <Field type="email" name="email" placeholder="Email"
+                                <Field
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
                                     value={values.email}
                                     onChange={handleChange}
-                                    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-                                <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                                    className={`form-control${
+                                        errors.email && touched.email
+                                            ? ' is-invalid'
+                                            : ''
+                                    }`}
+                                />
+                                <ErrorMessage
+                                    name="email"
+                                    component="div"
+                                    className="invalid-feedback"
+                                />
 
-                                <Field type="password" name="password" placeholder="Password"
+                                <Field
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
                                     value={values.password}
                                     onChange={handleChange}
-                                    className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
-                                <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                                    className={`form-control${
+                                        errors.password && touched.password
+                                            ? ' is-invalid'
+                                            : ''
+                                    }`}
+                                />
+                                <ErrorMessage
+                                    name="password"
+                                    component="div"
+                                    className="invalid-feedback"
+                                />
 
                                 <div className="emailRec">
                                     <Checkbox />
                                     <p className="emailRecText">
-                                        Yes! I want to get the most out of StudyHard by receiving emails with
+                                        Yes! I want to get the most out of
+                                        StudyHard by receiving emails with
                                         exclusive learning tips!
                                     </p>
                                 </div>
-                                <Button type="submit" className="submitBtn"
-                                    onClick={handleSubmit} disabled={!isValid}>Submit</Button>
+                                <Button
+                                    type="submit"
+                                    className="submitBtn"
+                                    onClick={handleSubmit}
+                                    disabled={!isValid}
+                                >
+                                    Submit
+                                </Button>
                             </Form>
-                        }
+                        )}
                     </Formik>
                     <p className="termsPrivacy">
-                        By signing up, you agree to our <a href={"#"}>Terms of Use</a> and
-                        <a href={"#"}> Privacy Policy</a>.
+                        By signing up, you agree to our{' '}
+                        <a href="#">Terms of Use</a> and
+                        <a href="#"> Privacy Policy</a>.
                     </p>
                     <hr />
-                    <p className="logExAc">Already have an account? <a href={"#"}>Log In</a></p>
+                    <p className="logExAc">
+                        Already have an account? <a href="#">Log In</a>
+                    </p>
                 </div>
             </div>
-
-        )
+        );
     }
 }
 
@@ -102,7 +155,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         onSignUp: (credential) => dispatch(signUp(credential))
-    }
+    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
-

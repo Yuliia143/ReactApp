@@ -1,7 +1,12 @@
 import React from 'react';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
+import User from "../../../models/user";
 
-const DeleteUserModal = ({user, config}:any) => {
+interface DeleteModalProps {
+    user: User;
+    config: any
+}
+const DeleteUserModal = ({user, config}:DeleteModalProps) => {
     return (
         <Modal open={config.modalOpen}
                onClose={config.handleClose}>
