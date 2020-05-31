@@ -1,15 +1,14 @@
-import axios from "axios";
-import { BASE_URL } from "../config";
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 interface HttpResponse {
   headers: any;
   data: any;
 }
 // function setNewToken(headers: any) {
-//     if(headers['access-token']){
-//         localStorage.setItem("Access-Token", headers['access-token']);
-//     }
-
+//   if (headers['access-token']) {
+//     localStorage.setItem('Access-Token', headers['access-token']);
+//   }
 // }
 
 const get = async (
@@ -17,10 +16,10 @@ const get = async (
   data: any,
   options: any = {}
 ): Promise<HttpResponse> => {
-  const token = localStorage.getItem("Access-Token");
+  const token = localStorage.getItem('Access-Token');
   const response = await axios.get(BASE_URL + url, {
     ...options,
-    headers: { "Access-Token": token },
+    headers: { 'Access-Token': token },
     params: data,
   });
   //   setNewToken(response.headers);
@@ -32,10 +31,10 @@ const post = async (
   data: any,
   options: any = {}
 ): Promise<HttpResponse> => {
-  const token = localStorage.getItem("Access-Token");
+  const token = localStorage.getItem('Access-Token');
   const response = await axios.post(BASE_URL + url, data, {
     ...options,
-    headers: { "Access-Token": token },
+    headers: { 'Access-Token': token },
   });
   //   setNewToken(response.headers);
   return response;
@@ -46,20 +45,20 @@ const put = async (
   data: any,
   options: any = {}
 ): Promise<HttpResponse> => {
-  const token = localStorage.getItem("Access-Token");
+  const token = localStorage.getItem('Access-Token');
   const response = await axios.put(BASE_URL + url, data, {
     ...options,
-    headers: { "Access-Token": token },
+    headers: { 'Access-Token': token },
   });
   //   setNewToken(response.headers);
   return response;
 };
 
 const remove = async (url: string, data?: object): Promise<HttpResponse> => {
-  const token = localStorage.getItem("Access-Token");
+  const token = localStorage.getItem('Access-Token');
   const response = await axios.delete(BASE_URL + url, {
     headers: {
-      "Access-Token": token,
+      'Access-Token': token,
     },
     data,
   });

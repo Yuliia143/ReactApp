@@ -5,11 +5,11 @@ import {
   SIGN_UP_SUCCESS,
   SIGN_UP_FAIL,
   SIGN_OUT_SUCCESS,
-} from "../types/auth";
+} from '../types/auth';
 
-import { signUp as registration, signIn as login } from "../../api/auth";
+import { signUp as registration, signIn as login } from '../../api/auth';
 
-import { AppThunk } from "../index";
+import { AppThunk } from '../index';
 
 export const signUp = (
   credential: any
@@ -31,10 +31,10 @@ export const signIn = (
   try {
     await login(credential).then((response) => {
       window.localStorage.setItem(
-        "Access-Token",
-        response.headers["access-token"]
+        'Access-Token',
+        response.headers['access-token']
       );
-      window.localStorage.setItem("User", JSON.stringify(response.data));
+      window.localStorage.setItem('User', JSON.stringify(response.data));
       dispatch({ type: SIGN_IN_SUCCESS, payload: response.data });
     });
   } catch (err) {
@@ -45,7 +45,7 @@ export const signIn = (
 
 export const signOut = (): AppThunk => (dispatch) => {
   dispatch({ type: AUTH_LOADING });
-  window.localStorage.removeItem("Access-Token");
-  window.localStorage.removeItem("User");
+  window.localStorage.removeItem('Access-Token');
+  window.localStorage.removeItem('User');
   dispatch({ type: SIGN_OUT_SUCCESS });
 };

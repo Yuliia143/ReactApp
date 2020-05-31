@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Slider from "react-slick";
-import { connect, ConnectedProps } from "react-redux";
+import Slider from 'react-slick';
+import { connect, ConnectedProps } from 'react-redux';
 
-import CardItem from "./CardItem";
-import { getLectures } from "../../../../store/actions/getLectures";
-import { RootState } from "../../../../store";
-import Lecture from "../../../../models/lecture";
+import CardItem from './CardItem';
+import { getLectures } from '../../../../store/actions/getLectures';
+import { RootState } from '../../../../store';
+import Lecture from '../../../../models/lecture';
 
-const classes = require("./Lections.module.css");
+const classes = require('./Lections.module.css');
 
 const mapStateToProps = (state: RootState) => ({
   lecturesList: state.lectures.lectures,
@@ -29,7 +29,7 @@ interface Props {
 const Lections = ({
   lecturesList,
   lecturesLoading,
-  categoryId = "",
+  categoryId = '',
 }: PropsFromRedux & Props) => {
   const renderLectures = (arr: Lecture[]) => {
     if (arr.length === 0) {
@@ -44,7 +44,6 @@ const Lections = ({
   const [filteredLections, setFilterLections] = useState<Lecture[]>(
     lecturesList || []
   );
-
   useEffect(() => {
     if (categoryId) {
       setFilterLections(
