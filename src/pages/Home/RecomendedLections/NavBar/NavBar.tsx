@@ -1,52 +1,50 @@
-import React from 'react';
-import classes from './NavBar.module.css';
+import React, { useState } from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../../store";
+import { getCategories } from "../../../../store/actions/getCategories";
+import Category from "../../../../models/category";
+import Lections from "../Lections/Lections";
+import { LectionWrapperNav } from "../../style";
 
-const NavBar = () => {
-    return (
-        <nav className={classes.nav}>
-            <div className={classes.item}>
-                <button>
-                    <a>Business</a>{' '}
-                </button>
-            </div>
+const classes = require('./NavBar.module.css');
 
-            <div className={classes.item}>
-                <button>
-                    <a>Design</a>
-                </button>
-            </div>
+const mapStateToProps = (state: RootState) => ({
+  categoriesList: state.categories.categories,
+  categoriesLoading: state.categories.loading
+});
 
-            <div className={classes.item}>
-                <button>
-                    <a>Photography</a>
-                </button>
-            </div>
+const mapDispatchToProps = (dispatch: Function) => ({
+  getCategories: () => dispatch(getCategories())
+});
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-            <div className={classes.item}>
-                <button>
-                    <a>Development</a>
-                </button>
-            </div>
+const NavBar = ({ categoriesList, categoriesLoading }: PropsFromRedux) => {
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-            <div className={classes.item}>
-                <button>
-                    <a>Marketing</a>
-                </button>
-            </div>
+  const renderCategoryList = (categories: Category[] = []) => {
+    if (!categoriesLoading && categoriesList) {
+      return categories.map((item: any) => {
+        return (
+          <div className={classes.item} key={item.id} onClick={() => setSelectedCategory(item.id) } role="button" tabIndex={0} onKeyPress={()=>{console.log( 'for users with physical disabilities who cannot use a mouse')}}>
+            <button type="button"><p>{item.title}</p></button>
+          </div>
+        )
+      })
+    }return null;
+  }
 
-            <div className={classes.item}>
-                <button>
-                    <a>It & software</a>
-                </button>
-            </div>
+  const categories = renderCategoryList(categoriesList);
+  return (
+    <div>
+      <nav className={classes.nav}>
+        {categories}
+      </nav>
+      <LectionWrapperNav>
+        <Lections categoryId={selectedCategory} />
+      </LectionWrapperNav>
+    </div>
+  )
+}
 
-            <div className={classes.item}>
-                <button>
-                    <a>Personal Development</a>
-                </button>
-            </div>
-        </nav>
-    );
-};
-
-export default NavBar;
+export default connector(NavBar);

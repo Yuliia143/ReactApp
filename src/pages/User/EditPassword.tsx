@@ -11,7 +11,7 @@ interface Props {
     user: User;
 }
 
-const EditPassword: React.FC<Props> = ({ user }) => {
+const EditPassword: React.FC<Props> = ({ user }  : Props) => {
     const [passwords, setPasswords] = useState({
         oldPassword: '',
         newPassword: '',
@@ -58,21 +58,24 @@ const EditPassword: React.FC<Props> = ({ user }) => {
                         header="Your new password does not match confirmation."
                     />
                 );
-            }
-            if (passwords.oldPassword == passwords.newPassword) {
+            } if (passwords.oldPassword === passwords.newPassword) {
                 return (
                     <Message
                         negative
                         header="New password can not be the same as old password"
                     />
                 );
-            }
-
-            return <Message negative header="Incorrect current password" />;
+            } 
+                return (
+                    <Message negative header="Incorrect current password" />
+                );
+            
         }
         if (success) {
             return <Message success header="Your password has been changed." />;
         }
+
+        return null;
     };
 
     const saveFields = () => {
@@ -87,10 +90,10 @@ const EditPassword: React.FC<Props> = ({ user }) => {
         };
 
         http.put('/api/edit/editPassword', data)
-            .then((response) => {
+            .then(() => {
                 setSuccess(true);
             })
-            .catch((e) => setError(true));
+            .catch(() => setError(true));
     };
 
     return (
@@ -102,14 +105,17 @@ const EditPassword: React.FC<Props> = ({ user }) => {
                 </div>
                 <div className="inputs">
                     <Form onSubmit={matchPasswords}>
-                        <Form.Field required>
-                            <label>Password:</label>
-                            <input
-                                onChange={textInputOnChange}
-                                type="password"
-                                name="oldPassword"
-                                placeholder="Enter current password"
-                            />
+                        <Form.Field>
+                            <label htmlFor="password">
+                                Passwords:
+                                <input
+                                    id="password"
+                                    onChange={textInputOnChange}
+                                    type="password"
+                                    name="oldPassword"
+                                    placeholder="Enter current password"
+                                />
+                            </label>
                         </Form.Field>
                         <Form.Field required>
                             <input

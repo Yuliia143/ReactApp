@@ -68,12 +68,14 @@ const AvatarCropper = (props) => {
         );
     };
 
+    const  { avatar } = props
+
     return (
         <Modal className="crop-modal" open>
             <Modal.Content className="crop-modal">
                 <div className="cropper-container">
                     <Cropper
-                        image={props.avatar}
+                        image={avatar}
                         crop={crop}
                         zoom={zoom}
                         aspect={1 / 1}

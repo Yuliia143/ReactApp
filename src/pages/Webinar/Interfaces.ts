@@ -4,6 +4,9 @@ export interface PeerConnection {
 
 export interface User {
     id: string;
+    userName: string;
+    imageUrl: string;
+    socketId: string;
 }
 
 export interface Data {
@@ -23,4 +26,20 @@ export interface Navigator {
         success: (stream: object) => void,
         error?: (error: object) => void
     ): void;
+}
+
+export interface UserFromStorage {
+    _id: string;
+    name: string;
+    email: string;
+    surName: string;
+    role: string;
+}
+
+export interface CommentI{
+    id: string;
+    commentText: string;
+    author: string;
+    authorId: string;
+    userImage: string;
 }

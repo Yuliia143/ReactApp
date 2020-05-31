@@ -12,7 +12,7 @@ interface Props {
     updateProfile: (data: object) => void;
 }
 
-const EditEmail: React.FC<Props> = ({ user, updateProfile }) => {
+const EditEmail: React.FC<Props> = ({ user, updateProfile } : Props) => {
     const [email, setEmail] = useState(user.email);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -24,10 +24,10 @@ const EditEmail: React.FC<Props> = ({ user, updateProfile }) => {
         setSuccess('');
     };
 
-    const isEmailValid = (email: string) => {
+    const isEmailValid = (userEmail: string) => {
         const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}/g;
 
-        if (!emailPattern.test(email)) {
+        if (!emailPattern.test(userEmail)) {
             setError('Your email is invalid');
             setLoading(false);
             return false;
@@ -42,6 +42,7 @@ const EditEmail: React.FC<Props> = ({ user, updateProfile }) => {
         if (success) {
             return <Message success header="Your email has been changed." />;
         }
+        return null;
     };
 
     const saveFields = () => {
@@ -67,14 +68,10 @@ const EditEmail: React.FC<Props> = ({ user, updateProfile }) => {
                     email
                 });
 
-                if (response.data.message == 'Email is already used') {
+                if (response.data.message === 'Email is already used') {
                     setError('Email is already used');
                 }
-                console.log(response.data);
             })
-            .catch((e) => {
-                console.log(e);
-            });
     };
 
     return (
@@ -85,13 +82,16 @@ const EditEmail: React.FC<Props> = ({ user, updateProfile }) => {
                 <div className="inputs">
                     <Form loading={loading}>
                         <Form.Field>
-                            <label>Email</label>
-                            <input
-                                onChange={textInputOnChange}
-                                value={email}
-                                name="email"
-                                placeholder="Email"
-                            />
+                            <label htmlFor="email">
+                                Email
+                                <input
+                                    id="email"
+                                    onChange={textInputOnChange}
+                                    value={email}
+                                    name="email"
+                                    placeholder="Email"
+                                />
+                            </label>
                         </Form.Field>
                         <div className="save-btn">
                             <Button

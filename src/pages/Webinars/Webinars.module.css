@@ -14,6 +14,12 @@
 .commentsGroup{
     width: 37%;
     top: 0;
+    position: relative;
+}
+
+#commentCard{
+    overflow: auto;
+    height: calc(100% - 190px);
 }
 
 .commentTitle{
@@ -21,5 +27,10 @@
 }
 
 .commentsForm{
-    transform: translateY(340%);
+    position: absolute !important;
+    bottom: 0;
+}
+
+#commentArea{
+    resize: none;
 }

@@ -1,50 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { Comment, Header } from 'semantic-ui-react';
+import socketIoClient from 'socket.io-client';
+import { BASE_URL } from '../../config';
 import CommentForm from './CommentForm';
 import { RenderComments } from './RenderComments';
 import './Lecture.css';
-import { socket } from '../../App';
 import { Comment as CommentI } from './Lecture';
 
+const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
+
 export default function Comments(props: {
-    messages: CommentI[];
-    lectureId: string;
+  messages: CommentI[];
+  lectureId: string;
 }) {
-    const [messages, setMessages] = useState<CommentI[]>(props.messages);
+  const [messages, setMessages] = useState<CommentI[]>(props.messages);
 
-    const leave_room = () => {
-        socket.emit('Leave room', props.lectureId);
+  const leaveRoom = () => {
+    socket.emit('Leave room', props.lectureId);
+  };
+
+  const addNewComment = (comment: CommentI) => {
+    setMessages((prevMessages) => {
+      if (!prevMessages.find((item) => item._id === comment._id)) {
+        return [...prevMessages, comment];
+      }
+      return prevMessages;
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', leaveRoom);
+    socket.emit('join_room', props.lectureId);
+    socket.on('send_message', addNewComment);
+    return () => {
+      window.removeEventListener('beforeunload', leaveRoom);
     };
+  }, []);
 
-    const addNewComment = (comment: CommentI) => {
-        setMessages((prevMessages) => {
-            if (!prevMessages.find((item) => item._id === comment._id)) {
-                return [...prevMessages, comment];
-            }
-            return prevMessages;
-        });
-    };
+  const { lectureId } = props;
 
-    useEffect(() => {
-        window.addEventListener('beforeunload', leave_room);
-        socket.emit('join_room', props.lectureId);
-        socket.on('send_message', addNewComment);
-        return () => {
-            window.removeEventListener('beforeunload', leave_room);
-        };
-    }, []);
-
-    const { lectureId } = props;
-
-    return (
-        <Comment.Group id="commentGroup">
-            <Header as="h3" dividing>
-                Comments
-            </Header>
-            <div className="commentCard">
-                <RenderComments comments={messages} />
-            </div>
-            <CommentForm lectureId={lectureId} onPostComment={addNewComment} />
-        </Comment.Group>
-    );
+  return (
+    <Comment.Group id="commentGroup">
+      <Header as="h3" dividing>
+        Comments
+      </Header>
+      <div className="commentCard">
+        <RenderComments comments={messages} />
+      </div>
+      <CommentForm lectureId={lectureId} onPostComment={addNewComment} />
+    </Comment.Group>
+  );
 }

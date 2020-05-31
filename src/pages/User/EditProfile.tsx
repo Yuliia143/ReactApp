@@ -12,7 +12,7 @@ interface Props {
     updateProfile: (data: object) => void;
 }
 
-const EditProfile: React.FC<Props> = ({ user, updateProfile }) => {
+const EditProfile: React.FC<Props> = ({ user, updateProfile }:Props) => {
     const [userFullName, setUserFullName] = useState({
         name: user.name,
         surName: user.surName
@@ -43,6 +43,8 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile }) => {
         if (error) {
             return <Message negative header="All fields are required." />;
         }
+
+        return null;
     };
 
     const saveFields = () => {
@@ -59,16 +61,14 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile }) => {
         };
 
         http.put('/api/edit/editName', data)
-            .then((response) => {
+            .then(() => {
                 setLoading(false);
-                // debugger
                 updateProfile({
                     name: userFullName.name,
                     surName: userFullName.surName
                 });
-                console.log(response.data);
             })
-            .catch((e) => {
+            .catch(() => {
                 setError(true);
                 setLoading(false);
             });
@@ -84,22 +84,28 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile }) => {
                 <div className="inputs">
                     <Form loading={loading} onSubmit={isFieldsEmpty}>
                         <Form.Field>
-                            <label>First Name</label>
-                            <input
-                                onChange={textInputOnChange}
-                                value={userFullName.name}
-                                name="name"
-                                placeholder="First Name"
-                            />
+                            <label htmlFor="firstName">
+                                First Name
+                                <input
+                                    id="firstName"
+                                    onChange={textInputOnChange}
+                                    value={userFullName.name}
+                                    name="name"
+                                    placeholder="First Name"
+                                />
+                                </label>
                         </Form.Field>
                         <Form.Field>
-                            <label>Last Name</label>
-                            <input
-                                onChange={textInputOnChange}
-                                value={userFullName.surName}
-                                name="surName"
-                                placeholder="Last Name"
-                            />
+                            <label htmlFor="lastName">
+                                Last Name
+                                <input
+                                    id="lastName"
+                                    onChange={textInputOnChange}
+                                    value={userFullName.surName}
+                                    name="surName"
+                                    placeholder="Last Name"
+                                />
+                            </label>
                         </Form.Field>
                         <div className="save-btn">
                             <Button onClick={saveFields} color="red">
@@ -113,5 +119,6 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile }) => {
         </div>
     );
 };
+
 
 export default EditProfile;
