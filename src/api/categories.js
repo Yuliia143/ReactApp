@@ -11,5 +11,3 @@ export const readCategories = () => {
       throw new Error(error);
     });
 };
-
-// замінити на http service

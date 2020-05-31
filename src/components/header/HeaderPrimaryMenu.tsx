@@ -49,7 +49,7 @@ const HeaderPrimaryMenu = ({ user, onSignOut }: PropsFromRedux) => {
             Admin page
           </Dropdown.Item>
         ) : null}
-        <Dropdown.Item as={Link} name="webinar" to="/webinar/new">
+        <Dropdown.Item as={Link} name="webinar" to="/webinars/new">
           Webinar
         </Dropdown.Item>
         <Dropdown.Item as={Link} name="webinars" to="/webinars/list">
