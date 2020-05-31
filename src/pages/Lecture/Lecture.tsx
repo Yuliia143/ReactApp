@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
+import { RouteComponentProps } from 'react-router-dom';
 import { getLecture } from '../../api/comments-api';
 import './Lecture.css';
 import Comments from './Comments';
-import { RouteComponentProps } from 'react-router-dom';
-import { string } from 'yup';
 
 export interface Lection {
   id: string;
@@ -52,7 +51,7 @@ export default function Lecture(props: RouteComponentProps<{ id: string }>) {
         <ReactPlayer
           className="video-item"
           url={lecture.videoUrl}
-          controls={true}
+          controls
           width="100%"
           height="450px"
           config={{

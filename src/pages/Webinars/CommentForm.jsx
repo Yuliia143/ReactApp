@@ -1,21 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {Button, Form, Input} from "semantic-ui-react";
-import styles from "./Webinars.module.css"
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Input } from 'semantic-ui-react';
+import styles from './Webinars.module.css';
 
-export default function(){
-
+export default function () {
     const [comment, setComment] = useState('');
 
-    const postComment = () => {
+    const postComment = () => {};
 
-    }
-
-    return(
+    return (
         <Form className={styles.commentsForm}>
             <Form.TextArea
                 value={comment}
                 placeholder="Enter your comment"
-                onChange={event => {
+                onChange={(event) => {
                     setComment(event.target.value);
                 }}
             />
@@ -28,5 +25,5 @@ export default function(){
                 positive
             />
         </Form>
-    )
+    );
 }

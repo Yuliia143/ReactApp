@@ -6,7 +6,6 @@ interface HttpResponse {
     data: any;
 }
 // function setNewToken(headers: any) {
-//     console.log(headers);
 //     if(headers['access-token']){
 //         localStorage.setItem("Access-Token", headers['access-token']);
 //     }

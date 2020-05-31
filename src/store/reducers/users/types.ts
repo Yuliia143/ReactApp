@@ -6,49 +6,47 @@ import {
     USERS_LOADING,
     USERS_STOP,
     USERS_SUCCESS
-} from "../../types/users";
-import User from "../../../models/user";
+} from '../../types/users';
+import User from '../../../models/user';
 
 export interface UsersState {
-    loading: boolean,
-    users: User[]
+    loading: boolean;
+    users: User[];
 }
 
 interface UsersLoadingAction {
-    type: typeof USERS_LOADING
+    type: typeof USERS_LOADING;
 }
 
 interface UsersSuccessAction {
-    type: typeof USERS_SUCCESS
-    payload: User[]
+    type: typeof USERS_SUCCESS;
+    payload: User[];
 }
 
 interface UsersStopAction {
-    type: typeof USERS_STOP
+    type: typeof USERS_STOP;
 }
 
 interface UsersFailAction {
-    type: typeof USERS_FAIL
+    type: typeof USERS_FAIL;
 }
 
-interface UsersUpdateAction{
-    type: typeof USER_UPDATE
-    payload: User
+interface UsersUpdateAction {
+    type: typeof USER_UPDATE;
+    payload: User;
 }
 
-interface UsersAddAction{
-    type: typeof USER_ADD
-    payload: User
+interface UsersAddAction {
+    type: typeof USER_ADD;
+    payload: User;
 }
-interface UsersDeleteAction{
-    type: typeof USER_DELETE
-    payload: string
+interface UsersDeleteAction {
+    type: typeof USER_DELETE;
+    payload: string;
 }
-
-
 
 export type UsersActions =
-    UsersLoadingAction
+    | UsersLoadingAction
     | UsersSuccessAction
     | UsersStopAction
     | UsersFailAction

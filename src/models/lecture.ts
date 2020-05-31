@@ -4,8 +4,6 @@ interface Lecture {
   title?: string;
   author?: string;
   defaultRating?: string;
-  oldPrice?: string;
-  newPrice?: string;
   videoUrl?: string;
   description?: string;
   file?: null | File;

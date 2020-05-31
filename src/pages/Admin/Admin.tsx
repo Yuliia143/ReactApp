@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Accordion, Menu } from 'semantic-ui-react';
-import Users from './Users/Users';
-import GeneralLectures from './Lectures/GeneralLectures';
-import CreatePage from '../Lectures/Create/CreatePage';
 import { MenuItemProps } from 'semantic-ui-react/dist/commonjs/collections/Menu/MenuItem';
 import { AccordionTitleProps } from 'semantic-ui-react/dist/commonjs/modules/Accordion/AccordionTitle';
 import { useRouteMatch, Switch, useHistory } from 'react-router-dom';
+import Users from './Users/Users';
+import GeneralLectures from './Lectures/GeneralLectures';
+import CreatePage from '../Lectures/Create/CreatePage';
+
 import PrivateRoute from '../../PrivateRoute';
 import styles from './Admin.module.css';
 
@@ -14,20 +15,20 @@ const Admin = () => {
   const [activeItem, setActiveItem] = useState('users');
 
   const history = useHistory();
-  let { path } = useRouteMatch();
+  const { path } = useRouteMatch();
 
   const handleClick = (_: any, data: AccordionTitleProps) => {
     if (data.name) {
       setActiveItem(data.name || '');
     }
-    history.push(path + '/' + data.name);
+    history.push(`${path}/${data.name}`);
     const newIndex = activeIndex === data.index ? -1 : data.index;
     setActiveIndex(newIndex as number);
   };
 
   const handleItemClick = (_: any, data: MenuItemProps) => {
     setActiveItem(data.name || '');
-    history.push(path + '/' + data.name || '');
+    history.push(`${path}/${data.name}` || '');
   };
 
   return (
@@ -43,7 +44,7 @@ const Admin = () => {
             onClick={handleClick}
             icon={{ display: 'none' }}
             className={styles.adminItem}
-          ></Accordion.Title>
+          />
           <Accordion.Title
             as={Menu.Item}
             active={activeIndex === 1}
@@ -52,7 +53,7 @@ const Admin = () => {
             index={1}
             onClick={handleClick}
             className={styles.adminItem}
-          ></Accordion.Title>
+          />
           <Accordion.Content
             active={activeIndex === 1}
             content={

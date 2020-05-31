@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import socketIoClient from 'socket.io-client';
 import PrivateRoute from './PrivateRoute';
 import HeaderContainer from './components/header/HeaderContainer';
 import Home from './pages/Home/Home';
@@ -17,7 +18,6 @@ import { NoMatch } from './components/NoMatch';
 import FavoriteLections from './pages/Home/FavoriteLections/FavoriteLections';
 import Admin from './pages/Admin/Admin';
 import Webinar from './pages/Webinar/Webinar';
-import socketIoClient from 'socket.io-client';
 import { BASE_URL } from './config';
 import Webinars from './pages/Webinars/Webinars';
 
