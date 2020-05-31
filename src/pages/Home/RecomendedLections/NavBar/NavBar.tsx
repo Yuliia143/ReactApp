@@ -32,11 +32,7 @@ const NavBar = ({ categoriesList, categoriesLoading }: PropsFromRedux) => {
             onClick={() => setSelectedCategory(item.id)}
             role="button"
             tabIndex={0}
-            onKeyPress={() => {
-              console.log(
-                "for users with physical disabilities who cannot use a mouse"
-              );
-            }}
+            onKeyPress={() => false}
           >
             <button type="button">
               <p>{item.title}</p>
