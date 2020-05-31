@@ -1,6 +1,6 @@
 .cardsFlex {
     display: flex !important;
-    padding-left: 23px;
+    padding-left: 50px;
     width: 770px;
 }
 
@@ -62,6 +62,13 @@
 
 .slider_2 {
     display: none !important;
+}
+
+.titleNoLections{
+    margin: 114px 71px !important;
+    font-size: 22px;
+    width: auto;
+    outline: none;
 }
 
 @media screen and (max-width:1440px) {

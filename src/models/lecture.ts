@@ -7,5 +7,7 @@ interface Lecture {
   videoUrl?: string;
   description?: string;
   file?: null | File;
+  categoryId?: string;
+  categoryTitle?: string;
 }
 export default Lecture;

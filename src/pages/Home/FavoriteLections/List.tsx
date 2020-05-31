@@ -1,49 +1,61 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import classes from './FavoriteLections.module.css';
 import { Link } from 'react-router-dom';
 import http from '../../../api/http';
 
+const classes = require('./FavoriteLections.module.css');
+
 interface CardProps {
-    imgUrl: string,
-    title: string,
-    author: string,
-    description: string,
-    '_id': string,
+  imgUrl: string;
+  title: string;
+  author: string;
+  description: string;
+  _id: string;
 }
 
 interface Props {
-    item: CardProps,
-    handleClick: Function
+  item: CardProps;
+  handleClick: Function;
 }
 
 const List = (props: Props) => {
-    const {handleClick} = props;
+  const { item } = props;
+  const { author, description, _id, imgUrl, title } = item;
+  const { handleClick } = props;
 
-    const deleteFavLection = async (id: any) => {
-        handleClick(true);
-        await http.remove(`/api/lectures/${id}/fav_lectures`);
-        handleClick(false);
-    }
+  const deleteFavLection = async (id: any) => {
+    handleClick(true);
+    await http.remove(`/api/lectures/${id}/fav_lectures`);
+    handleClick(false);
+  };
 
-    const { author, description, _id, imgUrl, title } = props.item;
-    return (
-        <div className="ui middle aligned divided list" id={classes.wrapList}>
-            <div className="item">
-                <div className="right floated content" id={classes.forButtons}>
-                    <Link to={`/lecture/${_id}`}>
-                        <Button className="ui button" content="Watch" color='green'></Button>
-                    </Link>
-                    <Button className="ui button" content="Delete" color='red' onClick={() => deleteFavLection(_id)} ></Button>
-                </div>
-                <img className="ui avatar image" id={classes.imgLection} src={imgUrl} />
-                <div className="content">
-                    <div className={classes.headerTitle}>{title}</div>
-                    <div className={classes.author}>{author}</div>
-                    <div>{description}</div>
-                </div>
-            </div>
+  return (
+    <div className="ui middle aligned divided list" id={classes.wrapList}>
+      <div className="item">
+        <div className="right floated content" id={classes.forButtons}>
+          <Link to={`/lecture/${_id}`}>
+            <Button className="ui button" content="Watch" color="green" />
+          </Link>
+          <Button
+            className="ui button"
+            content="Delete"
+            color="red"
+            onClick={() => deleteFavLection(_id)}
+          />
         </div>
-    )
-}
+        <img
+          className="ui avatar image"
+          id={classes.imgLection}
+          src={imgUrl}
+          alt="Avatar"
+        />
+        <div className="content">
+          <div className={classes.headerTitle}>{title}</div>
+          <div className={classes.author}>{author}</div>
+          <div>{description}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 export default List;

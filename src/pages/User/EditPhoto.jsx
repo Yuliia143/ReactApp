@@ -65,6 +65,8 @@ const EditPhoto = (props) => {
         if (success) {
             return <Message success header={success} />;
         }
+
+        return null;
     };
 
     const singleFileUploadHandler = () => {
@@ -88,10 +90,8 @@ const EditPhoto = (props) => {
 
                     const avatar = response.data.updatedUser.imageUrl;
                     props.setAvatar(avatar);
-                    console.log(response.data);
-                    // todo test non-200
                 })
-                .catch((error) => {
+                .catch(() => {
                     setLoading(false);
                     setError('Something went wrong. Please, try again!');
                     setSuccess('');
@@ -119,12 +119,14 @@ const EditPhoto = (props) => {
                                 cropImage={cropImage}
                             />
                         )}
-                        <input
-                            type="file"
-                            id="file"
-                            onChange={singleFileChangedHandler}
-                        />
-                        <label htmlFor="file">Upload image</label>
+                        <label className="label-image" htmlFor="file">
+                            Upload image
+                            <input
+                                type="file"
+                                id="file"
+                                onChange={singleFileChangedHandler}
+                            />
+                        </label>
                         <Button
                             className="save-btn"
                             onClick={singleFileUploadHandler}

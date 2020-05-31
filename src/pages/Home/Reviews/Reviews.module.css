@@ -70,7 +70,7 @@
     color: #29303b;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1020px) {
     .image {
         width: 44px;
         height: 44px;
@@ -88,12 +88,20 @@
         margin: 0 0 15px 0;
         height: 225px;
     }
-    .wrapperBG{
-        height: 819px;
+
+    .wrapperBG {
+        height: 999px;
     }
-    .title{
+
+    .title {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .wrapperBG {
+        height: 1254px;
     }
 }

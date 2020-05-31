@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-
+import { ConnectedProps, connect } from "react-redux";
 import Slider from "react-slick";
-import { connect, ConnectedProps } from "react-redux";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import CardItem from "./CardItem";
-import { getLectures } from "../../../../store/actions/getLectures";
-import { RootState } from "../../../../store";
-import Lecture from "../../../../models/lecture";
+import { RootState } from "../../../store";
+import { getLectures } from "../../../store/actions/getLectures";
 
-const classes = require('./Lections.module.css');
+import Lecture from "../../../models/lecture";
+import CardItem from "../RecomendedLections/Lections/CardItem";
+
+const classes = require('./CategoriesPage.module.css');
 
 const mapStateToProps = (state: RootState) => ({
   lecturesList: state.lectures.lectures,
@@ -26,28 +28,41 @@ interface Props {
   categoryId?: string
 }
 
-const Lections = ({ lecturesList, lecturesLoading, categoryId = '' }: PropsFromRedux & Props) => {
+const CategoriesPage = ({lecturesList, lecturesLoading, categoryId = '' }: PropsFromRedux & Props) => {
 
   const renderLectures = (arr: Lecture[]) => {
     if (arr.length === 0) {
-      return <h3 className={classes.titleNoLections}>No lectures</h3>
+      return <h3 className={classes.noLection}>No lectures</h3>
     }
     if (arr && !lecturesLoading) {
       return arr.map((item: any) =>
         <CardItem item={item} key={item.id} />
       )
-    } return null;
+    }return null;
   }
 
+  const [title, setTitle] = useState('');
   const [filteredLections, setFilterLections] = useState<Lecture[]>(lecturesList || []);
 
+  const renderTitle = (arr: any) => {
+    if (arr) {
+      return arr.map((category: any) => {
+        return {
+          categoryTitle: category.categoryTitle
+        }
+      })
+    }return null;
+  }
+  const selectedTitle = renderTitle(filteredLections);
+  
   useEffect(() => {
     if (categoryId) {
       setFilterLections(lecturesList.filter(item => item.categoryId === categoryId));
+      setTitle(selectedTitle[0].categoryTitle);
     } else {
       setFilterLections(lecturesList);
     }
-  }, [categoryId]);
+  }, [categoryId,title]);
 
   const lectionCard = renderLectures(filteredLections);
 
@@ -55,32 +70,19 @@ const Lections = ({ lecturesList, lecturesLoading, categoryId = '' }: PropsFromR
     dots: false,
     infinite: false,
     speed: 900,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  };
-
-  const settings2 = {
-    dots: false,
-    infinite: false,
-    speed: 900,
-    slidesToShow: 2,
-    slidesToScroll: 2
+    slidesToShow: 4,
+    slidesToScroll: 1
   };
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.cardsFlex}>
-        <Slider {...settings1} className={classes.slider_1}>
-          {lectionCard}
-        </Slider>
-        <Slider {...settings2} className={classes.slider_2}>
+    <div>
+      <h1 className={classes.title}>{title}</h1>
+      <div>
+        <Slider {...settings1}>
           {lectionCard}
         </Slider>
       </div>
     </div>
   )
 }
-
-
-export default connector(Lections);
-
+export default connector(CategoriesPage);

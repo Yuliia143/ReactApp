@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    jest: true,
   },
   parser: '@typescript-eslint/parser',
 
@@ -23,5 +24,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-underscore-dangle': 'off',
+    'prefer-destructuring': ['error', { object: true, array: true }],
   },
 };

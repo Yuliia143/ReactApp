@@ -18,10 +18,10 @@ interface Props {
     updateUser: (data: User) => void;
 }
 
-const UserEditPage: React.FC<Props> = ({ user, updateUser }) => {
+const UserEditPage: React.FC<Props> = ({ user, updateUser } : Props) => {
     const [activeItem, setActiveItem] = useState('profile');
     const [avatar, setAvatar] = useState(
-        'https://react.semantic-ui.com/images/wireframe/square-image.png'
+        user.imageUrl ? user.imageUrl : 'https://react.semantic-ui.com/images/wireframe/square-image.png'
     );
 
     const handleItemClick = (
@@ -30,7 +30,7 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser }) => {
     ) => setActiveItem(data.name || '');
 
     const updateProfile = (data: object) => {
-        updateUser({ ...user, ...data });
+        updateUser({ ...user, ...data});
     };
 
     const { name, surName } = user;
@@ -46,14 +46,16 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser }) => {
                             size="small"
                             circular
                         />
-                        <div className="edit-menu-item">{`${name} ${surName}`}</div>
+                        <div className="edit-menu-item">
+                            {`${name  } ${  surName}`}
+                        </div>
                     </div>
                 </Menu.Item>
                 <Menu.Item
                     name="profile"
                     active={activeItem === 'profile'}
                     onClick={handleItemClick}
-                />
+                 />
                 <Menu.Item
                     name="photo"
                     active={activeItem === 'photo'}
@@ -71,16 +73,16 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser }) => {
                 />
             </Menu>
             <div className="edit-content">
-                {activeItem == 'profile' && (
+                {activeItem === 'profile' && (
                     <EditProfile user={user} updateProfile={updateProfile} />
                 )}
-                {activeItem == 'photo' && (
+                {activeItem === 'photo' && (
                     <EditPhoto avatar={avatar} setAvatar={setAvatar} />
                 )}
-                {activeItem == 'email' && (
+                {activeItem === 'email' && (
                     <EditEmail user={user} updateProfile={updateProfile} />
                 )}
-                {activeItem == 'password' && <EditPassword user={user} />}
+                {activeItem === 'password' && <EditPassword user={user} />}
             </div>
         </div>
     );
