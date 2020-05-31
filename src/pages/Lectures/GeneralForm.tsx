@@ -2,24 +2,19 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { Formik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import FileLoaderProgress from './FileLoaderProgress';
 import Lecture from '../../models/lecture';
-import classes from './CreatePage.module.css';
+import styles from './GeneralForm.module.css';
 
 interface Props {
   initialValues: Lecture;
   formSubmiting: (values: any) => Promise<void>;
-  closeDetails?: () => void;
   editPage?: Lecture | null;
 }
 
-const GeneralForm = ({
-  initialValues,
-  formSubmiting,
-  closeDetails,
-  editPage,
-}: Props) => {
+const GeneralForm = ({ initialValues, formSubmiting, editPage }: Props) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string()
       .min(2, 'Must have a character')
@@ -41,19 +36,14 @@ const GeneralForm = ({
     return false;
   };
 
+  const history = useHistory();
+
+  const handleCancel = () => {
+    history.goBack();
+  };
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '80%',
-        border: 'none',
-        padding: '20px',
-        margin: '10px auto',
-      }}
-    >
+    <div className={styles.editContent}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -105,8 +95,7 @@ const GeneralForm = ({
               onChange={handleChange}
               error={errorFormHandlind(touched.videoUrl, errors.videoUrl)}
             />
-
-            <label htmlFor="file" className={classes.button}>
+            <label htmlFor="file" className={styles.button}>
               Upload Video
             </label>
             <input
@@ -137,7 +126,7 @@ const GeneralForm = ({
                     type="button"
                     color="red"
                     inverted
-                    onClick={closeDetails}
+                    onClick={handleCancel}
                   >
                     Cancel
                   </Button>

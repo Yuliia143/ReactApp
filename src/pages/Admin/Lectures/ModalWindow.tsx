@@ -27,19 +27,18 @@ const ModalWindow = ({
   videoUrl,
   updateLectureList,
 }: Props) => {
-  const deleteFromAws = async (urlVideo: string | undefined) => {
-    const slashIndex = urlVideo!.lastIndexOf('/');
-    const fileName = urlVideo!.slice(slashIndex + 1, urlVideo!.length);
-    const data: { file: string } = {
-      file: fileName,
-    };
-    await http.remove('/api/aws/upload-video', data);
-  };
+  // const deleteFromAws = async (urlVideo: string | undefined) => {
+  //   const slashIndex = urlVideo!.lastIndexOf('/');
+  //   const fileName = urlVideo!.slice(slashIndex + 1, urlVideo!.length);
+  //   const data: { file: string } = {
+  //     file: fileName,
+  //   };
+  //   await http.remove('/api/aws/upload-video', data);
+  // };
 
-  const deleteLecture = async (lectureId: string | undefined) => {
-    await http.remove(`/api/lectures/${lectureId}`);
-    await updateLectureList();
-    await deleteFromAws(videoUrl);
+  const deleteLecture = async (lectureId: string | undefined, data: object) => {
+    await http.remove(`/api/lectures/${lectureId}`, data);
+    updateLectureList();
     onClose();
   };
 
@@ -55,7 +54,7 @@ const ModalWindow = ({
           icon="checkmark"
           labelPosition="right"
           content="Delete"
-          onClick={() => deleteLecture(id)}
+          onClick={() => deleteLecture(id, { videoUrl })}
         />
       </Modal.Actions>
     </Modal>

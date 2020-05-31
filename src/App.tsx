@@ -18,7 +18,7 @@ import FavoriteLections from './pages/Home/FavoriteLections/FavoriteLections';
 import Admin from './pages/Admin/Admin';
 import Webinar from './pages/Webinar/Webinar';
 import socketIoClient from 'socket.io-client';
-import { BASE_URL, RTC_CONFIG } from './config';
+import { BASE_URL } from './config';
 import Webinars from './pages/Webinars/Webinars';
 
 const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
@@ -45,7 +45,6 @@ function App() {
                 <PrivateRoute path="/admin" component={Admin} isAdmin />
                 <PrivateRoute path="/webinar/new" component={Webinar} />
                 <PrivateRoute path="/webinar/all" component={Webinars} />
-
                 <Route component={NoMatch} />
               </Switch>
             </div>
