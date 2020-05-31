@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Comment, Form, Header, Statistic } from 'semantic-ui-react';
+import { Comment } from 'semantic-ui-react';
 import { Comment as CommentI } from './Lecture';
 
 export const RenderComments = (props: { comments: CommentI[] }) => {
