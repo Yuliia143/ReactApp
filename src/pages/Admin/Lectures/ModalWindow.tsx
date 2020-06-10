@@ -1,8 +1,8 @@
-import React from "react";
-import { Modal, Button } from "semantic-ui-react";
-import { connect, ConnectedProps } from "react-redux";
-import { getLectures } from "../../../store/actions/getLectures";
-import http from "../../../api/http";
+import React from 'react';
+import { Modal, Button } from 'semantic-ui-react';
+import { connect, ConnectedProps } from 'react-redux';
+import { getLectures } from '../../../store/actions/getLectures';
+import http from '../../../api/http';
 
 const mapDispatchToProps = (dispatch: Function) => ({
   updateLectureList: () => dispatch(getLectures()),
@@ -27,17 +27,18 @@ const ModalWindow = ({
   videoUrl,
   updateLectureList,
 }: Props) => {
-  // const deleteFromAws = async (urlVideo: string | undefined) => {
-  //   const slashIndex = urlVideo!.lastIndexOf('/');
-  //   const fileName = urlVideo!.slice(slashIndex + 1, urlVideo!.length);
-  //   const data: { file: string } = {
-  //     file: fileName,
-  //   };
-  //   await http.remove('/api/aws/upload-video', data);
-  // };
+  const deleteFromAws = async (urlVideo: string | undefined) => {
+    const slashIndex = urlVideo!.lastIndexOf('/');
+    const fileName = urlVideo!.slice(slashIndex + 1, urlVideo!.length);
+    const data: { file: string } = {
+      file: fileName,
+    };
+    await http.remove('/api/aws/upload-video', data);
+  };
 
-  const deleteLecture = async (lectureId: string | undefined, data: object) => {
-    await http.remove(`/api/lectures/${lectureId}`, data);
+  const deleteLecture = async (lectureId: string | undefined) => {
+    await http.remove(`/api/lectures/${lectureId}`);
+    await deleteFromAws(videoUrl);
     updateLectureList();
     onClose();
   };
@@ -54,7 +55,7 @@ const ModalWindow = ({
           icon="checkmark"
           labelPosition="right"
           content="Delete"
-          onClick={() => deleteLecture(id, { videoUrl })}
+          onClick={() => deleteLecture(id)}
         />
       </Modal.Actions>
     </Modal>
