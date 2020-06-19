@@ -118,7 +118,7 @@ const EditPassword: React.FC<Props> = ({ user }: Props) => {
                   name="oldPassword"
                   placeholder="Enter current password"
                   />
-                <Icon id="sec-pass" className={hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
+                <Icon id="sec-pass" className={!hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
               </label>
             </Form.Field>
             <Form.Field required>
@@ -128,7 +128,7 @@ const EditPassword: React.FC<Props> = ({ user }: Props) => {
                 name="newPassword"
                 placeholder="Enter new password"
               />
-              <Icon id="sec-pass" className={hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
+              <Icon id="sec-pass" className={!hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
             </Form.Field>
             <Form.Field required>
               <input
@@ -137,7 +137,7 @@ const EditPassword: React.FC<Props> = ({ user }: Props) => {
                 name="repeatNewPassword"
                 placeholder="Re-type new password"
                 />
-              <Icon id="sec-pass" className={hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
+              <Icon id="sec-pass" className={!hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
             </Form.Field>
             <div className="save-btn">
               <Button onClick={saveFields} disabled={isDisabled} color="red">

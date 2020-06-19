@@ -26,11 +26,21 @@ form.form {
     width: 100%;
  }
 
- .save-btn {
+.save-btn {
     display: flex;
     justify-content: center;
     margin-top: 30px;
- }
+}
+
+.delete-btn {
+    margin-top: 0;
+    color: red;
+    cursor: pointer;
+}
+
+.disabled-btn {
+    color: white;
+}
   
 .edit-menu-data {
     display: flex;
@@ -135,6 +145,15 @@ form.form {
     right: 30px;
 }
 
+.toggle-icon {
+    position: relative;
+    bottom: 27px;
+    left: 88%;
+}
+
+.deleteAcc {
+    margin-top: 70px;
+}
 
 @media screen and (max-width: 1024px) { 
     .edit-content {
