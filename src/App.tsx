@@ -21,7 +21,6 @@ import Webinar from './pages/Webinar/Webinar';
 import WebinarList from './pages/WebinarList/WebinarList';
 import Webinars from './pages/Webinars/Webinars';
 
-
 function App() {
   return (
     <div className="App">
@@ -32,7 +31,7 @@ function App() {
             <div className="mainContent">
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/category/:id" component={CategoriesPage} />
+                <Route exact path="/category/:id" component={CategoriesPage}/>
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
                 <PrivateRoute path="/lecture/new" component={CreateLecture} />
