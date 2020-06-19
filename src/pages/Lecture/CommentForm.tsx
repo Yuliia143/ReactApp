@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { postComment } from "../../api/comments-api";
-import { Comment } from "./Lecture";
+import { Comment } from "./modules";
 
 export default function CommentForm(props: {
   lectureId: string;
@@ -17,9 +17,20 @@ export default function CommentForm(props: {
       setComment("");
       setLoading(true);
       setErrorLoading(false);
+      const userString = localStorage.getItem('User') as string;
+      const user = JSON.parse(userString);
+      const {imageUrl} = user;
+      let userImageUrl = '';
+      if(!Object.prototype.hasOwnProperty.call(user, 'imageUrl') || imageUrl === ''){
+        userImageUrl = 'https://img.icons8.com/plasticine/2x/user.png';
+      }
+      else{
+        userImageUrl = imageUrl;
+      }
       const savedComment: Comment = await postComment(lectureId, {
         rating: 3,
         messageText: comment,
+        imageUrl: userImageUrl,
       });
       setLoading(false);
       onPostComment(savedComment);

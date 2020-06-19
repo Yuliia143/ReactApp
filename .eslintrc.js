@@ -26,6 +26,5 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'prefer-destructuring': ['error', { object: true, array: true }],
     'consistent-return': 'off',
-    'import/no-cycle': 'off',
   },
 };

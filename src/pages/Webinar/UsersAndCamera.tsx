@@ -3,7 +3,7 @@ import { Button, Confirm, List } from "semantic-ui-react";
 import styles from "./Webinar.module.css";
 import { RTC_CONFIG } from "../../config";
 import { peerUpdating } from "./updateUserList";
-import { PeerConnection, User as UserI, Data } from "./Interfaces";
+import { PeerConnection, User as UserI, Data, Candidate } from "./Interfaces";
 import User from "./User";
 import { leavePage, stopWebinar } from "./stopWebinat";
 import Loader from "./Loader";
@@ -63,7 +63,7 @@ export default function ({ socket }: any) {
 
       addNewUser(user);
     });
-
+    
     socket.on("remove-user", (user: UserI) => {
       removeUser(user);
       if (peerConnections[user.id] !== undefined) {
