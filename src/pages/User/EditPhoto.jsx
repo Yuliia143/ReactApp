@@ -14,6 +14,7 @@ const EditPhoto = (props) => {
   const [newAvatar, setNewAvatar] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  console.log(props.user)
 
   const isFileValid = (file) => {
     if (!file) return false;
@@ -67,6 +68,8 @@ const EditPhoto = (props) => {
     return null;
   };
 
+  const isDefaultAvatar = props.avatar == "https://react.semantic-ui.com/images/wireframe/square-image.png";
+
   const singleFileUploadHandler = () => {
     setLoading(true);
     const data = new FormData();
@@ -98,6 +101,21 @@ const EditPhoto = (props) => {
     }
   };
 
+  const deleteAvatart = (avatar) => {
+    setLoading(true);
+   
+    http
+      .remove("/api/edit/deleteAvatar", avatar)
+      .then(() => {
+        setLoading(false);
+        props.setAvatar('https://react.semantic-ui.com/images/wireframe/square-image.png');
+        setNewAvatar('https://react.semantic-ui.com/images/wireframe/square-image.png')
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       <Form loading={loading}>
@@ -108,8 +126,15 @@ const EditPhoto = (props) => {
               Add a nice photo of yourself for your profile.
             </div>
             <div className="imgPreview">
-              <Image src={newAvatar || props.avatar} />
+              <Image src={ newAvatar || props.avatar } />
             </div>
+            <button
+              className={!isDefaultAvatar ? "delete-btn" : "disabled-btn"}
+              onClick={deleteAvatart}
+              disabled={isDefaultAvatar}
+            >
+              Delete avatar
+            </button>
             <div>{getMessage()}</div>
             {cropWindow && (
               <AvatarCropper
