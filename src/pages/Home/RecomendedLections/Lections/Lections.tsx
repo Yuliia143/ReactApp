@@ -31,6 +31,7 @@ const Lections = ({
   lecturesLoading,
   categoryId = '',
 }: PropsFromRedux & Props) => {
+  
   const renderLectures = (arr: Lecture[]) => {
     if (arr.length === 0) {
       return <h3 className={classes.titleNoLections}>No lectures</h3>;

@@ -25,7 +25,7 @@ export default function CommentForm(props: {
         userImageUrl = 'https://img.icons8.com/plasticine/2x/user.png';
       }
       else{
-        userImageUrl = user;
+        userImageUrl = imageUrl;
       }
       const savedComment: Comment = await postComment(lectureId, {
         rating: 3,

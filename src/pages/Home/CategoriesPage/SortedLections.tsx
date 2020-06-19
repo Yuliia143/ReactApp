@@ -56,7 +56,6 @@ const CategoriesPage = ({
         };
       });
     }
-    return null;
   };
   const selectedTitle = renderTitle(filteredLections);
 
