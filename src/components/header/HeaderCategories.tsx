@@ -47,7 +47,6 @@ const history = useHistory();
             <Dropdown.Item
               key={category.id}
               text={category.title}
-              // onClick={() => handleDropdownCategories()
               onClick={()=>history.push(`/category/${category.id}`)
               }
             />
