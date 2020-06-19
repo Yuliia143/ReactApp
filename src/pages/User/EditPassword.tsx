@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import { Form, Button, Message } from "semantic-ui-react";
+import { Form, Button, Message, Icon } from "semantic-ui-react";
+
 
 import http from "../../api/http";
 import User from "../../models/user";
@@ -20,7 +21,12 @@ const EditPassword: React.FC<Props> = ({ user }: Props) => {
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const showPassword = () => {
+    setHidden(!hidden);
+  };
 
   const matchPasswords = () => {
     if (passwords.newPassword !== passwords.repeatNewPassword) {
@@ -108,27 +114,30 @@ const EditPassword: React.FC<Props> = ({ user }: Props) => {
                 <input
                   id="password"
                   onChange={textInputOnChange}
-                  type="password"
+                  type={hidden ? "text" : "password" }
                   name="oldPassword"
                   placeholder="Enter current password"
-                />
+                  />
+                <Icon id="sec-pass" className={!hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
               </label>
             </Form.Field>
             <Form.Field required>
               <input
                 onChange={textInputOnChange}
-                type="password"
+                type={hidden ? "text" : "password" }
                 name="newPassword"
                 placeholder="Enter new password"
               />
+              <Icon id="sec-pass" className={!hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
             </Form.Field>
             <Form.Field required>
               <input
                 onChange={textInputOnChange}
-                type="password"
+                type={hidden ? "text" : "password" }
                 name="repeatNewPassword"
                 placeholder="Re-type new password"
-              />
+                />
+              <Icon id="sec-pass" className={!hidden ? "toggle-icon low vision" : "toggle-icon eye"} onClick={showPassword}/>
             </Form.Field>
             <div className="save-btn">
               <Button onClick={saveFields} disabled={isDisabled} color="red">

@@ -72,7 +72,6 @@ const SignIn = ({ onSignIn, history }: any) => {
         history.push("/");
       }
     }
-
   };
 
   return (
@@ -189,3 +188,4 @@ const mapDispatchToProps = (dispatch: Function) => {
 };
 
 export default connect(null, mapDispatchToProps)(SignIn);
+

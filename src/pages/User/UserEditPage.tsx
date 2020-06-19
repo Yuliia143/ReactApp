@@ -10,15 +10,17 @@ import EditProfile from "./EditProfile";
 import EditPhoto from "./EditPhoto";
 import EditPassword from "./EditPassword";
 import EditEmail from "./EditEmail";
+import { signOut } from "../../store/actions/auth";
 
 import "./User.css";
 
 interface Props {
   user: User;
   updateUser: (data: User) => void;
+  onSignOut: () => void;
 }
 
-const UserEditPage: React.FC<Props> = ({ user, updateUser }: Props) => {
+const UserEditPage: React.FC<Props> = ({ user, updateUser, onSignOut }: Props) => {
   const [activeItem, setActiveItem] = useState("profile");
   const [avatar, setAvatar] = useState(
     user.imageUrl
@@ -30,6 +32,11 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser }: Props) => {
     e: React.MouseEvent<HTMLAnchorElement>,
     data: MenuItemProps
   ) => setActiveItem(data.name || "");
+
+  const updateAvatar = (newAvatar: any) => {
+    setAvatar(newAvatar);
+    updateUser({ ...user, imageUrl: newAvatar });
+  }
 
   const updateProfile = (data: object) => {
     updateUser({ ...user, ...data });
@@ -74,10 +81,10 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser }: Props) => {
       </Menu>
       <div className="edit-content">
         {activeItem === "profile" && (
-          <EditProfile user={user} updateProfile={updateProfile} />
+          <EditProfile user={user} updateProfile={updateProfile} onSignOut={onSignOut} />
         )}
         {activeItem === "photo" && (
-          <EditPhoto avatar={avatar} setAvatar={setAvatar} />
+          <EditPhoto avatar={avatar} setAvatar={updateAvatar} user={user} />
         )}
         {activeItem === "email" && (
           <EditEmail user={user} updateProfile={updateProfile} />
@@ -91,6 +98,9 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser }: Props) => {
 const mapDispatchToProps = (dispatch: Function) => ({
   updateUser: (user: User) =>
     dispatch({ type: "UPDATE_PROFILE", payload: user }),
+  onSignOut: () => {
+    dispatch(signOut());
+  }, 
 });
 
 const mapStateToProps = (state: any) => ({

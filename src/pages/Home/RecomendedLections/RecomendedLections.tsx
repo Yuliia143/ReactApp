@@ -15,7 +15,6 @@ const RecomendedLections = () => {
           every month
         </p>
       </div>
-
       <div className={classes.wrapForCenter}>
         <NavBar />
       </div>

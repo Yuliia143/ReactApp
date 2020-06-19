@@ -4,22 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { getLecture } from "../../api/comments-api";
 import "./Lecture.css";
 import Comments from "./Comments";
-
-export interface Lection {
-  id: string;
-  videoUrl: string;
-  description: string;
-  title: string;
-  messages: Comment[];
-}
-
-export interface Comment {
-  _id: string;
-  messageText: string;
-  author: string;
-  rating: number;
-  createdOn: string;
-}
+import { Lection } from "./modules";
 
 export default function Lecture(props: RouteComponentProps<{ id: string }>) {
   const [lecture, setLecture] = useState<Lection>();
@@ -28,7 +13,6 @@ export default function Lecture(props: RouteComponentProps<{ id: string }>) {
   const {
     params: { id },
   } = match;
-
   const fetchLecture = async () => {
     getLecture(id)
       .then((lecture: Lection) => {

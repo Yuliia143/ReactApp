@@ -5,18 +5,18 @@ module.exports = {
     node: true,
     jest: true,
   },
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
 
   parserOptions: {
-    project: "./tsconfig.json",
+    project: './tsconfig.json',
     ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module", // Allows for the use of imports
+    sourceType: 'module', // Allows for the use of imports
   },
   extends: [
-    "airbnb-typescript",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react",
+    'airbnb-typescript',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'prettier/react',
   ],
   rules: {
     "func-names": "off",
@@ -26,7 +26,6 @@ module.exports = {
     "no-underscore-dangle": "off",
     "@typescript-eslint/camelcase": "off",
     "prefer-destructuring": ["error", { object: true, array: true }],
-    "import/no-cycle": "off",
-    "jsx-a11y/media-has-caption": "off"
+    "jsx-a11y/media-has-caption": "off",
   },
 };

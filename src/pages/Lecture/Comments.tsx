@@ -5,7 +5,7 @@ import { BASE_URL } from "../../config";
 import CommentForm from "./CommentForm";
 import { RenderComments } from "./RenderComments";
 import "./Lecture.css";
-import { Comment as CommentI } from "./Lecture";
+import { Comment as CommentI } from "./modules";
 
 export default function Comments(props: {
   messages: CommentI[];

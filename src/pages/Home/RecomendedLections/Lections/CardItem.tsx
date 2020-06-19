@@ -17,9 +17,7 @@ interface Props {
   item: CardProps;
 }
 
-const CardItem = ({
-  item: { imgUrl, title, author, defaultRating, description, id },
-}: Props) => {
+const CardItem = ({item: { imgUrl, title, author, defaultRating, description, id }}: Props) => {
   const [open, setOpen] = useState(false);
 
   const show = () => setOpen(true);
@@ -55,7 +53,7 @@ const CardItem = ({
       </Card>
 
       <Modal dimmer="blurring" open={open} onClose={close}>
-        <Modal.Header>Do you want to buy this lecture?</Modal.Header>
+        <Modal.Header>Do you want to watch this lecture?</Modal.Header>
         <Modal.Content image>
           <Image wrapped size="medium" src={imgUrl} />
           <Modal.Description>
