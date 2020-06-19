@@ -14,7 +14,6 @@ const EditPhoto = (props) => {
   const [newAvatar, setNewAvatar] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  console.log(props.user)
 
   const isFileValid = (file) => {
     if (!file) return false;
@@ -68,7 +67,7 @@ const EditPhoto = (props) => {
     return null;
   };
 
-  const isDefaultAvatar = props.avatar == "https://react.semantic-ui.com/images/wireframe/square-image.png";
+  const isDefaultAvatar = props.avatar === "https://react.semantic-ui.com/images/wireframe/square-image.png";
 
   const singleFileUploadHandler = () => {
     setLoading(true);
@@ -101,7 +100,8 @@ const EditPhoto = (props) => {
     }
   };
 
-  const deleteAvatart = (avatar) => {
+  const deleteAvatart = (event, avatar) => {
+    event.persist();
     setLoading(true);
    
     http

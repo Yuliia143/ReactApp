@@ -2,11 +2,8 @@ import React, { useState } from "react";
 
 import { Form, Button, Message } from "semantic-ui-react";
 
-import { Link } from "react-router-dom";
-
 import http from "../../api/http";
 import User from "../../models/user";
-import { signOut } from "../../store/actions/auth";
 
 import "./User.css";
 
@@ -57,7 +54,7 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile, onSignOut }: Props)
       }
     };
     http
-      .remove("/api/users/" + userId, requestOptions)
+      .remove(`/api/users/${userId}`, requestOptions)
       .then(() => {
         setLoading(false);
         onSignOut();

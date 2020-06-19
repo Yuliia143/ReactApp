@@ -25,7 +25,7 @@ const EditPassword: React.FC<Props> = ({ user }: Props) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const showPassword = () => {
-    setHidden(hidden ? false : true);
+    setHidden(!hidden);
   };
 
   const matchPasswords = () => {
