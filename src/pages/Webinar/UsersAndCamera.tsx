@@ -64,16 +64,16 @@ export default function ({ socket }: any) {
       addNewUser(user);
     });
 
-    socket.on("candidate", (id: string, candidate: Candidate) => {
-            peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
-        });
-    
     socket.on("remove-user", (user: UserI) => {
       removeUser(user);
       if (peerConnections[user.id] !== undefined) {
         peerConnections[user.id].close();
         delete peerConnections[user.id];
       }
+    });
+
+    socket.on("candidate", (id:string, candidate:any) => {
+      peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
     });
 
     socket.on("answer-made", async (data: Data) => {

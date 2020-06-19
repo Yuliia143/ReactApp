@@ -36,7 +36,7 @@ export default function (props: Props) {
     return () => {
       socket.off("update_online_users");
     };
-  });
+  }, []);
 
   const goToWebinar = (webinarId: string) => {
     const path = `/webinar/${webinarId}`;
