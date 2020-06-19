@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Table, Button, Checkbox, Label, Icon } from "semantic-ui-react";
-import { useHistory, useRouteMatch } from "react-router-dom";
-import Lecture from "../../../models/lecture";
-import ModalWindow from "./ModalWindow";
+import React, { useState } from 'react';
+import { Table, Button, Checkbox, Label, Icon } from 'semantic-ui-react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import Lecture from '../../../models/lecture';
+import ModalWindow from './ModalWindow';
 
 interface Props {
   lecture: Lecture;
@@ -34,7 +34,6 @@ const RowTable = (props: Props) => {
         modalState={modalState}
         onClose={close}
         id={id}
-        videoUrl={videoUrl}
       />
       <Table.Cell>
         <Checkbox />
@@ -50,7 +49,7 @@ const RowTable = (props: Props) => {
               link
               name="hand point left"
               color="blue"
-              style={{ margin: "0" }}
+              style={{ margin: '0' }}
             />
           </Button>
           <Button.Or />
@@ -59,16 +58,16 @@ const RowTable = (props: Props) => {
               link
               name="pencil alternate"
               color="teal"
-              style={{ margin: "0" }}
+              style={{ margin: '0' }}
             />
           </Button>
           <Button.Or />
-          <Button onClick={show("blurring")}>
+          <Button onClick={show('blurring')}>
             <Icon
               link
               name="trash alternate"
               color="red"
-              style={{ margin: "0" }}
+              style={{ margin: '0' }}
             />
           </Button>
         </Button.Group>
