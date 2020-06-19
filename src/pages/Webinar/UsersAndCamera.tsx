@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Confirm, List } from "semantic-ui-react";
-import styles from "./Webinar.module.css";
-import { RTC_CONFIG } from "../../config";
-import { peerUpdating } from "./updateUserList";
-import { PeerConnection, User as UserI, Data, Candidate } from "./Interfaces";
-import User from "./User";
-import { leavePage, stopWebinar } from "./stopWebinat";
-import Loader from "./Loader";
+import React, { useEffect, useState } from 'react';
+import { Button, Confirm, List } from 'semantic-ui-react';
+import styles from './Webinar.module.css';
+import { RTC_CONFIG } from '../../config';
+import { peerUpdating } from './updateUserList';
+import { PeerConnection, User as UserI, Data } from './Interfaces';
+import User from './User';
+import { leavePage, stopWebinar } from './stopWebinat';
+import Loader from './Loader';
 
 const peerConnections: PeerConnection = {};
 
@@ -35,7 +35,7 @@ export default function ({ socket }: any) {
       { video: true, audio: true },
       (stream) => {
         const localVideo = document.getElementById(
-          "local-video"
+          'local-video'
         ) as HTMLVideoElement;
         if (localVideo) {
           localVideo.srcObject = stream;
@@ -47,12 +47,12 @@ export default function ({ socket }: any) {
       }
     );
 
-    socket.on("update-user-list", (user: UserI) => {
+    socket.on('update-user-list', (user: UserI) => {
       const peerConnection = new RTCPeerConnection(RTC_CONFIG);
       peerConnections[user.socketId] = peerConnection;
 
       const videoElement = document.getElementById(
-        "local-video"
+        'local-video'
       ) as HTMLVideoElement;
       const stream = videoElement.srcObject as MediaStream;
       stream
@@ -63,8 +63,8 @@ export default function ({ socket }: any) {
 
       addNewUser(user);
     });
-    
-    socket.on("remove-user", (user: UserI) => {
+
+    socket.on('remove-user', (user: UserI) => {
       removeUser(user);
       if (peerConnections[user.id] !== undefined) {
         peerConnections[user.id].close();
@@ -72,13 +72,13 @@ export default function ({ socket }: any) {
       }
     });
 
-    socket.on("answer-made", async (data: Data) => {
+    socket.on('answer-made', async (data: Data) => {
       peerConnections[data.socket].setRemoteDescription(data.answer);
     });
 
-    window.addEventListener("beforeunload", () => leavePage(socket));
+    window.addEventListener('beforeunload', () => leavePage(socket));
     return () => {
-      window.removeEventListener("beforeunload", () => leavePage(socket));
+      window.removeEventListener('beforeunload', () => leavePage(socket));
       leavePage(socket);
     };
   }, []);
