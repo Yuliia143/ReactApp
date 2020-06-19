@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Dropdown, Input } from "semantic-ui-react";
 import Category from "../../models/category";
 import styles from "./Header.module.css";
+import { useHistory } from "react-router-dom";
 
 interface Props {
-  categoriesList: Category[];
+  categoriesList: Category[]
 }
 
-const HeaderCategories = ({ categoriesList }: Props) => {
+const HeaderCategories = ({ categoriesList}: Props) => {
   const [isActiveDropdownCategories, setActiveDropdown] = useState(false);
   const [searchCategField, setSearchCategField] = useState("");
   const handleDropdownCategories = (status = false) => {
@@ -25,7 +26,7 @@ const HeaderCategories = ({ categoriesList }: Props) => {
     });
   };
   const searchedCategories = searchChange(categoriesList);
-
+const history = useHistory();
   return (
     <Dropdown
       item
@@ -46,7 +47,9 @@ const HeaderCategories = ({ categoriesList }: Props) => {
             <Dropdown.Item
               key={category.id}
               text={category.title}
-              onClick={() => handleDropdownCategories()}
+              // onClick={() => handleDropdownCategories()
+              onClick={()=>history.push(`/category/${category.id}`)
+              }
             />
           ))}
         </Dropdown.Menu>

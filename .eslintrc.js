@@ -19,7 +19,6 @@ module.exports = {
     "prettier/react",
   ],
   rules: {
-<<<<<<< HEAD
     'func-names': 'off',
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
@@ -28,15 +27,5 @@ module.exports = {
     'prefer-destructuring': ['error', { object: true, array: true }],
     'consistent-return': 'off',
     'import/no-cycle': 'off',
-=======
-    "func-names": "off",
-    "no-shadow": "off",
-    "import/prefer-default-export": "off",
-    "react/jsx-props-no-spreading": "off",
-    "no-underscore-dangle": "off",
-    "prefer-destructuring": ["error", { object: true, array: true }],
-    "consistent-return": "off",
-    "import/no-cycle": "off",
->>>>>>> 6ba1691201422796a94539e5259f1baee93825a5
   },
 };

@@ -1,6 +1,9 @@
 import React from "react";
 import TrustedCompanies from "./TrustedCompanies/TrustedCompanies";
 import Offer from "./Offer/Offer";
+const Avatar1 =  require("../../../assets/images/avatar_1.jpg")
+const Avatar2 =  require("../../../assets/images/avatar_2.jpg")
+const Avatar3 =  require("../../../assets/images/avatar_3.jpg")
 
 const classes = require("./Reviews.module.css");
 
@@ -13,7 +16,7 @@ const Reviews = () => {
           <div className={classes.container}>
             <div className={classes.imgAndName}>
               <img
-                src="https://i.udemycdn.com/user/100x100/8872940_27b4_3.jpg"
+                src={Avatar1}
                 alt="Author"
                 className={classes.image}
               />
@@ -29,7 +32,7 @@ const Reviews = () => {
           <div className={classes.container}>
             <div className={classes.imgAndName}>
               <img
-                src="https://i.udemycdn.com/user/100x100/22869844_edad.jpg"
+                src={Avatar2}
                 alt="Author"
                 className={classes.image}
               />
@@ -45,7 +48,7 @@ const Reviews = () => {
           <div className={classes.container}>
             <div className={classes.imgAndName}>
               <img
-                src="https://i.udemycdn.com/user/100x100/26154780_76c8.jpg"
+                src={Avatar3}
                 alt="Author"
                 className={classes.image}
               />

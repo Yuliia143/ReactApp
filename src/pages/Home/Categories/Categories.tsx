@@ -9,8 +9,7 @@ const classes = require('./Categories.module.css');
 
 const mapStateToProps = (state: RootState) => ({
   categoriesList: state.categories.categories,
-  categoriesLoading: state.categories.loading,
-  lecturesList: state.lectures.lectures,
+  categoriesLoading: state.categories.loading
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -30,7 +29,6 @@ const Categories = ({ categoriesList, categoriesLoading }: PropsFromRedux) => {
             role="button"
             tabIndex={0}
             onKeyPress={() => false}
-
           >
             <Link to={`/category/${item.id}`}>{item.title}</Link>
           </div>
