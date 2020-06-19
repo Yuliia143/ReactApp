@@ -45,8 +45,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}",
-    "lint": "eslint --ext .js,.ts,.tsx ./",
-    "lint:fix": "eslint --fix --ext .js,.ts,.tsx ./"
+    "lint": "eslint --ext .js,.ts,.tsx ./src",
+    "lint:fix": "eslint --fix --ext .js,.ts,.tsx ./src"
   },
   "eslintConfig": {
     "extends": "react-app"

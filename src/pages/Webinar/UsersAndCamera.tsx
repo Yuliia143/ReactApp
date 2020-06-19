@@ -3,7 +3,7 @@ import { Button, Confirm, List } from "semantic-ui-react";
 import styles from "./Webinar.module.css";
 import { RTC_CONFIG } from "../../config";
 import { peerUpdating } from "./updateUserList";
-import { PeerConnection, User as UserI, Data } from "./Interfaces";
+import { PeerConnection, User as UserI, Data, Candidate } from "./Interfaces";
 import User from "./User";
 import { leavePage, stopWebinar } from "./stopWebinat";
 import Loader from "./Loader";

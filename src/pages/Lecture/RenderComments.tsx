@@ -1,6 +1,6 @@
 import React from "react";
 import { Comment } from "semantic-ui-react";
-import { Comment as CommentI } from "./Lecture";
+import { Comment as CommentI } from "./modules";
 
 export const RenderComments = (props: { comments: CommentI[] }) => {
   const { comments } = props;
@@ -11,8 +11,8 @@ export const RenderComments = (props: { comments: CommentI[] }) => {
         const date = item.createdOn.slice(0, 10);
         return (
           <Comment key={item._id} id="comment-container">
-            <Comment.Avatar src="https://img.icons8.com/plasticine/2x/user.png" />
-            <Comment.Author id="author"> {item.author}</Comment.Author>
+            <Comment.Avatar src={item.imageUrl} />
+            <Comment.Author id="author">{item.author}</Comment.Author>
             <Comment.Content>
               <Comment.Metadata>
                 <div className="date">
@@ -27,3 +27,8 @@ export const RenderComments = (props: { comments: CommentI[] }) => {
     </div>
   );
 };
+
+
+
+
+

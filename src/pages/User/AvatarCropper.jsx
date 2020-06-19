@@ -63,7 +63,7 @@ const AvatarCropper = (props) => {
 
   const onCropImage = async () => {
     const image = await getCroppedImg(props.avatar, croppedAreaPixels);
-    createFile(image, "avatar.png", "image/png").then((file) =>
+    createFile(image, `avatar-${Date.now()}.png`, "image/png").then((file) =>
       props.cropImage(file)
     );
   };
