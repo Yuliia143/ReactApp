@@ -1,28 +1,28 @@
-import React, {useState} from 'react';
-import {Search} from "semantic-ui-react";
-import Lecture from "../../models/lecture";
-import {MenuItemProps} from "semantic-ui-react/dist/commonjs/collections/Menu/MenuItem";
-import {SearchProps} from "semantic-ui-react/dist/commonjs/modules/Search/Search";
-import {withRouter} from "react-router-dom";
-import {RouteComponentProps} from "react-router-dom";
+import React, { useState } from 'react';
+import { Search } from 'semantic-ui-react';
+import Lecture from '../../models/lecture';
+import { MenuItemProps } from 'semantic-ui-react/dist/commonjs/collections/Menu/MenuItem';
+import { SearchProps } from 'semantic-ui-react/dist/commonjs/modules/Search/Search';
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface Props extends RouteComponentProps {
-    lecturesList: Lecture[]
+    lecturesList: Lecture[];
 }
 
 interface SearchLecture {
-    id: string,
-    title: string,
-    description: string
+    id: string;
+    title: string;
+    description: string;
 }
 
-const HeaderSearch = ({lecturesList, history}: Props) => {
-    const list = lecturesList.map(lecture => {
+const HeaderSearch = ({ lecturesList, history }: Props) => {
+    const list = lecturesList.map((lecture) => {
         return {
             id: lecture.id,
             title: lecture.title,
-            description: lecture.description,
-        }
+            description: lecture.description
+        };
     });
     const [searchLectField, setSearchLectField] = useState('');
 
@@ -30,25 +30,31 @@ const HeaderSearch = ({lecturesList, history}: Props) => {
         setSearchLectField(data.result.title);
         history.push(`/lecture/${data.result.id}`);
     };
-    const handleSearchSelect = (event: React.MouseEvent<HTMLElement>, data: SearchProps) => {
+    const handleSearchSelect = (
+        event: React.MouseEvent<HTMLElement>,
+        data: SearchProps
+    ) => {
         setSearchLectField(data.value || '');
     };
     const handleSearchChange = (list: SearchLecture[] = []) => {
-        return list.filter(item => {
-            return item.title.toLowerCase().includes(searchLectField.toLowerCase())
+        return list.filter((item) => {
+            return item.title
+                .toLowerCase()
+                .includes(searchLectField.toLowerCase());
         });
     };
     const res = handleSearchChange(list);
     return (
         <Search
             placeholder="Search..."
-            input={{fluid: true}}
-            style={{width: '300px'}}
+            input={{ fluid: true }}
+            style={{ width: '300px' }}
             value={searchLectField}
             onSearchChange={handleSearchSelect}
             onResultSelect={handleResultSelect}
-            results={res}/>
-    )
+            results={res}
+        />
+    );
 };
 
 export default withRouter(HeaderSearch);
