@@ -4,7 +4,6 @@
     align-items: center;
     margin-left: 51px;
     border-bottom: 1px solid #dedfe0;
-
 }
 
 .item {
@@ -12,7 +11,7 @@
     margin-left: 15px;
 }
 
-a {
+p {
     color: rgba(0, 0, 0, 0.616);
 }
 

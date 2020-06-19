@@ -61,7 +61,7 @@ export const LectionWrapperNav = styled.div`
   }
   .slick-list {
     height: 283px;
-    width: 813px;
+    width: 781px;
     outline: none;
   }
 
@@ -69,18 +69,19 @@ export const LectionWrapperNav = styled.div`
     margin-left: 12px;
   }
   .slick-next {
-    margin-right: 3px;
+    margin-right: -7px;
   }
 
   @media screen and (max-width: 768px) {
     .slick-list {
-      width: 601px;
+      width: 547px;
     }
     .slick-next {
-      right: -8px;
+      right:-29px;
     }
     .slick-prev {
       left: -31px;
     }
+    
   }
 `;
