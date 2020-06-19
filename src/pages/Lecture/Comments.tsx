@@ -5,7 +5,7 @@ import { BASE_URL } from "../../config";
 import CommentForm from "./CommentForm";
 import { RenderComments } from "./RenderComments";
 import "./Lecture.css";
-import { Comment as CommentI } from "./Lecture";
+import { Comment as CommentI } from "./modules";
 
 const socket = socketIoClient(BASE_URL || "http://localhost:3030");
 
