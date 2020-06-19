@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Dropdown, Input } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
 import Category from "../../models/category";
 import styles from "./Header.module.css";
-import { useHistory } from "react-router-dom";
 
 interface Props {
   categoriesList: Category[]

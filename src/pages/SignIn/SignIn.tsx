@@ -1,11 +1,11 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { BASE_URL } from '../../config';
 import './SignIn.css';
 import { Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { signIn } from "../../store/actions/auth";
 import * as Yup from 'yup';
+import { BASE_URL } from '../../config';
+import { signIn } from "../../store/actions/auth";
 import { Credential } from "../../models/credential"
 
 const validationSchema = Yup.object().shape({
@@ -64,13 +64,13 @@ const SignIn = ({ onSignIn, history }: any) => {
                                 <Field type="email" name="email" placeholder="Email"
                                     value={values.email}
                                     onChange={handleChange}
-                                    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                                    className={`form-control${  errors.email && touched.email ? ' is-invalid' : ''}`} />
                                 <ErrorMessage name="email" component="div" className="invalid-feedback" />
 
                                 <Field type="password" name="password" placeholder="Password"
                                     value={values.password}
                                     onChange={handleChange}
-                                    className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                                    className={`form-control${  errors.password && touched.password ? ' is-invalid' : ''}`} />
                                 <ErrorMessage name="password" component="div" className="invalid-feedback" />
 
                             </div>
@@ -81,7 +81,7 @@ const SignIn = ({ onSignIn, history }: any) => {
                             </div>
                             <div className="changeAccIn">
                                 <p className="forgotPassword">or Forgot Password</p>
-                                <p className="newAcc">Don't have an account?Sign Up</p>
+                                <p className="newAcc">Don&apos;t have an account?Sign Up</p>
                             </div>
                         </Form>
                     }

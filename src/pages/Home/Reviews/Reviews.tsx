@@ -1,6 +1,7 @@
 import React from "react";
 import TrustedCompanies from "./TrustedCompanies/TrustedCompanies";
 import Offer from "./Offer/Offer";
+
 const Avatar1 =  require("../../../assets/images/avatar_1.jpg")
 const Avatar2 =  require("../../../assets/images/avatar_2.jpg")
 const Avatar3 =  require("../../../assets/images/avatar_3.jpg")
