@@ -2,21 +2,26 @@ import React, { useState } from "react";
 
 import { Form, Button, Message } from "semantic-ui-react";
 
+import { Link } from "react-router-dom";
+
 import http from "../../api/http";
 import User from "../../models/user";
+import { signOut } from "../../store/actions/auth";
 
 import "./User.css";
 
 interface Props {
   user: User;
   updateProfile: (data: object) => void;
+  onSignOut: () => void;
 }
 
-const EditProfile: React.FC<Props> = ({ user, updateProfile }: Props) => {
+const EditProfile: React.FC<Props> = ({ user, updateProfile, onSignOut }: Props) => {
   const [userFullName, setUserFullName] = useState({
     name: user.name,
     surName: user.surName,
   });
+  const userId = user._id;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -43,6 +48,24 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile }: Props) => {
 
     return null;
   };
+
+  const deleteAccount = () => {
+    const token = localStorage.getItem("Access-Token");
+    const requestOptions = {
+      headers: {
+        "Access-Token": token,
+      }
+    };
+    http
+      .remove("/api/users/" + userId, requestOptions)
+      .then(() => {
+        setLoading(false);
+        onSignOut();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }
 
   const saveFields = () => {
     setLoading(true);
@@ -104,11 +127,16 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile }: Props) => {
               </label>
             </Form.Field>
             <div className="save-btn">
-              <Button onClick={saveFields} color="red">
+              <Button onClick={saveFields}  color="red" >
                 Save
               </Button>
             </div>
           </Form>
+          <div className="deleteAcc">
+              <Button  onClick={deleteAccount} color="red" >
+                Delete account
+              </Button>
+            </div>
         </div>
         <div>{getMessage()}</div>
       </div>
