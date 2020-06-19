@@ -21,6 +21,8 @@ import Webinar from './pages/Webinar/Webinar';
 import WebinarList from './pages/WebinarList/WebinarList';
 import Webinars from './pages/Webinars/Webinars';
 
+require('dotenv').config();
+
 function App() {
   return (
     <div className="App">

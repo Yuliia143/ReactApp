@@ -8,3 +8,7 @@ export const signUp = (credential) => {
 export const signIn = (credential) => {
   return axios.post(`${BASE_URL}/api/user/signin`, credential);
 };
+
+export const googleFacebook = (credential) => {
+  return axios.post(`${BASE_URL}/api/user/googleFacebook`, credential);
+}

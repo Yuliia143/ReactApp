@@ -12,14 +12,16 @@ import Loader from "../Webinar/Loader";
 
 const { RTCPeerConnection, RTCSessionDescription } = window;
 
-let socket = socketIoClient(BASE_URL || "http://localhost:3030");
-
 interface OfferResponse {
   offer: any;
   socket: string;
 }
 
 export default function ({ match }: any) {
+  const [socket] = useState(
+    socketIoClient(BASE_URL || "http://localhost:3030")
+  );
+
   const peerConnection = new RTCPeerConnection(RTC_CONFIG);
 
   const { params } = match;
@@ -51,18 +53,20 @@ export default function ({ match }: any) {
     };
   };
 
-  const leaveFromPage = (userId: string, lectureId: string) => {
+  const leavePage = (userId: string, lectureId: string) => {
     peerConnection.close();
     socket.emit("disconnect_user", {
       userId,
       lectureId,
     });
-    socket.close();
+    socket.off("candidate");
+    socket.off("offer-made");
+    socket.off("new_comment");
+    socket.off("get_all_comments");
+    socket.off("webinar_stoped");
   };
 
   useEffect(() => {
-    socket = socketIoClient(BASE_URL || "http://localhost:3030");
-
     const userStr = localStorage.getItem("User") as string;
     const { _id, name, surName, imageUrl } = JSON.parse(userStr);
 
@@ -95,6 +99,12 @@ export default function ({ match }: any) {
         answer,
         to: data.socket,
       });
+
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          socket.emit("candidate", data.socket, event.candidate);
+        }
+      };
     });
 
     socket.on("new_comment", (comment: CommentI) => {
@@ -120,16 +130,15 @@ export default function ({ match }: any) {
       setOpenModal(true);
     });
 
-    window.addEventListener("beforeunload", () =>
-      leaveFromPage(_id, params.id)
-    );
+    window.addEventListener("beforeunload", () => leavePage(_id, params.id));
 
     return () => {
       window.removeEventListener("beforeunload", () =>
-        leaveFromPage(_id, params.id)
+        leavePage(_id, params.id)
       );
 
-      leaveFromPage(_id, params.id);
+      leavePage(_id, params.id);
+      socket.close();
     };
   }, []);
 
@@ -138,7 +147,7 @@ export default function ({ match }: any) {
   ) : (
     <div id="video" className={styles.videoContainer}>
       {loading === true ? <Loader /> : null}
-      <video autoPlay muted id="remote-video" className={styles.remoteVideo} />
+      <video autoPlay id="remote-video" className={styles.remoteVideo} />
       <Comment.Group className={styles.commentsGroup}>
         <Header as="h3" dividing className={styles.commentTitle}>
           Comments

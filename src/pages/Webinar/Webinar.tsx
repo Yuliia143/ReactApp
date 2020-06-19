@@ -1,12 +1,17 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import socketIoClient from "socket.io-client";
 import styles from "./Webinar.module.css";
 import StartWebinar from "./StartWebinar";
 import { BASE_URL } from "../../config";
 
-const socket = socketIoClient(BASE_URL || "http://localhost:3030");
-
 export default function () {
+    const [socket] = useState(socketIoClient(BASE_URL || "http://localhost:3030"));
+    useEffect(() => {
+        return () => {
+            socket.close();
+        }
+    }, [])
+
   return (
     <div className={styles.container}>
       <StartWebinar socket={socket} />

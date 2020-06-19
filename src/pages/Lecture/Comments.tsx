@@ -7,14 +7,13 @@ import { RenderComments } from "./RenderComments";
 import "./Lecture.css";
 import { Comment as CommentI } from "./modules";
 
-const socket = socketIoClient(BASE_URL || "http://localhost:3030");
-
 export default function Comments(props: {
   messages: CommentI[];
   lectureId: string;
 }) {
   const { messages } = props;
   const [comments, setComments] = useState<CommentI[]>(messages);
+  const [socket] = useState(socketIoClient(BASE_URL || "http://localhost:3030"));
 
   const leaveRoom = () => {
     socket.emit("Leave room", props.lectureId);
@@ -35,6 +34,8 @@ export default function Comments(props: {
     socket.on("send_message", addNewComment);
     return () => {
       window.removeEventListener("beforeunload", leaveRoom);
+      socket.off('send_message');
+      socket.close();
     };
   }, []);
 
