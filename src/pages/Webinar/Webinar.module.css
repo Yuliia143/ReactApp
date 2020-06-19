@@ -108,4 +108,35 @@ html, body {
 #btn{
     width: 80%;
     margin: 0 auto;
+    z-index: 100;
+}
+
+#author {
+    font-weight: lighter;
+    font-size: 15px;
+}
+
+#date {
+    padding-left: 465px;
+    font-size: 13px;
+}
+
+#commentText{
+    margin-top: -10px;
+}
+
+.oneUser{
+    margin-left: 15px;
+}
+
+#userAvatar{
+    margin-right: 5px;
+}
+
+#loader{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index: 9999;
 }

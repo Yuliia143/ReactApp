@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import CategoriesPage from './pages/Home/CategoriesPage/CategoriesPage';
 import PrivateRoute from './PrivateRoute';
 import HeaderContainer from './components/header/HeaderContainer';
 import Home from './pages/Home/Home';
@@ -17,11 +18,8 @@ import { NoMatch } from './components/NoMatch';
 import FavoriteLections from './pages/Home/FavoriteLections/FavoriteLections';
 import Admin from './pages/Admin/Admin';
 import Webinar from './pages/Webinar/Webinar';
-import socketIoClient from 'socket.io-client';
-import { BASE_URL, RTC_CONFIG } from './config';
+import WebinarList from './pages/WebinarList/WebinarList';
 import Webinars from './pages/Webinars/Webinars';
-
-const socket = socketIoClient(BASE_URL || 'http://localhost:3030');
 
 function App() {
   return (
@@ -33,6 +31,7 @@ function App() {
             <div className="mainContent">
               <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/category/:id" component={CategoriesPage}/>
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
                 <PrivateRoute path="/lecture/new" component={CreateLecture} />
@@ -42,10 +41,10 @@ function App() {
                   path="/favorite-lections"
                   component={FavoriteLections}
                 />
+                <PrivateRoute path="/webinar/:id" component={Webinars} />
+                <Route path="/webinars/list" component={WebinarList} />
                 <PrivateRoute path="/admin" component={Admin} isAdmin />
-                <PrivateRoute path="/webinar/new" component={Webinar} />
-                <PrivateRoute path="/webinar/all" component={Webinars} />
-
+                <PrivateRoute path="/webinars/new" component={Webinar} />
                 <Route component={NoMatch} />
               </Switch>
             </div>
@@ -57,4 +56,4 @@ function App() {
   );
 }
 
-export { App, socket };
+export { App };

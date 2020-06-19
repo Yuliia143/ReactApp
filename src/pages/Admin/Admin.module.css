@@ -1,0 +1,18 @@
+.adminMenu {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.adminItem {
+    padding: 14px 20px !important;
+}
+
+.adminContent {
+    width: 70%;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    min-height: calc(100vh - 240px);
+    position: relative;
+}

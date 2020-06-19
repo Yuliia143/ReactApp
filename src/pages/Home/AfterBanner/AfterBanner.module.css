@@ -15,7 +15,9 @@
     align-items: center;
     width: 30%;
 }
-
+.text{
+    color: white;
+}
 .title{
     margin-bottom: 0;
 }

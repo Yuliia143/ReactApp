@@ -1,0 +1,14 @@
+.displayFlex{
+    display: flex !important;
+    padding-left: 50px;
+    width: 770px;
+}
+.noLection{
+    margin: 200px 71px !important;
+    font-size: 32px;
+    width: auto;
+    outline: none;
+}
+.title{
+    margin: 20px 29px !important;
+}

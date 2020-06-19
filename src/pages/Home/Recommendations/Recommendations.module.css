@@ -27,11 +27,13 @@
 }
 
 .title{
+    color: white;
     font-size: 24px;
     margin-top: 20px;
 }
 
 .text{
+    color: white;
     font-size: 17px;
     margin: 15px 0 15px 0;
 }

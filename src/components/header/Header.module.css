@@ -1,0 +1,22 @@
+.headerContainer{
+    border-radius: 0 !important;
+    padding: 10px 30px !important;
+    margin-bottom: 0 !important;
+}
+.headerDropDown{
+    margin-top: 0!important;
+}
+.headerSearch{
+    width: 300px;
+}
+.headerButton{
+    padding: 13px 40px !important;
+}
+.headerMenu{
+    height: 55px;
+}
+.primaryDropDown{
+    margin-top: 0 !important;
+    width: 200px;
+    max-height: 200px;
+}

@@ -1,44 +1,71 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center"><img src="https://raw.githubusercontent.com/Yuliia143/ReactApp/master/src/assets/images/logoblack.png" width="400"/></p>
 
-## Available Scripts
+## About Study Hard
+Study Hard is a learning platform with lectures where anyone can watch video lectures for free, add them to favorites and join webinars.
+This project was generated with React version 16.9.32.
 
-In the project directory, you can run:
+## The project has three user roles (Admin, Teacher, and Student).
+### Admin:
+- Can perform CRUD operations on users and assign roles to them.
+- Can perform CRUD operations on lectures.
+- Can access the pages of course listing and user listing.
+### Teacher:
+- Can create lecture.
+- Can update and delete only owned lectures.
+- Has a dashboard where he/she can holds the webinars.
+- Has a profile page to update personal details.
+### Student:
+- Can view basic info of all courses like title, general description, author, rating.
+- Has a dashboard where he/she can see all the enrolled courses.
+- Can unenroll himself/herself from a course.
+- Can mark a course as completed (delete from favorites).
+- Has a profile page to update personal details.
+### Guest/Visitor:
+- Can view listing of all the courses.
+- Can register as a author or student.
 
-### `npm start`
+## Quick Start
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository:
+```
+git clone https://github.com/Yuliia143/ReactApp.git
+cd client
+```
+2. Install project dependencies:
+```sh
+$ npm install
+```
+3. To start the project run following command in your terminal:
+```sh
+$ npm start
+```
+4. To build the project run the following command in your terminal:
+```sh
+$ npm run build
+```
+5. After following above steps, your browser should automatically launched. If not, open your browser and run:
+```sh
+http://localhost:3000
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Built with:
+- [create-react-app](https://github.com/facebook/create-react-app)
+- [Redux](https://github.com/Yuliia143/ReactApp/tree/master/src/store)
+- [semantic-ui](https://react.semantic-ui.com/) - For creating beautiful, responsive layouts
+- [typescript](https://create-react-app.dev/docs/adding-typescript/) - For strict mode
+- [mongodb](https://www.mongodb.com/cloud/atlas) - For data storage
 
-### `npm test`
+## Link
+[Study Hard](https://study-hard-e89c8.web.app/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contributors 
+Thanks to the following members for maintaining the project.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+|Alias |Github |Email |
+|:-- |:-- |:-- |
+|Yuliia143|[Yuliia143](https://github.com/Yuliia143)|yulya.humenyuk143@gmail.com|
+|khudnytskaya|[khudnytskaya](https://github.com/khudnytskaya)|h.nastiaa@gmail.com|
+|vasyldzyuba|[vasyldzyuba](https://github.com/vasyldzyuba)|vasyl.dzuba1@gmail.com|
+|ihordubas|[ihordubas](https://github.com/ihordubas)|ihordubas1525@gmail.com|
+|Vovik1|[Vovik1](https://github.com/Vovik1)|volodja.grytsiv1996@gmail.com|
+|Taras-is|[Taras-is](https://github.com/Taras-is)|tarasdida22@gmail.com|
