@@ -5,9 +5,14 @@ import User from "../../models/user";
 
 export const updateUser = (user: User): AppThunk => (dispatch) => {
   dispatch({ type: USERS_LOADING });
-  updateUserInfo(user)
+  return updateUserInfo(user)
     .then((response) => {
-      dispatch({ type: USER_UPDATE, payload: response.user });
+      if (response && response.data.user) {
+        dispatch({ type: USER_UPDATE, payload: response.data.user });
+      }
+    })
+    .catch((err) => {
+      return { err: err.response.data };
     })
     .finally(() => {
       dispatch({ type: USERS_STOP });

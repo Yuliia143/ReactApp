@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { RootState } from '../../../store';
-import { getCategories } from '../../../store/actions/getCategories';
-import Category from '../../../models/category';
+import React from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { Link } from "react-router-dom";
+import { RootState } from "../../../store";
+import { getCategories } from "../../../store/actions/getCategories";
+import Category from "../../../models/category";
 
-const classes = require('./Categories.module.css');
+const classes = require("./Categories.module.css");
 
 const mapStateToProps = (state: RootState) => ({
   categoriesList: state.categories.categories,
-  categoriesLoading: state.categories.loading
+  categoriesLoading: state.categories.loading,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

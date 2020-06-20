@@ -50,7 +50,7 @@ const SignIn = ({ onSignIn, history }: any) => {
   };
 
   const responseFacebook = async (res: any) => {
-    if (Object.prototype.hasOwnProperty.call(res, 'email') === true) {
+    if (Object.prototype.hasOwnProperty.call(res, "email") === true) {
       const {
         email,
         first_name,
@@ -188,4 +188,3 @@ const mapDispatchToProps = (dispatch: Function) => {
 };
 
 export default connect(null, mapDispatchToProps)(SignIn);
-

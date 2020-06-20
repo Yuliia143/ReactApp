@@ -5,9 +5,16 @@ import { addUserInfo } from "../../api/users";
 
 export const addUser = (user: User): AppThunk => (dispatch) => {
   dispatch({ type: USERS_LOADING });
-  addUserInfo(user)
+
+  return addUserInfo(user)
     .then((response) => {
-      dispatch({ type: USER_ADD, payload: response.user });
+      if (response && response.data.user) {
+        dispatch({ type: USER_ADD, payload: response.data.user });
+      }
+      return response;
+    })
+    .catch((err) => {
+      return { err: err.response.data };
     })
     .finally(() => {
       dispatch({ type: USERS_STOP });

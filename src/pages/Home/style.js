@@ -77,11 +77,10 @@ export const LectionWrapperNav = styled.div`
       width: 547px;
     }
     .slick-next {
-      right:-29px;
+      right: -29px;
     }
     .slick-prev {
       left: -31px;
     }
-    
   }
 `;

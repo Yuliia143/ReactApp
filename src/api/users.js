@@ -23,23 +23,9 @@ export const removeUser = (id) => {
 };
 
 export const updateUserInfo = (user) => {
-  return http
-    .put(`/api/users/${user.id}`, { user })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
+  return http.put(`/api/users/${user.id}`, { user });
 };
 
 export const addUserInfo = (user) => {
-  return http
-    .post("/api/users/all", { user })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
+  return http.post("/api/users/all", { user });
 };

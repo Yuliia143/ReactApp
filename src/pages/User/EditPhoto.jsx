@@ -67,7 +67,9 @@ const EditPhoto = (props) => {
     return null;
   };
 
-  const isDefaultAvatar = props.avatar === "https://react.semantic-ui.com/images/wireframe/square-image.png";
+  const isDefaultAvatar =
+    props.avatar ===
+    "https://react.semantic-ui.com/images/wireframe/square-image.png";
 
   const singleFileUploadHandler = () => {
     setLoading(true);
@@ -103,13 +105,17 @@ const EditPhoto = (props) => {
   const deleteAvatart = (event, avatar) => {
     event.persist();
     setLoading(true);
-   
+
     http
       .remove("/api/edit/deleteAvatar", avatar)
       .then(() => {
         setLoading(false);
-        props.setAvatar('https://react.semantic-ui.com/images/wireframe/square-image.png');
-        setNewAvatar('https://react.semantic-ui.com/images/wireframe/square-image.png')
+        props.setAvatar(
+          "https://react.semantic-ui.com/images/wireframe/square-image.png"
+        );
+        setNewAvatar(
+          "https://react.semantic-ui.com/images/wireframe/square-image.png"
+        );
       })
       .catch(() => {
         setLoading(false);
@@ -126,7 +132,7 @@ const EditPhoto = (props) => {
               Add a nice photo of yourself for your profile.
             </div>
             <div className="imgPreview">
-              <Image src={ newAvatar || props.avatar } />
+              <Image src={newAvatar || props.avatar} />
             </div>
             <button
               className={!isDefaultAvatar ? "delete-btn" : "disabled-btn"}

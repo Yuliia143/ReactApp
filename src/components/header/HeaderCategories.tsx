@@ -5,10 +5,10 @@ import Category from "../../models/category";
 import styles from "./Header.module.css";
 
 interface Props {
-  categoriesList: Category[]
+  categoriesList: Category[];
 }
 
-const HeaderCategories = ({ categoriesList}: Props) => {
+const HeaderCategories = ({ categoriesList }: Props) => {
   const [isActiveDropdownCategories, setActiveDropdown] = useState(false);
   const [searchCategField, setSearchCategField] = useState("");
   const handleDropdownCategories = (status = false) => {
@@ -26,7 +26,7 @@ const HeaderCategories = ({ categoriesList}: Props) => {
     });
   };
   const searchedCategories = searchChange(categoriesList);
-const history = useHistory();
+  const history = useHistory();
   return (
     <Dropdown
       item
@@ -47,8 +47,7 @@ const history = useHistory();
             <Dropdown.Item
               key={category.id}
               text={category.title}
-              onClick={()=>history.push(`/category/${category.id}`)
-              }
+              onClick={() => history.push(`/category/${category.id}`)}
             />
           ))}
         </Dropdown.Menu>

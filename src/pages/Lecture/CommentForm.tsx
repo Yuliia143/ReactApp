@@ -17,14 +17,16 @@ export default function CommentForm(props: {
       setComment("");
       setLoading(true);
       setErrorLoading(false);
-      const userString = localStorage.getItem('User') as string;
+      const userString = localStorage.getItem("User") as string;
       const user = JSON.parse(userString);
-      const {imageUrl} = user;
-      let userImageUrl = '';
-      if(!Object.prototype.hasOwnProperty.call(user, 'imageUrl') || imageUrl === ''){
-        userImageUrl = 'https://img.icons8.com/plasticine/2x/user.png';
-      }
-      else{
+      const { imageUrl } = user;
+      let userImageUrl = "";
+      if (
+        !Object.prototype.hasOwnProperty.call(user, "imageUrl") ||
+        imageUrl === ""
+      ) {
+        userImageUrl = "https://img.icons8.com/plasticine/2x/user.png";
+      } else {
         userImageUrl = imageUrl;
       }
       const savedComment: Comment = await postComment(lectureId, {

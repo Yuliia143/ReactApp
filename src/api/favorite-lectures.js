@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { BASE_URL } from '../config';
+import axios from "axios";
+import { BASE_URL } from "../config";
 
 export const getFavorites = () => {
-  const token = localStorage.getItem('Access-Token');
+  const token = localStorage.getItem("Access-Token");
   return axios
     .get(`${BASE_URL}/api/lectures/by_user`, {
       headers: {
-        'Access-Token': token,
+        "Access-Token": token,
       },
     })
     .then((response) => {

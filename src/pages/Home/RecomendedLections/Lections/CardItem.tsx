@@ -17,7 +17,9 @@ interface Props {
   item: CardProps;
 }
 
-const CardItem = ({item: { imgUrl, title, author, defaultRating, description, id }}: Props) => {
+const CardItem = ({
+  item: { imgUrl, title, author, defaultRating, description, id },
+}: Props) => {
   const [open, setOpen] = useState(false);
 
   const show = () => setOpen(true);

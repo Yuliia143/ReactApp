@@ -1,8 +1,8 @@
-const socketsOff = (socket:any) => {
-  socket.off('update-user-list');
-  socket.off('emove-user');
-  socket.off('answer-made');
-}
+const socketsOff = (socket: any) => {
+  socket.off("update-user-list");
+  socket.off("emove-user");
+  socket.off("answer-made");
+};
 
 export const stopWebinar = (socket: any) => {
   const video = document.querySelector("#local-video") as HTMLVideoElement;
