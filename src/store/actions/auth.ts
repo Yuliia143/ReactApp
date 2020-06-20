@@ -34,7 +34,7 @@ export const signIn = (
 ): AppThunk<Promise<any | { err: any }>> => async (dispatch) => {
   dispatch({ type: AUTH_LOADING });
   let login = SignIn;
-  if(googleOrFacebook) login = googleFacebook
+  if (googleOrFacebook) login = googleFacebook;
   try {
     await login(credential).then((response) => {
       window.localStorage.setItem(

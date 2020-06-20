@@ -20,7 +20,11 @@ interface Props {
   onSignOut: () => void;
 }
 
-const UserEditPage: React.FC<Props> = ({ user, updateUser, onSignOut }: Props) => {
+const UserEditPage: React.FC<Props> = ({
+  user,
+  updateUser,
+  onSignOut,
+}: Props) => {
   const [activeItem, setActiveItem] = useState("profile");
   const [avatar, setAvatar] = useState(
     user.imageUrl
@@ -36,7 +40,7 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser, onSignOut }: Props) =
   const updateAvatar = (newAvatar: any) => {
     setAvatar(newAvatar);
     updateUser({ ...user, imageUrl: newAvatar });
-  }
+  };
 
   const updateProfile = (data: object) => {
     updateUser({ ...user, ...data });
@@ -81,7 +85,11 @@ const UserEditPage: React.FC<Props> = ({ user, updateUser, onSignOut }: Props) =
       </Menu>
       <div className="edit-content">
         {activeItem === "profile" && (
-          <EditProfile user={user} updateProfile={updateProfile} onSignOut={onSignOut} />
+          <EditProfile
+            user={user}
+            updateProfile={updateProfile}
+            onSignOut={onSignOut}
+          />
         )}
         {activeItem === "photo" && (
           <EditPhoto avatar={avatar} setAvatar={updateAvatar} user={user} />
@@ -100,7 +108,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
     dispatch({ type: "UPDATE_PROFILE", payload: user }),
   onSignOut: () => {
     dispatch(signOut());
-  }, 
+  },
 });
 
 const mapStateToProps = (state: any) => ({

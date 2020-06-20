@@ -1,36 +1,36 @@
-import React from 'react';
-import { Formik, Form, ErrorMessage, Field } from 'formik';
-import { Checkbox, Button } from 'semantic-ui-react';
-import './SignUp.css';
-import { connect } from 'react-redux';
-import * as Yup from 'yup';
-import { signUp } from '../../store/actions/auth';
-import { ISignUp } from '../../models/credential';
+import React from "react";
+import { Formik, Form, ErrorMessage, Field } from "formik";
+import { Checkbox, Button } from "semantic-ui-react";
+import "./SignUp.css";
+import { connect } from "react-redux";
+import * as Yup from "yup";
+import { signUp } from "../../store/actions/auth";
+import { ISignUp } from "../../models/credential";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
-    .min(5, 'Too Short!')
-    .max(40, 'Too Long!')
-    .required('Full Name is required'),
+    .min(5, "Too Short!")
+    .max(40, "Too Long!")
+    .required("Full Name is required"),
 
-  email: Yup.string().email('Email is invalid').required('Email is required'),
+  email: Yup.string().email("Email is invalid").required("Email is required"),
 
   password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
 });
 
 const initialValues = {
-  email: '',
-  name: '',
-  password: '',
+  email: "",
+  name: "",
+  password: "",
 };
 
 const SignUp = ({ onSignUp, history }: any) => {
   const handleSignUp = async (credential: ISignUp, formikActions: any) => {
     const result = await onSignUp(credential);
     if (!result) {
-      history.push('/signin');
+      history.push("/signin");
     }
     if (result && result.err) {
       formikActions.setErrors(result.err);
@@ -65,7 +65,7 @@ const SignUp = ({ onSignUp, history }: any) => {
                 value={values.name}
                 onChange={handleChange}
                 className={`form-control${
-                  errors.name && touched.name ? ' is-invalid' : ''
+                  errors.name && touched.name ? " is-invalid" : ""
                 }`}
               />
               <ErrorMessage
@@ -81,7 +81,7 @@ const SignUp = ({ onSignUp, history }: any) => {
                 value={values.email}
                 onChange={handleChange}
                 className={`form-control${
-                  errors.email && touched.email ? ' is-invalid' : ''
+                  errors.email && touched.email ? " is-invalid" : ""
                 }`}
               />
               <ErrorMessage
@@ -97,7 +97,7 @@ const SignUp = ({ onSignUp, history }: any) => {
                 value={values.password}
                 onChange={handleChange}
                 className={`form-control${
-                  errors.password && touched.password ? ' is-invalid' : ''
+                  errors.password && touched.password ? " is-invalid" : ""
                 }`}
               />
               <ErrorMessage

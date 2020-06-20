@@ -27,8 +27,3 @@ export const RenderComments = (props: { comments: CommentI[] }) => {
     </div>
   );
 };
-
-
-
-
-

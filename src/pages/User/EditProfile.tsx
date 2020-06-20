@@ -13,7 +13,11 @@ interface Props {
   onSignOut: () => void;
 }
 
-const EditProfile: React.FC<Props> = ({ user, updateProfile, onSignOut }: Props) => {
+const EditProfile: React.FC<Props> = ({
+  user,
+  updateProfile,
+  onSignOut,
+}: Props) => {
   const [userFullName, setUserFullName] = useState({
     name: user.name,
     surName: user.surName,
@@ -51,7 +55,7 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile, onSignOut }: Props)
     const requestOptions = {
       headers: {
         "Access-Token": token,
-      }
+      },
     };
     http
       .remove(`/api/users/${userId}`, requestOptions)
@@ -62,7 +66,7 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile, onSignOut }: Props)
       .catch(() => {
         setLoading(false);
       });
-  }
+  };
 
   const saveFields = () => {
     setLoading(true);
@@ -124,16 +128,16 @@ const EditProfile: React.FC<Props> = ({ user, updateProfile, onSignOut }: Props)
               </label>
             </Form.Field>
             <div className="save-btn">
-              <Button onClick={saveFields}  color="red" >
+              <Button onClick={saveFields} color="red">
                 Save
               </Button>
             </div>
           </Form>
           <div className="deleteAcc">
-              <Button  onClick={deleteAccount} color="red" >
-                Delete account
-              </Button>
-            </div>
+            <Button onClick={deleteAccount} color="red">
+              Delete account
+            </Button>
+          </div>
         </div>
         <div>{getMessage()}</div>
       </div>

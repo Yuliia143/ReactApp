@@ -30,9 +30,9 @@ export default function ({ socket }: any) {
 
     socket.on("new_comment", addNewComment);
     return () => {
-      socket.off('receive_all_comments');
-      socket.off('new_comment');
-    }
+      socket.off("receive_all_comments");
+      socket.off("new_comment");
+    };
   });
 
   return (

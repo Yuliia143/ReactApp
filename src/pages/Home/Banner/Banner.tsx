@@ -6,10 +6,7 @@ const classes = require("./Banner.module.css");
 const Banner = () => {
   return (
     <div className={classes.banner}>
-      <img
-        src={BannerImg}
-        alt="Banner"
-      />
+      <img src={BannerImg} alt="Banner" />
     </div>
   );
 };

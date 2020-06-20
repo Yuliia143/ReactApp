@@ -11,4 +11,4 @@ export const signIn = (credential) => {
 
 export const googleFacebook = (credential) => {
   return axios.post(`${BASE_URL}/api/user/googleFacebook`, credential);
-}
+};

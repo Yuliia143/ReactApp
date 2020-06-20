@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../../../store';
-import { getCategories } from '../../../../store/actions/getCategories';
-import Category from '../../../../models/category';
-import Lections from '../Lections/Lections';
-import { LectionWrapperNav } from '../../style';
+import React, { useState } from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../../store";
+import { getCategories } from "../../../../store/actions/getCategories";
+import Category from "../../../../models/category";
+import Lections from "../Lections/Lections";
+import { LectionWrapperNav } from "../../style";
 
-const classes = require('./NavBar.module.css');
+const classes = require("./NavBar.module.css");
 
 const mapStateToProps = (state: RootState) => ({
   categoriesList: state.categories.categories,
@@ -20,7 +20,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const NavBar = ({ categoriesList, categoriesLoading }: PropsFromRedux) => {
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const renderCategoryList = (categories: Category[] = []) => {
     if (!categoriesLoading && categoriesList) {

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Search } from 'semantic-ui-react';
-import { MenuItemProps } from 'semantic-ui-react/dist/commonjs/collections/Menu/MenuItem';
-import { SearchProps } from 'semantic-ui-react/dist/commonjs/modules/Search/Search';
-import { useHistory } from 'react-router-dom';
-import { connect, ConnectedProps } from 'react-redux';
-import Lecture from '../../models/lecture';
-import styles from './Header.module.css';
-import HeaderSearchModal from './HeaderSearchModal';
-import { RootState } from '../../store';
+import React, { useState } from "react";
+import { Search } from "semantic-ui-react";
+import { MenuItemProps } from "semantic-ui-react/dist/commonjs/collections/Menu/MenuItem";
+import { SearchProps } from "semantic-ui-react/dist/commonjs/modules/Search/Search";
+import { useHistory } from "react-router-dom";
+import { connect, ConnectedProps } from "react-redux";
+import Lecture from "../../models/lecture";
+import styles from "./Header.module.css";
+import HeaderSearchModal from "./HeaderSearchModal";
+import { RootState } from "../../store";
 
 const mapStateToProps = (state: RootState) => ({
   user: state.auth.user,
@@ -44,7 +44,7 @@ const HeaderSearch = ({ lecturesList, user }: Props) => {
         };
       })
     : [];
-  const [searchLectField, setSearchLectField] = useState('');
+  const [searchLectField, setSearchLectField] = useState("");
 
   const handleResultSelect = (_: any, data: MenuItemProps) => {
     setSearchLectField(data.result.title);
@@ -59,7 +59,7 @@ const HeaderSearch = ({ lecturesList, user }: Props) => {
     event: React.MouseEvent<HTMLElement>,
     data: SearchProps
   ) => {
-    setSearchLectField(data.value || '');
+    setSearchLectField(data.value || "");
   };
   const handleSearchChange = (list: SearchLecture[] = []) => {
     return list.filter((item) => {

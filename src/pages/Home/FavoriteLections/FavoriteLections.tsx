@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { getFavorites } from '../../../api/favorite-lectures';
-import List from './List';
+import React, { useState, useEffect } from "react";
+import { getFavorites } from "../../../api/favorite-lectures";
+import List from "./List";
 
-const classes = require('./FavoriteLections.module.css');
+const classes = require("./FavoriteLections.module.css");
 
 const FavoriteLections = () => {
   const [favLections, setFavLections] = useState([]);

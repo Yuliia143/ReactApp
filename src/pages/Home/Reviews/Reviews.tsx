@@ -2,9 +2,9 @@ import React from "react";
 import TrustedCompanies from "./TrustedCompanies/TrustedCompanies";
 import Offer from "./Offer/Offer";
 
-const Avatar1 =  require("../../../assets/images/avatar_1.jpg")
-const Avatar2 =  require("../../../assets/images/avatar_2.jpg")
-const Avatar3 =  require("../../../assets/images/avatar_3.jpg")
+const Avatar1 = require("../../../assets/images/avatar_1.jpg");
+const Avatar2 = require("../../../assets/images/avatar_2.jpg");
+const Avatar3 = require("../../../assets/images/avatar_3.jpg");
 
 const classes = require("./Reviews.module.css");
 
@@ -16,11 +16,7 @@ const Reviews = () => {
         <div className={classes.flexCategories}>
           <div className={classes.container}>
             <div className={classes.imgAndName}>
-              <img
-                src={Avatar1}
-                alt="Author"
-                className={classes.image}
-              />
+              <img src={Avatar1} alt="Author" className={classes.image} />
               <div className={classes.author}>Borivoje</div>
             </div>
             <p className={classes.text}>
@@ -32,11 +28,7 @@ const Reviews = () => {
 
           <div className={classes.container}>
             <div className={classes.imgAndName}>
-              <img
-                src={Avatar2}
-                alt="Author"
-                className={classes.image}
-              />
+              <img src={Avatar2} alt="Author" className={classes.image} />
               <div className={classes.author}>Dipesh</div>
             </div>
             <p className={classes.text}>
@@ -48,11 +40,7 @@ const Reviews = () => {
 
           <div className={classes.container}>
             <div className={classes.imgAndName}>
-              <img
-                src={Avatar3}
-                alt="Author"
-                className={classes.image}
-              />
+              <img src={Avatar3} alt="Author" className={classes.image} />
               <div className={classes.author}>Kathy</div>
             </div>
             <p className={classes.text}>

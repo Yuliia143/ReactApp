@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import http from '../../../api/http';
+import React from "react";
+import { Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import http from "../../../api/http";
 
-const classes = require('./FavoriteLections.module.css');
+const classes = require("./FavoriteLections.module.css");
 
 interface CardProps {
   imgUrl: string;

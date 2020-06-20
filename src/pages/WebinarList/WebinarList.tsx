@@ -16,19 +16,19 @@ interface WebinarItem {
 }
 
 export default function () {
-  const [socket] = useState(socketIoClient(BASE_URL || "http://localhost:3030"));
+  const [socket] = useState(
+    socketIoClient(BASE_URL || "http://localhost:3030")
+  );
   const [webinarsList, setWebinarsList] = useState<WebinarItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-
     socket.emit("get_all_webinars", "");
 
     socket.on("get_all_webinars", (webinars: WebinarItem[]) => {
       setWebinarsList(webinars);
       setLoading(false);
     });
-
 
     return () => {
       socket.off("get_all_webinars");
